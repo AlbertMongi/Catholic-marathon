@@ -1,15 +1,18 @@
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 const ExperienceSection: React.FC = () => {
+  const { t } = useTranslation(); // ✅ Move useTranslation inside component
+
   return (
-    <section 
+    <section
       className="relative overflow-hidden flex flex-col items-center justify-center"
       style={{
         backgroundImage: "url('/images/way_experience.jpeg')",
         backgroundSize: "cover",
         backgroundPosition: "center",
-        minHeight: "400px", // reduced height
-        padding: "60px 20px", // smaller top/bottom padding
+        minHeight: "400px",
+        padding: "60px 20px",
       }}
     >
       {/* Gradient overlay */}
@@ -18,7 +21,7 @@ const ExperienceSection: React.FC = () => {
       <div className="text-center w-full max-w-4xl">
         {/* Section Heading */}
         <h2 className="text-3xl md:text-4xl font-bold mb-6 gradient-text">
-          Watch about Pugu Marathon
+          {t("watch_marathon_title")}
         </h2>
 
         {/* YouTube Video */}
