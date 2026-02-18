@@ -28,10 +28,10 @@ const Footer: React.FC = () => {
             />
             <div className="flex space-x-6 justify-center md:justify-start">
               {[
-                { href: "https://www.facebook.com/evmak", icon: <Facebook size={24} /> },
-                { href: "https://www.instagram.com/evmakco?igsh=bGlzcmx1YjV0dGJs", icon: <Instagram size={24} /> },
-                { href: "https://twitter.com/evmak", icon: <Twitter size={24} /> },
-                { href: "https://www.youtube.com/@Evmak", icon: <Youtube size={24} /> },
+                { href: "", icon: <Facebook size={24} /> },
+                { href: "", icon: <Instagram size={24} /> },
+                { href: "", icon: <Twitter size={24} /> },
+                { href: "", icon: <Youtube size={24} /> },
               ].map((social, idx) => (
                 <a
                   key={idx}

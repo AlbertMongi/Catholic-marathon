@@ -69,6 +69,8 @@ const resources = {
     integrity_title: "Integrity & Fair Play",
     integrity_content: "We uphold fairness, honesty, and ethical standards in organizing the event, registrations, and results.",
     pugu_marathon_route: "Pugu Marathon route",
+    our_proud_sponsors: "Our Proud Sponsors",
+    sponsor_alt: "Sponsor {{number}}",
     },
   },
   sw: {
@@ -102,6 +104,8 @@ const resources = {
            watch_marathon_title: "Tazama Kuhusu Pugu Marathon",
             visit_our_page: "Tembelea ukurasa wetu wa {{platform}}",
     quick_links: "Viungo vya Haraka",
+
+    
     about_pugu_marathon: "Kuhusu Pugu Marathon",
     register_to_run: "Jisajili Kuendesha",
     contact_us: "Wasiliana Nasi",
@@ -137,6 +141,8 @@ const resources = {
     integrity_title: "Uadilifu & Uchezaji wa Haki",
     integrity_content: "Tunashikilia usawa, uaminifu, na viwango vya maadili katika kupanga tukio, usajili, na matokeo.",
     pugu_marathon_route: "Njia ya Pugu Marathon",
+     our_proud_sponsors: "Wadhamini Wetu Wenye Fahari",
+    sponsor_alt: "Mdhamini {{number}}",
     },
   },
 };
