@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =====================================
+   BASE THEME — BRIGHT GOLD (#FAC31C)
+   ===================================== */
+@layer base {
+  :root {
+    /* Backgrounds */
+    --background: 45 40% 98%;       /* very light warm tint */
+    --foreground: 45 80% 12%;
+
+    --card: 45 35% 98%;
+    --card-foreground: 45 80% 14%;
+
+    --popover: 45 35% 98%;
+    --popover-foreground: 45 80% 14%;
+
+    /* Primary — bright gold */
+    --primary: 48 95% 65%;          /* #FAC31C */
+    --primary-foreground: 45 100% 98%;  /* almost white */
+
+    /* Secondary */
+    --secondary: 45 50% 92%;
+    --secondary-foreground: 45 70% 18%;
+
+    /* Muted */
+    --muted: 45 40% 90%;
+    --muted-foreground: 45 25% 40%;
+
+    /* Accent (same as primary) */
+    --accent: 48 95% 65%;
+    --accent-foreground: 45 80% 12%;
+
+    /* Destructive (kept red – change if desired) */
+    --destructive: 0 75% 55%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders & Focus */
+    --border: 45 30% 86%;
+    --input: 45 30% 86%;
+    --ring: 48 95% 65%;
+
+    --radius: 0.75rem;
+  }
+}
+
+/* =====================================
+   GLOBAL STYLES
+   ===================================== */
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-serif;
+  }
+}
+
+/* =====================================
+   COMPONENTS — updated to #FAC31C theme
+   ===================================== */
+@layer components {
+  /* Glass */
+  .glass {
+    @apply bg-white/70 backdrop-blur-xl border border-yellow-400/30 shadow-lg;
+  }
+
+  .glass-dark {
+    @apply bg-yellow-950/20 backdrop-blur-xl border border-yellow-400/20 shadow-lg text-yellow-50;
+  }
+
+  .glass-card {
+    @apply rounded-2xl p-6 glass transition-all duration-300 hover:shadow-xl;
+  }
+
+  .glass-button {
+    @apply px-6 py-3 rounded-full glass font-medium
+           transition-all duration-300
+           hover:bg-yellow-100/70 hover:shadow-xl;
+  }
+
+  .glass-button-dark {
+    @apply px-6 py-3 rounded-full glass-dark font-medium
+           transition-all duration-300
+           hover:bg-yellow-900/40 hover:shadow-xl;
+  }
+
+  /* Gradient text */
+  .gradient-text {
+    @apply bg-gradient-to-r from-yellow-400 via-yellow-500 to-yellow-600
+           text-transparent bg-clip-text;
+  }
+
+  /* Layout */
+  .page-container {
+    @apply container max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12;
+  }
+
+  .section-padding {
+    @apply py-12 md:py-20;
+  }
+
+  /* Hero */
+  .hero-section {
+    @apply relative min-h-[70vh] md:min-h-[80vh]
+           flex items-center justify-center overflow-hidden;
+  }
+
+  .hero-content {
+    @apply relative z-10 text-center max-w-4xl mx-auto px-4 animate-fade-in;
+  }
+
+  .hero-gradient {
+    @apply absolute inset-0
+           bg-gradient-to-br from-yellow-400/35 via-yellow-500/30 to-yellow-600/25
+           z-0;
+  }
+
+  .hero-bg {
+    @apply absolute inset-0 -z-10 bg-cover bg-center bg-no-repeat;
+  }
+}
