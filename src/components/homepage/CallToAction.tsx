@@ -15,7 +15,7 @@ const SponsorsSection: React.FC = () => {
   ];
 
   return (
-    <section className="section-padding bg-gradient-church text-white">
+    <section className="section-padding bg-white text-gray-800">
       <div className="page-container text-center">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-[#FAC31C]">
           {t("our_proud_sponsors")}

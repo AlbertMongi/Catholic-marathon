@@ -63,7 +63,7 @@ const HeroSection: React.FC = () => {
               asChild
               className="group bg-[#6A10CB] hover:bg-[#6A10CB]/90 text-white text-lg font-semibold rounded-full px-8 py-6 shadow-lg hover:shadow-xl transition-all duration-300 flex items-center gap-2"
             >
-              <Link to="/register" className="flex items-center gap-2">
+              <Link to="/give" className="flex items-center gap-2">
                 {t("hero_register")}
                 <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
               </Link>
