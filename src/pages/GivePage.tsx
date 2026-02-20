@@ -12,6 +12,221 @@
 
 // const API_BASE = "http://127.0.0.1:8000/api"; // ← change to production URL later
 
+// // ── Real Decania → Parokia mapping ───────────────────────────────────────
+// const decaniaParokiaMap: Record<string, string[]> = {
+//   "Mt. Joseph": [
+//     "St. Joseph",
+//     "Chang'ombe",
+//     "Upanga",
+//     "Msimbazi",
+//     "Mburahati",
+//     "Keko",
+//     "Mafia",
+//     "Muhimbili",
+//     "Buguruni",
+//     "Kurasini",
+//     "Mtoni",
+//     "Mikoroshoni",
+//     "Gonge - Mafia",
+//     "Bareni - Mafia",
+//   ],
+//   "Ubungo": [
+//     "Ubungo",
+//     "Msewe",
+//     "Manzese",
+//     "Kimara Chuo Kikuu",
+//     "Tandale",
+//     "Michungwani",
+//     "Changanyikeni",
+//     "Korogwe",
+//   ],
+//   "Makuburi": [
+//     "Makuburi",
+//     "Kibangu",
+//     "Luhanga",
+//     "Tabata Kisiwani",
+//     "Makoka",
+//     "Kilungule",
+//     "Mabibo",
+//     "Nzasa",
+//     "Kimara Mtoni",
+//     "Baruti",
+//     "Maria Goreti Kimara",
+//     "Mavurunza",
+//     "Bonyokwa",
+//   ],
+//   "Kibaha": [
+//     "Kibaha",
+//     "Mkuza",
+//     "Mlandizi",
+//     "Kibamba",
+//     "Kiluvya",
+//     "Kibwegere",
+//     "Kwembe",
+//     "Misugusugu",
+//     "Kongowele",
+//     "Jamaika",
+//     "Chang'ombe",
+//     "Mpiji",
+//     "Makurunge",
+//     "Visiga",
+//     "Lulanzi",
+//     "Mabwepande",
+//     "Hondogo",
+//     "Miembesaba",
+//     "Garagaza",
+//     "Kidimu",
+//   ],
+//   "Mbezi Luis": [
+//     "Mbezi Luis",
+//     "Makabe",
+//     "Msakuzi",
+//     "Mshikamano",
+//     "Malamba Mawili",
+//     "Msumi",
+//     "Mpiji Magohe",
+//     "Tegeta A",
+//     "Pande",
+//     "Mageti - Mt. Simon Stock",
+//   ],
+//   "Mavurunza": [
+//     "Mavurunza",
+//     "Mbezi Mwisho",
+//     "Temboni",
+//     "Tagaste Temboni - Ritha Matosa",
+//     "Msingwa",
+//     "Goba Stop-Over",
+//   ],
+//   "Kigamboni": [
+//     "Kigamboni",
+//     "Kongowe",
+//     "Mji Mwema",
+//     "Kimbiji",
+//     "Toangoma",
+//     "Kibada",
+//     "Gezaulole",
+//     "Mikwambe",
+//     "Vijibweni",
+//     "Mwongozo",
+//     "Mkokozi",
+//     "Lugwadu",
+//     "Mlamleni",
+//     "Kisarawe II",
+//   ],
+//   "Mbagala": [
+//     "Mbagala Zakhem",
+//     "Kizuiani",
+//     "Kijichi",
+//     "Mbagala Kuu",
+//     "Kizinga",
+//     "Mbande",
+//     "Kilamba",
+//     "Chamazi",
+//     "Vigoa",
+//     "Majimatitu",
+//     "Kingugi",
+//     "Vigozi",
+//     "Msongola A",
+//     "Mgeninani",
+//   ],
+//   "Kilimahewa": [
+//     "Vikindu",
+//     "Mkuranga",
+//     "Kilimahewa",
+//     "Kibiti",
+//     "Kisiju Pwani",
+//     "Kisegese",
+//     "Bungu",
+//     "Ikwiriri",
+//     "Vianzi",
+//     "Marogoro",
+//     "Utete",
+//   ],
+//   "Mt. Thomas More": [
+//     "Mbezi Beach - Mt. Gasper Salasala",
+//     "Mbezi Juu",
+//     "Kunduchi",
+//     "Mtongani",
+//     "Mbezi Beach (BMMH)",
+//     "Mbezi Beach (Thomas More)",
+//     "Kilongawima",
+//     "Goba",
+//     "Kunguru",
+//     "Kinzudi",
+//     "Goba Mwisho",
+//     "IPTL - Mt. Ambrose",
+//     "Utatu Mtakatifu - Skanska",
+//     "Mbezi Manyema - Mt. Monica",
+//     "Kinzudi (Tokeo la Bwana)",
+//     "Salasala Kilimahewa",
+//     "Woiso Original Products (WOP)",
+//   ],
+//   "Mt. Petro Oysterbay": [
+//     "Mwenge",
+//     "Sinza",
+//     "Mwananyamala",
+//     "Hananasifu",
+//     "Kawe",
+//     "Mikocheni",
+//     "Makongo Juu",
+//     "Magomeni",
+//     "Kijitonyama",
+//   ],
+//   "Ukonga": [
+//     "Ukonga",
+//     "Yombo",
+//     "Kiwalani",
+//     "Yombo Dovya",
+//     "Buza",
+//     "Kitunda",
+//     "Yombo Vituka",
+//     "Kivule",
+//     "Mwanagati",
+//     "Magole",
+//     "Gongolamboto",
+//     "Nyantira",
+//     "Minazini",
+//     "Kipunguni",
+//   ],
+//   "Pugu": [
+//     "Pugu Mji Mpya",
+//     "Relini",
+//     "Chanika",
+//     "Chakenge",
+//     "Buyuni",
+//     "Bombambili",
+//     "Mvuti",
+//     "Zingiziwa",
+//     "Kisarawe Masaki",
+//     "Viwege",
+//     "Kigenzi",
+//     "Yongwe",
+//     "Dominico",
+//     "Mzenga",
+//     "Nyebulu",
+//     "Rada",
+//     "Msongola B",
+//     "Vikongoro",
+//     "Homboza",
+//   ],
+//   "Segerea": [
+//     "Segerea",
+//     "Tabata",
+//     "Kimanga",
+//     "Kipawa",
+//     "Mongo la Ndege",
+//     "Vingunguti",
+//     "Kinyerezi",
+//     "Ulongoni",
+//     "Sitakishari",
+//     "King'azi",
+//     "Manabii",
+//     "Bangulo",
+//     "Kisukuru",
+//     "Kifuru",
+//   ],
+// };
+
 // const MarathonRegistrationPage: React.FC = () => {
 //   const { t } = useTranslation();
 
@@ -199,27 +414,42 @@
 //   const showParokia = isCatholic && !!formData.decania;
 //   const isOther = formData.membership === "other";
 
+//   const availableParokia = formData.decania && decaniaParokiaMap[formData.decania]
+//     ? decaniaParokiaMap[formData.decania]
+//     : [];
+
 //   // ── RENDER ───────────────────────────────────────────────────────────
 //   return (
 //     <>
 //       {/* Hero Section */}
-//       <section className="relative min-h-[15vh] flex items-center justify-center overflow-hidden">
+//       <section className="relative min-h-[25vh] flex items-center justify-center overflow-hidden">
 //         <div
 //           className="absolute inset-0 bg-cover bg-center"
-//           style={{ backgroundImage: 'url("images/istock.jpg")' }}
+//           style={{ backgroundImage: 'url("images/running.png")' }}
 //         />
-      
 //       </section>
 
-//       {/* Main Content */}
-//       <section className="py-12 md:py-16 bg-white">
-//         <div className="max-w-[720px] mx-auto px-4 sm:px-6">
+//       {/* Main Content – with background logos */}
+//       <section className="py-12 md:py-16 bg-white relative overflow-hidden">
+//         {/* Repeating sponsor logos background */}
+//         <div className="absolute inset-0 opacity-[0.2] pointer-events-none">
+//           <div
+//             className="w-full h-full bg-repeat"
+//             style={{
+//               backgroundImage: 'url("/images/pugu.png")',
+//               backgroundSize: "140px",
+//               backgroundPosition: "center",
+//             }}
+//           />
+//         </div>
+
+//         <div className="max-w-[880px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
 //           <div
 //             className="rounded-3xl overflow-hidden shadow-2xl bg-white"
-//             style={{ boxShadow: "0 20px 50px rgba(0, 0, 0, 0.08)" }}
+//             style={{ boxShadow: "0 20px 60px rgba(0, 0, 0, 0.09)" }}
 //           >
 //             {step === "form" && (
-//               <div className="p-8 md:p-10">
+//               <div className="p-8 md:p-12">
 //                 <p className="text-center text-gray-500 italic mb-8 text-sm">
 //                   {t("form.required_fields")} <span className="text-red-500">*</span>
 //                 </p>
@@ -230,7 +460,7 @@
 //                   </div>
 //                 )}
 
-//                 <form onSubmit={handleRegSubmit} className="space-y-6">
+//                 <form onSubmit={handleRegSubmit} className="space-y-7">
 //                   <div>
 //                     <label className="block font-medium text-gray-700 mb-2">
 //                       {t("form.full_name")} <span className="text-red-500">*</span>
@@ -348,9 +578,11 @@
 //                           <SelectValue placeholder={t("form.select_decania")} />
 //                         </SelectTrigger>
 //                         <SelectContent>
-//                           {/* ← Add real options or fetch from API */}
-//                           <SelectItem value="Decania A">Decania A</SelectItem>
-//                           <SelectItem value="Decania B">Decania B</SelectItem>
+//                           {Object.keys(decaniaParokiaMap).map((dec) => (
+//                             <SelectItem key={dec} value={dec}>
+//                               {dec}
+//                             </SelectItem>
+//                           ))}
 //                         </SelectContent>
 //                       </Select>
 //                     </div>
@@ -364,14 +596,17 @@
 //                       <Select
 //                         value={formData.parokia}
 //                         onValueChange={(v) => setFormData((p) => ({ ...p, parokia: v }))}
+//                         disabled={availableParokia.length === 0}
 //                       >
 //                         <SelectTrigger className="h-12 rounded-xl">
 //                           <SelectValue placeholder={t("form.select_parokia")} />
 //                         </SelectTrigger>
 //                         <SelectContent>
-//                           {/* ← Add real options or fetch from API */}
-//                           <SelectItem value="Parokia X">Parokia X</SelectItem>
-//                           <SelectItem value="Parokia Y">Parokia Y</SelectItem>
+//                           {availableParokia.map((par) => (
+//                             <SelectItem key={par} value={par}>
+//                               {par}
+//                             </SelectItem>
+//                           ))}
 //                         </SelectContent>
 //                       </Select>
 //                     </div>
@@ -390,9 +625,10 @@
 //                           <SelectValue placeholder={t("form.select_pickup")} />
 //                         </SelectTrigger>
 //                         <SelectContent>
-//                           {/* ← Add real options */}
+//                           {/* ← Add your real pickup points here when known */}
 //                           <SelectItem value="Point A">Point A</SelectItem>
 //                           <SelectItem value="Point B">Point B</SelectItem>
+//                           <SelectItem value="Point C">Point C</SelectItem>
 //                         </SelectContent>
 //                       </Select>
 //                     </div>
@@ -401,7 +637,7 @@
 //                   <Button
 //                     type="submit"
 //                     disabled={loading}
-//                     className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-semibold rounded-xl shadow-lg disabled:opacity-60 mt-6"
+//                     className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-semibold rounded-xl shadow-lg disabled:opacity-60 mt-8"
 //                   >
 //                     {loading ? (
 //                       <span className="flex items-center justify-center gap-3">
@@ -416,8 +652,9 @@
 //               </div>
 //             )}
 
+//             {/* Payment and Success sections remain unchanged */}
 //             {step === "payment" && (
-//               <div className="p-8 md:p-10">
+//               <div className="p-8 md:p-12">
 //                 <h2 className="text-3xl font-bold text-center mb-2 text-purple-900">
 //                   {t("payment.complete_payment")}
 //                 </h2>
@@ -578,8 +815,6 @@
 
 // export default MarathonRegistrationPage;
 
-
-
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
@@ -594,6 +829,221 @@ import {
 
 const API_BASE = "http://127.0.0.1:8000/api"; // ← change to production URL later
 
+// ── Real Decania → Parokia mapping ───────────────────────────────────────
+const decaniaParokiaMap: Record<string, string[]> = {
+  "Mt. Joseph": [
+    "St. Joseph",
+    "Chang'ombe",
+    "Upanga",
+    "Msimbazi",
+    "Mburahati",
+    "Keko",
+    "Mafia",
+    "Muhimbili",
+    "Buguruni",
+    "Kurasini",
+    "Mtoni",
+    "Mikoroshoni",
+    "Gonge - Mafia",
+    "Bareni - Mafia",
+  ],
+  "Ubungo": [
+    "Ubungo",
+    "Msewe",
+    "Manzese",
+    "Kimara Chuo Kikuu",
+    "Tandale",
+    "Michungwani",
+    "Changanyikeni",
+    "Korogwe",
+  ],
+  "Makuburi": [
+    "Makuburi",
+    "Kibangu",
+    "Luhanga",
+    "Tabata Kisiwani",
+    "Makoka",
+    "Kilungule",
+    "Mabibo",
+    "Nzasa",
+    "Kimara Mtoni",
+    "Baruti",
+    "Maria Goreti Kimara",
+    "Mavurunza",
+    "Bonyokwa",
+  ],
+  "Kibaha": [
+    "Kibaha",
+    "Mkuza",
+    "Mlandizi",
+    "Kibamba",
+    "Kiluvya",
+    "Kibwegere",
+    "Kwembe",
+    "Misugusugu",
+    "Kongowele",
+    "Jamaika",
+    "Chang'ombe",
+    "Mpiji",
+    "Makurunge",
+    "Visiga",
+    "Lulanzi",
+    "Mabwepande",
+    "Hondogo",
+    "Miembesaba",
+    "Garagaza",
+    "Kidimu",
+  ],
+  "Mbezi Luis": [
+    "Mbezi Luis",
+    "Makabe",
+    "Msakuzi",
+    "Mshikamano",
+    "Malamba Mawili",
+    "Msumi",
+    "Mpiji Magohe",
+    "Tegeta A",
+    "Pande",
+    "Mageti - Mt. Simon Stock",
+  ],
+  "Mavurunza": [
+    "Mavurunza",
+    "Mbezi Mwisho",
+    "Temboni",
+    "Tagaste Temboni - Ritha Matosa",
+    "Msingwa",
+    "Goba Stop-Over",
+  ],
+  "Kigamboni": [
+    "Kigamboni",
+    "Kongowe",
+    "Mji Mwema",
+    "Kimbiji",
+    "Toangoma",
+    "Kibada",
+    "Gezaulole",
+    "Mikwambe",
+    "Vijibweni",
+    "Mwongozo",
+    "Mkokozi",
+    "Lugwadu",
+    "Mlamleni",
+    "Kisarawe II",
+  ],
+  "Mbagala": [
+    "Mbagala Zakhem",
+    "Kizuiani",
+    "Kijichi",
+    "Mbagala Kuu",
+    "Kizinga",
+    "Mbande",
+    "Kilamba",
+    "Chamazi",
+    "Vigoa",
+    "Majimatitu",
+    "Kingugi",
+    "Vigozi",
+    "Msongola A",
+    "Mgeninani",
+  ],
+  "Kilimahewa": [
+    "Vikindu",
+    "Mkuranga",
+    "Kilimahewa",
+    "Kibiti",
+    "Kisiju Pwani",
+    "Kisegese",
+    "Bungu",
+    "Ikwiriri",
+    "Vianzi",
+    "Marogoro",
+    "Utete",
+  ],
+  "Mt. Thomas More": [
+    "Mbezi Beach - Mt. Gasper Salasala",
+    "Mbezi Juu",
+    "Kunduchi",
+    "Mtongani",
+    "Mbezi Beach (BMMH)",
+    "Mbezi Beach (Thomas More)",
+    "Kilongawima",
+    "Goba",
+    "Kunguru",
+    "Kinzudi",
+    "Goba Mwisho",
+    "IPTL - Mt. Ambrose",
+    "Utatu Mtakatifu - Skanska",
+    "Mbezi Manyema - Mt. Monica",
+    "Kinzudi (Tokeo la Bwana)",
+    "Salasala Kilimahewa",
+    "Woiso Original Products (WOP)",
+  ],
+  "Mt. Petro Oysterbay": [
+    "Mwenge",
+    "Sinza",
+    "Mwananyamala",
+    "Hananasifu",
+    "Kawe",
+    "Mikocheni",
+    "Makongo Juu",
+    "Magomeni",
+    "Kijitonyama",
+  ],
+  "Ukonga": [
+    "Ukonga",
+    "Yombo",
+    "Kiwalani",
+    "Yombo Dovya",
+    "Buza",
+    "Kitunda",
+    "Yombo Vituka",
+    "Kivule",
+    "Mwanagati",
+    "Magole",
+    "Gongolamboto",
+    "Nyantira",
+    "Minazini",
+    "Kipunguni",
+  ],
+  "Pugu": [
+    "Pugu Mji Mpya",
+    "Relini",
+    "Chanika",
+    "Chakenge",
+    "Buyuni",
+    "Bombambili",
+    "Mvuti",
+    "Zingiziwa",
+    "Kisarawe Masaki",
+    "Viwege",
+    "Kigenzi",
+    "Yongwe",
+    "Dominico",
+    "Mzenga",
+    "Nyebulu",
+    "Rada",
+    "Msongola B",
+    "Vikongoro",
+    "Homboza",
+  ],
+  "Segerea": [
+    "Segerea",
+    "Tabata",
+    "Kimanga",
+    "Kipawa",
+    "Mongo la Ndege",
+    "Vingunguti",
+    "Kinyerezi",
+    "Ulongoni",
+    "Sitakishari",
+    "King'azi",
+    "Manabii",
+    "Bangulo",
+    "Kisukuru",
+    "Kifuru",
+  ],
+};
+
 const MarathonRegistrationPage: React.FC = () => {
   const { t } = useTranslation();
 
@@ -605,7 +1055,7 @@ const MarathonRegistrationPage: React.FC = () => {
     email_address: "",
     race_category: "",
     kit_size: "",
-    membership: "",           // maps to 'religion' in backend
+    membership: "",
     decania: "",
     parokia: "",
     pickup_point: "",
@@ -622,7 +1072,7 @@ const MarathonRegistrationPage: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // ── Registration ─────────────────────────────────────────────────────
+  // ── Registration handlers ────────────────────────────────────────────
   const handleRegChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -648,7 +1098,6 @@ const MarathonRegistrationPage: React.FC = () => {
     setError(null);
     setLoading(true);
 
-    // Client-side validation
     if (!formData.full_name.trim()) {
       setError(t("validation.full_name_required"));
       setLoading(false);
@@ -713,7 +1162,7 @@ const MarathonRegistrationPage: React.FC = () => {
     }
   };
 
-  // ── Payment ──────────────────────────────────────────────────────────
+  // ── Payment handlers ─────────────────────────────────────────────────
   const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const target = e.target;
     const value = target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value;
@@ -760,10 +1209,11 @@ const MarathonRegistrationPage: React.FC = () => {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage(data.message || 
-          (action === "pay_now"
-            ? t("payment.request_sent")
-            : t("payment.registered_pay_later"))
+        setMessage(
+          data.message ||
+            (action === "pay_now"
+              ? t("payment.request_sent")
+              : t("payment.registered_pay_later"))
         );
         setStep("success");
       } else {
@@ -781,6 +1231,10 @@ const MarathonRegistrationPage: React.FC = () => {
   const showParokia = isCatholic && !!formData.decania;
   const isOther = formData.membership === "other";
 
+  const availableParokia = formData.decania && decaniaParokiaMap[formData.decania]
+    ? decaniaParokiaMap[formData.decania]
+    : [];
+
   // ── RENDER ───────────────────────────────────────────────────────────
   return (
     <>
@@ -792,16 +1246,20 @@ const MarathonRegistrationPage: React.FC = () => {
         />
       </section>
 
-      {/* Main Content – with background logos */}
+      {/* Main Content – mixed logos background (checkerboard / offset pattern) */}
       <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-        {/* Repeating sponsor logos background */}
-        <div className="absolute inset-0 opacity-[0.2] pointer-events-none">
+        {/* Mixed repeating logos – both logos visible in a tiled/mixed way */}
+        <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
           <div
             className="w-full h-full bg-repeat"
             style={{
-              backgroundImage: 'url("/images/pugu.png")', // ← REPLACE with your actual light/grayscale logo path
-              backgroundSize: "140px", // adjust this value – 120–180px usually looks good
-              backgroundPosition: "center",
+              backgroundImage: `
+                url("/images/pugu.png"),
+                url("/images/pugu_black.png")
+              `,
+              backgroundSize: "140px 140px, 140px 140px",
+              backgroundPosition: "0 0, 70px 70px",     // half-tile offset → checkerboard mix
+              backgroundRepeat: "repeat, repeat",
             }}
           />
         </div>
@@ -941,8 +1399,11 @@ const MarathonRegistrationPage: React.FC = () => {
                           <SelectValue placeholder={t("form.select_decania")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="Decania A">Decania A</SelectItem>
-                          <SelectItem value="Decania B">Decania B</SelectItem>
+                          {Object.keys(decaniaParokiaMap).map((dec) => (
+                            <SelectItem key={dec} value={dec}>
+                              {dec}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -956,13 +1417,17 @@ const MarathonRegistrationPage: React.FC = () => {
                       <Select
                         value={formData.parokia}
                         onValueChange={(v) => setFormData((p) => ({ ...p, parokia: v }))}
+                        disabled={availableParokia.length === 0}
                       >
                         <SelectTrigger className="h-12 rounded-xl">
                           <SelectValue placeholder={t("form.select_parokia")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="Parokia X">Parokia X</SelectItem>
-                          <SelectItem value="Parokia Y">Parokia Y</SelectItem>
+                          {availableParokia.map((par) => (
+                            <SelectItem key={par} value={par}>
+                              {par}
+                            </SelectItem>
+                          ))}
                         </SelectContent>
                       </Select>
                     </div>
@@ -981,8 +1446,10 @@ const MarathonRegistrationPage: React.FC = () => {
                           <SelectValue placeholder={t("form.select_pickup")} />
                         </SelectTrigger>
                         <SelectContent>
+                          {/* ← Add your real pickup points here */}
                           <SelectItem value="Point A">Point A</SelectItem>
                           <SelectItem value="Point B">Point B</SelectItem>
+                          <SelectItem value="Point C">Point C</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
