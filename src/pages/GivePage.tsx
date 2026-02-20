@@ -1445,12 +1445,28 @@ const MarathonRegistrationPage: React.FC = () => {
                         <SelectTrigger className="h-12 rounded-xl">
                           <SelectValue placeholder={t("form.select_pickup")} />
                         </SelectTrigger>
-                        <SelectContent>
-                          {/* ← Add your real pickup points here */}
-                          <SelectItem value="Point A">Point A</SelectItem>
-                          <SelectItem value="Point B">Point B</SelectItem>
-                          <SelectItem value="Point C">Point C</SelectItem>
-                        </SelectContent>
+<SelectContent>
+  <SelectItem value="CRDB Mlimani City">CRDB Mlimani City</SelectItem>
+  <SelectItem value="Mkombozi Bank Msimbazi Center">Mkombozi Bank Msimbazi Center</SelectItem>
+  <SelectItem value="Mkombozi Bank Tegeta">Mkombozi Bank Tegeta</SelectItem>
+  <SelectItem value="Kanisa Katoliki Mt. Petro - Oysterbay">Kanisa Katoliki Mt. Petro - Oysterbay</SelectItem>
+  <SelectItem value="Kanisa Katoliki Kristo Mfalme - Tabata">Kanisa Katoliki Kristo Mfalme - Tabata</SelectItem>
+  <SelectItem value="Kanisa Katoliki Segerea">Kanisa Katoliki Segerea</SelectItem>
+  <SelectItem value="Kanisa Katoliki Mt. Yosefu - Posta">Kanisa Katoliki Mt. Yosefu - Posta</SelectItem>
+  <SelectItem value="Kanisa Katoliki Pugu">Kanisa Katoliki Pugu</SelectItem>
+  <SelectItem value="Kibo Complex Tegeta">Kibo Complex Tegeta</SelectItem>
+  <SelectItem value="Kariakoo">Kariakoo</SelectItem>
+  <SelectItem value="KKKT Kijitonyama">KKKT Kijitonyama</SelectItem>
+  <SelectItem value="IFM">IFM</SelectItem>
+  <SelectItem value="Chuo Kikuu">Chuo Kikuu</SelectItem>
+  <SelectItem value="Kanisa Katoliki Makongo">Kanisa Katoliki Makongo</SelectItem>
+  <SelectItem value="Kanisa Katoliki Mbezi Louis">Kanisa Katoliki Mbezi Louis</SelectItem>
+  <SelectItem value="Kanisa Katoliki Chanika">Kanisa Katoliki Chanika</SelectItem>
+  <SelectItem value="Kanisa Katoliki Mt. Gaspar">Kanisa Katoliki Mt. Gaspar</SelectItem>
+  <SelectItem value="Kibaha Pwani">Kibaha Pwani</SelectItem>
+  <SelectItem value="Ubungo">Ubungo</SelectItem>
+  <SelectItem value="Msongora">Msongora</SelectItem>
+</SelectContent>
                       </Select>
                     </div>
                   )}
