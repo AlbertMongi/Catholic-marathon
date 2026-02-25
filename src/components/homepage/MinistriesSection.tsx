@@ -1,26 +1,46 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
 import GlassCard from "@/components/ui/GlassCard";
-import { HeartHandshake, BookOpen, Mic } from "lucide-react";
+import { HeartHandshake, Heart, BookOpen, Leaf, Users } from "lucide-react";
 
 const PuguMarathonFeaturesSection: React.FC = () => {
   const { t } = useTranslation();
 
-  const marathonFeatures = [
+  const communityFeatures = [
+    {
+      title: t("health_title"),
+      description: t(
+        "health_desc"
+        
+      ),
+      icon: <Heart className="h-10 w-10 text-[#6A10CB]" />,
+    },
+    {
+      title: t("education_title"),
+      description: t(
+        "education_desc"
+      ),
+      icon: <BookOpen className="h-10 w-10 text-[#6A10CB]" />,
+    },
+    {
+      title: t("environment_title"),
+      description: t(
+        "environment_desc"
+       
+      ),
+      icon: <Leaf className="h-10 w-10 text-[#6A10CB]" />,
+    },
+    {
+      title: t("youth_empowerment_title", "Youth Empowerment"),
+      description: t(
+        "youth_empowerment_desc"
+      ),
+      icon: <Users className="h-10 w-10 text-[#6A10CB]" />,
+    },
     {
       title: t("feature_register"),
       description: t("feature_register_desc"),
       icon: <HeartHandshake className="h-10 w-10 text-[#6A10CB]" />,
-    },
-    {
-      title: t("feature_tips"),
-      description: t("feature_tips_desc"),
-      icon: <BookOpen className="h-10 w-10 text-[#6A10CB]" />,
-    },
-    {
-      title: t("feature_media"),
-      description: t("feature_media_desc"),
-      icon: <Mic className="h-10 w-10 text-[#6A10CB]" />,
     },
   ];
 
@@ -37,33 +57,39 @@ const PuguMarathonFeaturesSection: React.FC = () => {
       <div className="page-container">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 gradient-text">
-            {t("features_section_title")}
+            {t("community_focus_title")}
           </h2>
           <p className="text-gray-600 max-w-2xl mx-auto">
-            {t("features_section_desc")}
+            {t("community_focus_desc")}
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {marathonFeatures.map((feature, index) => (
-            <div
-              key={index}
-              className="animate-slide-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <GlassCard className="h-full flex flex-col justify-between p-6">
-                <div>
-                  <div className="mb-4 flex justify-center">{feature.icon}</div>
-                  <h3 className="text-xl font-bold mb-2 text-center">
-                    {feature.title}
-                  </h3>
-                  <p className="text-gray-600 mb-6 text-center">
-                    {feature.description}
-                  </p>
+        {/* TOP 3 */}
+        <div className="grid gap-6 md:grid-cols-3 mb-6">
+          {communityFeatures.slice(0, 3).map((feature, index) => (
+            <GlassCard key={index} className="h-full flex flex-col p-6">
+              <div className="flex flex-col items-center text-center">
+                <div className="mb-4">{feature.icon}</div>
+                <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                <p className="text-gray-600">{feature.description}</p>
+              </div>
+            </GlassCard>
+          ))}
+        </div>
+
+        {/* CENTERED 2 BELOW */}
+        <div className="flex justify-center">
+          <div className="grid gap-6 md:grid-cols-2 max-w-4xl w-full">
+            {communityFeatures.slice(3, 5).map((feature, index) => (
+              <GlassCard key={index} className="h-full flex flex-col p-6">
+                <div className="flex flex-col items-center text-center">
+                  <div className="mb-4">{feature.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
+                  <p className="text-gray-600">{feature.description}</p>
                 </div>
               </GlassCard>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

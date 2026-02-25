@@ -29,9 +29,8 @@ const Footer: React.FC = () => {
             <div className="flex space-x-6 justify-center md:justify-start">
               {[
                 { href: "", icon: <Facebook size={24} /> },
-                { href: "", icon: <Instagram size={24} /> },
-                { href: "", icon: <Twitter size={24} /> },
-                { href: "", icon: <Youtube size={24} /> },
+                { href: "https://www.instagram.com/pugu__marathon?igsh=YW1vajF0eWs3dWdh", icon: <Instagram size={24} /> },
+                { href: "https://www.youtube.com/@tumainitelevision", icon: <Youtube size={24} /> },
               ].map((social, idx) => (
                 <a
                   key={idx}
@@ -54,9 +53,9 @@ const Footer: React.FC = () => {
             </h3>
             <ul className="space-y-2">
               {[
-                { to: "/about", label: t("about_pugu_marathon") },
-                { to: "/give", label: t("register_to_run") },
-                { to: "/contact", label: t("contact_us") },
+                // { to: "/about", label: t("about_pugu_marathon") },
+                { to: "/register", label: t("register_to_run") },
+                // { to: "/contact", label: t("contact_us") },
               ].map((link, idx) => (
                 <li key={idx}>
                   <Link
@@ -80,10 +79,10 @@ const Footer: React.FC = () => {
                 <p className="font-medium">{t("race_day_excitement")}</p>
                 <p className="text-sm">{t("race_day_description")}</p>
               </div>
-              <div>
+              {/* <div>
                 <p className="font-medium">{t("training_tips")}</p>
                 <p className="text-sm">{t("training_tips_description")}</p>
-              </div>
+              </div> */}
               <div>
                 <p className="font-medium">{t("community_engagement")}</p>
                 <p className="text-sm">{t("community_engagement_description")}</p>
@@ -108,18 +107,18 @@ const Footer: React.FC = () => {
                   className="hover:text-[#FAC31C] transition-colors duration-300"
                   aria-label={t("call_us")}
                 >
-                  +255 716 400 001
+                  +255 717 140 699 
                 </a>
               </li>
               <li className="flex items-center">
                 <Mail size={18} className="mr-3 flex-shrink-0 text-[#FAC31C]" />
                 <a
-                  href="mailto:info@evmak.com"
-                  className="hover:text-[#FAC31C] transition-colors duration-300"
+                  href="mailto: marathonpugu@gmail.com"
+                  className="hover:text-[#FA C31C] transition-colors duration-300"
                   aria-label={t("email_us")}
                 >
-                  info@evmak.com
-                </a>
+                  marathonpugu@gmail.com
+                </a> 
               </li>
             </ul>
           </div>

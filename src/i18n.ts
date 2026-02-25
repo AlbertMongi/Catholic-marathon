@@ -9,22 +9,24 @@ const resources = {
       home: "Home",
       about: "About",
       gallery: "Gallery",
+      About_Us: "About Us",
       register: "Register",
       cart: "Cart",
     countdown_title: "Countdown to Pugu Marathon",
       days: "Days",
       hours: "Hours",
       minutes: "Minutes",
-       hero_title: "Pugu Marathon, Unity and Solidarity!",
-      hero_subtitle:
-        "Join thousands of runners to raise 600 million shillings for the community",
+       hero_title: "Pugu Marathon 2026",
+         hero_title1: "  Love and Unity",
+     hero_subtitle:
+  "Join thousands of runners to raise more than 600 million shillings for commmunity development support at large.",
       hero_register: "Register Now",
             features_section_title: "About the Pugu Marathon Experience",
       features_section_desc:
-        "Join thousands of runners and supporters for the Pugu Marathon, which began in 2023. This year, nearly 10,000 participants will take part, aiming to raise 600 million shillings for the community. ",
-      feature_register: "Hija Pugu Station",
+        "Join thousands of runners and supporters for the Pugu Marathon, which began in 2023. This year, nearly 10,000 participants will take part, aiming to raise more than 600 million shillings for the community. ",
+      feature_register: "Pilgrimage Pugu Station",
       feature_register_desc:
-        "We will build and develop Pugu Hija Station through the collections which we will get from the marathon.",
+        "Supporting the development and construction of the Pugu Pilgrimage Center.",
       feature_tips: "Marathon benefits",
       feature_tips_desc:
         "Through Pugu Marathon, we aim to promote a healthy lifestyle, foster community spirit, and raise funds for impactful community projects. ",
@@ -32,12 +34,12 @@ const resources = {
       feature_media_desc:
         "Watch recorded marathon highlights, interviews with participants, and motivational talks from previous events.",
        marathon_moments_title: "Pugu Marathon Moments & Highlights",
-          watch_marathon_title: "Watch about Pugu Marathon",
+          watch_marathon_title: "Launching Pugu Marathon 2026",
              visit_our_page: "Visit our {{platform}} page",
     quick_links: "Quick Links",
     about_pugu_marathon: "About Pugu Marathon",
     register_to_run: "Register to Run",
-    contact_us: "Contact Us",
+    contact_us: "Share your feedback with us",
     marathon_highlights: "Marathon Highlights",
     race_day_excitement: "Race Day Excitement",
     race_day_description: "Join thousands of runners in a community event",
@@ -46,17 +48,20 @@ const resources = {
     community_engagement: "Community Engagement",
     community_engagement_description: "Connect with volunteers, supporters & sponsors",
     location: "Dar es Salaam, Tanzania",
-    call_us: "Call us at +255 716 400 001",
+    call_us: "Call us at +255 717 140 699",
     email_us: "Email us at info@evmak.com",
     all_rights_reserved: "All Rights Reserved.",
     footer_tagline: "Run • Connect • Inspire",
+    contact_us_title: "Share your feedback with us",
+    community_focus_desc:
+              "We dedicate our efforts to initiatives that improve health, education, environment, and youth empowerment.",
 
     // ABOUT SCREEN
       about_pugu_marathon_title: "About Pugu Marathon 2026",
     our_purpose_title: "Our Purpose",
     our_purpose_content: "To inspire a healthy, active lifestyle and bring the community together through an exciting, well-organized marathon event.",
     our_mission_title: "Our Mission",
-    our_mission_content: "To provide a safe, inclusive, and enjoyable marathon experience while encouraging fitness, community engagement, and personal achievement.",
+    our_mission_content: "To bring together people from all walks of life without discrimination. The initiative envisions to support Pilgrimage Centre and support the advancement of community health, education, vocational skills, youth empowerment and environmental sustainability.",
     our_vision_title: "Our Vision",
     our_vision_content: "A vibrant running community where every participant feels motivated, supported, and part of a memorable event that promotes wellness and togetherness.",
     our_core_values_title: "Our Core Values",
@@ -72,6 +77,30 @@ const resources = {
     pugu_marathon_route: "Pugu Marathon route",
     our_proud_sponsors: "Our Proud Sponsors",
     sponsor_alt: "Sponsor {{number}}",
+    our_team_title: "Organizing Committee",
+    // ABOUT US
+      full_name: "Full Name",
+    full_name_placeholder: "Enter your full name",
+    email: "Email",
+    email_placeholder: "Enter your email address",
+    form_subject: "Subject",
+    subject_placeholder: "Select a subject",
+    form_message: "Message",
+    message_placeholder: "Write your message here",
+    form_send_message: "Send Message",
+     health_desc:
+        "To support the renovation Pugu Health Centre.",
+           community_focus_title: "Our Community Focus",
+            education_desc:
+        "To support the renovation Pugu Secondary school.",
+        health_title: "Health",
+             environment_desc:
+        "Promoting and supporting environmental preservation",
+                youth_empowerment_desc:
+        "Support the growth of the Vocational Centre",
+        education_title: "Education",
+        environment_title: "Environment",
+        youth_empowerment_title: "Youth Empowerment",
     // Registration page specific
   "form.full_name": "Full Name",
   "form.full_name_placeholder": "Enter your full name",
@@ -83,8 +112,8 @@ const resources = {
   "form.select_size": "-- Select kit size --",
   "form.membership": "Membership",
   "form.select_membership": "-- Select membership type --",
-  "form.decania": "Decania",
-  "form.select_decania": "-- Select decania --",
+  "form.decania": "Deanery",
+  "form.select_Deanery": "-- Select decania --",
   "form.parokia": "Parokia",
   "form.select_parokia": "-- Select parokia --",
   "form.pickup_point": "Kit Pickup Point",
@@ -131,37 +160,53 @@ const resources = {
   "race.5km": "5 Km",
   "race.10km": "10 Km",
   "race.21km": "21 Km (Half Marathon)"
+  
     },
   },
+
+
+
+
+
+
+
+
+
+
+
+
+
   sw: {
     translation: {
       home: "Nyumbani",
       about: "Kuhusu",
       gallery: "Maktaba",
+       About_Us: "Kuhusu Sisi",
       register: "Jisajili",
       cart: "Kikapu",
-       countdown_title: "Kihesabu cha Pugu Marathon",
+       countdown_title: "Siku zilizobaki kufikia Pugu Marathon",
       days: "Siku",
       hours: "Saa",
       minutes: "Dakika",
-        hero_title: "Pugu Marathon, Upendo na Mshikamano!",
+        hero_title: "Pugu Marathon 2026 ",
+        hero_title1: "Upendo na Mshikamano",
       hero_subtitle:
-        "Shiriki na maelfu ya wakimbiaji kukusanya kiasi cha shilling millioni 600 kwa ajili ya jamii",
+        "Shiriki na maelfu ya wakimbiaji kukusanya kiasi cha zaidi ya shilingi milioni 600 kwa ajili ya maendeleo ya jamii kwa ujumla",
       hero_register: "Jisajili Sasa",
         features_section_title: "Kuhusu Pugu Marathon",
       features_section_desc:
-"Jiunge na maelfu ya wakimbiaji na wadau wa Pugu Marathon, ambayo ilianza mwaka 2023. Mwaka huu, washiriki takriban 10,000 wanatarajiwa kushiriki, wakilenga kukusanya shilingi milioni 600 kwa ajili ya jamii.",
-      feature_register: "Jisajili & Shirikisha",
-      feature_register_desc:
-        "Jisajili kwa Pugu Marathon na hakikisha nafasi yako ya kukimbia, kushindana, au kusaidia mbio katika kategoria mbalimbali.",
+"Jiunge na maelfu ya wakimbiaji na wadau wa Pugu Marathon, ambayo ilianza mwaka 2023. Mwaka huu, washiriki takriban 15,000 wanatarajiwa kushiriki, wakilenga kukusanya shilingi milioni 600 kwa ajili ya jamii.",
+    feature_register: " Kituo cha Hija Pugu",
+feature_register_desc:
+  "Kuchangia maendeleo ya ujenzi wa kituo cha Hija Pugu",
       feature_tips: "Vidokezo & Ushauri wa Marathon",
       feature_tips_desc:
         "Pokea vidokezo vya kila siku vya kukimbia, ushauri wa motisha, na mwanga wa kuboresha uvumilivu kujiandaa kwa siku ya mbio.",
       feature_media: "Matukio & Vyombo vya Habari",
       feature_media_desc:
         "Tazama matukio yaliyorekodiwa ya marathon, mahojiano na washiriki, na mihadhara ya motisha kutoka matukio ya awali.",
-         marathon_moments_title: "Matukio & Tukio za Pugu Marathon",
-           watch_marathon_title: "Tazama Kuhusu Pugu Marathon",
+         marathon_moments_title: "Matukio ya Pugu Marathon",
+           watch_marathon_title: "Uzinduzi wa Pugu Marathon 2026",
             visit_our_page: "Tembelea ukurasa wetu wa {{platform}}",
     quick_links: "Viungo vya Haraka",
 
@@ -170,26 +215,26 @@ const resources = {
     register_to_run: "Jisajili Kuendesha",
     contact_us: "Wasiliana Nasi",
     marathon_highlights: "Matukio ya Marathon",
-    race_day_excitement: "Msisimko wa Siku ya Mashindano",
-    race_day_description: "Jiunge na maelfu ya wakimbiaji katika tukio la jamii",
+    race_day_excitement: "Jiunge na maelfu ya wakimbiaji katika tukio la jamii",
+    race_day_description: "",
     training_tips: "Vidokezo vya Mafunzo",
     training_tips_description: "Jiandae na boresha utendaji wako",
     community_engagement: "Ushirikiano wa Jamii",
-    community_engagement_description: "Ungana na wajitoleaji, wafuasi na wadhamini",
+    community_engagement_description: "",
     location: "Dar es Salaam, Tanzania",
-    call_us: "Tupigie simu kwa +255 716 400 001",
+    call_us: "Tupigie simu kwa +255 717 140 699 ",
     email_us: "Tukutumie barua pepe kwa info@evmak.com",
     all_rights_reserved: "Haki Zote Zimehifadhiwa.",
     footer_tagline: "Kimbia • Ungana • Chochea",
 
     // ABOUT SCREEN
-      about_pugu_marathon_title: "Kuhusu Pugu Marathon 2026",
+      about_pugu_marathon_title: "",
     our_purpose_title: "Madhumuni Yetu",
     our_purpose_content: "Kuchochea mtindo wa maisha wenye afya na kufanya jamii ijumlishe kupitia tukio la marathon lililopangwa vizuri na lenye furaha.",
     our_mission_title: "Dhamira Yetu",
-    our_mission_content: "Kutoa uzoefu wa marathon salama, jumuishi, na wenye furaha huku tukihimiza mazoezi, ushirikiano wa jamii, na mafanikio binafsi.",
-    our_vision_title: "Maono Yetu",
-    our_vision_content: "Jumuiya ya wakimbiaji yenye nguvu ambapo kila mshiriki anahamasishwa, anaungwa mkono, na ni sehemu ya tukio la kukumbukwa linalokuza ustawi na mshikamano.",
+    our_mission_content: "Kuleta pamoja watu kutoka makundi na matabaka yote ya jamii bila ubaguzi wa aina yoyote, kwa lengo la kujenga mshikamano, upendo na ushirikiano. Tunakusudia kuhamasisha na kuunga mkono maendeleo ya Kituo cha Hija Pugu, huku tukichangia ustawi wa jamii izungukayo kwa ujumla. Dhamira yetu ni kukuza afya bora, kuboresha elimu, kuendeleza stadi za kazi na ujasiriamali na kulinda mazingira yetu kwa ajili ya kizazi cha sasa na kijacho. Tunaamini kuwa kwa kushirikiana, tunaweza kuleta mabadiliko chanya na endelevu katika jamii yetu.",
+    our_vision_title: "",
+    our_vision_content: "",
     our_core_values_title: "Thamani Zetu Kuu",
     our_core_values_content: "Kanuni zinazotuongoza katika kila kitu tunachofanya katika Pugu Marathon.",
     community_spirit_title: "Roho ya Jamii",
@@ -201,8 +246,12 @@ const resources = {
     integrity_title: "Uadilifu & Uchezaji wa Haki",
     integrity_content: "Tunashikilia usawa, uaminifu, na viwango vya maadili katika kupanga tukio, usajili, na matokeo.",
     pugu_marathon_route: "Njia ya Pugu Marathon",
-     our_proud_sponsors: "Wadhamini Wetu Wenye Fahari",
+     our_proud_sponsors: "Wadhamini Wetu",
     sponsor_alt: "Mdhamini {{number}}",
+    health_desc:
+        "Maboresho ya kituo cha afya Pugu",
+        community_focus_title: "Malengo yetu kwa jamii",
+        
     // Registration page specific
   "form.full_name": "Jina Kamili",
   "form.full_name_placeholder": "Andika Jina lako kamili",
@@ -215,7 +264,7 @@ const resources = {
   "form.membership": "Uanachama",
   "form.select_membership": "-- Chagua aina ya uanachama --",
   "form.decania": "Decania",
-  "form.select_decania": "-- Chagua decania --",
+  "form.select_decania": "-- Chagua dekania --",
   "form.parokia": "Parokia",
   "form.select_parokia": "-- Chagua parokia --",
   "form.pickup_point": "Kituo cha kuchukulia tisheti",
@@ -225,7 +274,7 @@ const resources = {
   "validation.full_name_required": "Jina kamili linahitajika",
   "validation.phone_invalid": "Tafadhali ingiza namba halali (07XXXXXXXX)",
   "validation.required_fields": "Tafadhali jaza sehemu zote zinazohitajika",
-  "validation.catholic_decania_parokia_required": "Catholic wanachama wanahitaji Decania na Parokia",
+  "validation.catholic_decania_parokia_required": "Catholic wanachama wanahitaji Dekania na Parokia",
   "validation.other_pickup_required": "Wengine wanahitaji eneo la kuchukulia jezi",
 
   "registration.success_message": "Usajili umekamilika! Sasa endelea na malipo.",
@@ -263,14 +312,39 @@ const resources = {
 "payment.airtel_money": "Airtel Money",
 "payment.halo_pesa": "Halopesa",
 "payment.processing": "Inashughulikia...",
+ our_team_title: "Kamati ya Maandalizi",
+      health_title: "Afya",
+      education_desc:
+        "Maboresho ya shule ya sekondari Pugu",
+              youth_empowerment_desc:
+        "Kuchangia ukuaji wa kituo cha ufundi stadi Pugu",
+        education_title: "Elimu",
+        
+//  ABOUT US 
+contact_us_title: "Tutumie maoni yako",
+  full_name: "Jina Kamili",
+    full_name_placeholder: "Ingiza jina lako kamili",
+    email: "Barua Pepe",
+    email_placeholder: "Ingiza barua pepe yako",
+    form_subject: "Mada",
+    subject_placeholder: "Chagua mada",
+    form_message: "Ujumbe",
+    message_placeholder: "Andika ujumbe wako hapa",
+    form_send_message: "Tuma Ujumbe",
+                 environment_desc:
+        "Kusaidia uhifadhi wa mazingira Pugu",
+     community_focus_desc:
+              "Malengo ya Pugu Marathon ni kuwezesha miradi ya kijamii katika sekta ya afya, elimu, mazingira, na uwezeshaji wa vijana.",
+                   environment_title: "Mazingira",
+        youth_empowerment_title: "Maendeleo ya vijana",
     },
   },
 };
 
 i18n.use(initReactI18next).init({
   resources,
-  lng: "en", // default language
-  fallbackLng: "en",
+  lng: "sw", // default language
+  fallbackLng: "sw",
   interpolation: { escapeValue: false },
 });
 

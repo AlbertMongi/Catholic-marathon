@@ -201,7 +201,8 @@ const Navbar: React.FC = () => {
 
   const navLinks = [
     { key: "home", path: "/" },
-    { key: "register", path: "/give" },
+     { key: "About_Us", path: "/about" },
+    { key: "register", path: "/register" },
     { key: "gallery", path: "/events" },
   ];
 

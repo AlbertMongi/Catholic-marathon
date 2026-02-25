@@ -11,14 +11,20 @@ interface Picture {
 const CommunityStoriesSection: React.FC = () => {
   const { t } = useTranslation(); // ✅ Hook inside component
 
-  const pictures: Picture[] = [
-    { id: "1", src: "/images/people.png", alt: t("church_event") },
-    { id: "2", src: "/images/people1.png", alt: t("volunteer_activity") },
-    { id: "3", src: "/images/people.png", alt: t("charity_contribution") },
-    { id: "4", src: "/images/people1.png", alt: t("youth_gathering") },
-    { id: "5", src: "/images/people.png", alt: t("prayer_session") },
-    { id: "6", src: "/images/people1.png", alt: t("community_workshop") },
-  ];
+const pictures: Picture[] = [
+  { id: "1", src: "/images/4H7A0373.JPG", alt: t("church_event") },
+  { id: "2", src: "/images/4H7A0391.JPG", alt: t("volunteer_activity") },
+  { id: "8", src: "/images/JMN_9085.JPG", alt: t("volunteer_activity") },
+  { id: "9", src: "/images/JMN_9088.JPG", alt: t("charity_contribution") },
+  { id: "10", src: "/images/JMN_9093.JPG", alt: t("youth_gathering") },
+  { id: "11", src: "/images/JMN_9117.JPG", alt: t("prayer_session") },
+  { id: "12", src: "/images/JMN_9119.JPG", alt: t("community_workshop") },
+  { id: "13", src: "/images/JMN_9125.JPG", alt: t("church_event") },
+  { id: "14", src: "/images/JMN_9156.JPG", alt: t("volunteer_activity") },
+  { id: "15", src: "/images/JMN_9159.JPG", alt: t("charity_contribution") },
+  { id: "16", src: "/images/JMN_9167.JPG", alt: t("youth_gathering") },
+  { id: "17", src: "/images/JMN_9222.JPG", alt: t("prayer_session") },
+];
 
   return (
     <section className="relative section-padding bg-church-dark text-white overflow-hidden">

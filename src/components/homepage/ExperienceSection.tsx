@@ -6,7 +6,7 @@ const ExperienceSection: React.FC = () => {
 
   return (
     <section
-      className="relative overflow-hidden py-16 px-6"
+      className="relative overflow-hidden py-12 px-4"
       style={{
         backgroundImage: "url('/images/way_experience.jpeg')",
         backgroundSize: "cover",
@@ -14,40 +14,24 @@ const ExperienceSection: React.FC = () => {
       }}
     >
       {/* Gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#E18731]/20 to-[#E18731]/10"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-[#E18731]/30 to-[#E18731]/20"></div>
 
-      <div className="relative max-w-7xl mx-auto">
+      <div className="relative max-w-3xl mx-auto text-center">
         {/* Section Heading */}
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-[#FAC31C]">
+        <h2 className="text-2xl md:text-3xl font-bold mb-8 text-[#FAC31C]">
           {t("watch_marathon_title")}
         </h2>
 
-        {/* Content Wrapper */}
-        <div className="flex flex-col md:flex-row items-center gap-10">
-          
-          {/* LEFT SIDE - Image */}
-          <div className="w-full md:w-1/2">
-            <img
-              src="/images/map.png"
-              alt="Marathon Experience"
-              className="w-full h-auto rounded-2xl shadow-2xl object-cover"
-            />
-          </div>
-
-          {/* RIGHT SIDE - Video */}
-          <div className="w-full md:w-1/2">
-            <div className="relative w-full pb-[56.25%] rounded-2xl shadow-2xl overflow-hidden">
-              <iframe
-                className="absolute top-0 left-0 w-full h-full"
-                src="https://www.youtube.com/embed/lWpDkMreI7g"
-                title="YouTube video player"
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              ></iframe>
-            </div>
-          </div>
-
+        {/* Centered Video */}
+        <div className="relative w-full pb-[50%] rounded-xl shadow-lg overflow-hidden">
+          <iframe
+            className="absolute top-0 left-0 w-full h-full"
+            src="https://www.youtube.com/embed/lWpDkMreI7g"
+            title="YouTube video player"
+            frameBorder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowFullScreen
+          ></iframe>
         </div>
       </div>
     </section>

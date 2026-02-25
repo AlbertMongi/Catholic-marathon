@@ -8,7 +8,7 @@ import Layout from "./components/Layout/Layout";
 import Index from "./pages/Index";
 import AboutPage from "./pages/AboutPage";
 import EventsPage from "./pages/EventsPage";
-import GivePage from "./pages/GivePage";
+import RegisterPage from "./pages/RegisterPage";
 import WatchPage from "./pages/WatchPage";
 import StorePage from "./pages/StorePage";
 import ServePage from "./pages/ServePage";
@@ -33,7 +33,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/about" element={<AboutPage />} />
               <Route path="/events" element={<EventsPage />} />
-              <Route path="/give" element={<GivePage />} />
+              <Route path="/register" element={<RegisterPage />} />
               <Route path="/watch" element={<WatchPage />} />
               <Route path="/store" element={<StorePage />} />
               <Route path="/serve" element={<ServePage />} />
