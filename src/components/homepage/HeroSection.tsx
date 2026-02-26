@@ -7,10 +7,10 @@ import { useTranslation } from "react-i18next";
 
 const backgroundImages = [
   "/images/JMN_9117.JPG",
-  "/images/team.jpeg",
-  "/images/istock.jpg",
+  "/images/WhatsApp Image 2026-02-25 at 20.44.41.jpeg",
+  "/images/WhatsApp Image 2026-02-25 at 20.44.36 (1).jpeg",
   "/images/JMN_9125.JPG",
-  "/images/JMN_9167.JPG",
+  "/images/WhatsApp Image 2026-02-25 at 20.44.40 (1).jpeg",
 ];
 
 const HeroSection: React.FC = () => {

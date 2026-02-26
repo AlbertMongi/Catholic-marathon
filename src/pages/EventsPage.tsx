@@ -19,6 +19,25 @@ const galleryImages = [
   { src: "/images/JMN_9158.JPG",  year: 2025 },
   { src: "/images/JMN_9126.JPG",  year: 2025 },
   // 2023 photos (from your screenshot)
+    // Your original 2024 photos
+  { src: "/images/WhatsApp Image 2026-02-25 at 20.44.36 (1).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.36.jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.37 (1).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.37 (2).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.37.jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.38 (1).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.38 (2).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.38.jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.39 (1).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.39 (2).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.39.jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.40 (1).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.40 (2).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.40.jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.41 (1).jpeg", year: 2024 },
+{ src: "/images/WhatsApp Image 2026-02-25 at 20.44.41.jpeg", year: 2024 },
+  { src: "/images/4H7A0373.JPG", year: 2024 },
+  { src: "/images/4H7A0391.JPG", year: 2024 },
 //  { src: "/images/DSC_0100.jpg",   year: 2023 },
   { src: "/images/DSC_0771-1.jpg", year: 2023 },
   { src: "/images/IMG_2193.jpg",   year: 2023 },
@@ -52,9 +71,7 @@ const galleryImages = [
   // { src: "/images/IMG_2274.jpg",   year: 2023 },
 
   
-  // Your original 2024 photos
-  { src: "/images/4H7A0373.JPG", year: 2024 },
-  { src: "/images/4H7A0391.JPG", year: 2024 },
+
 
 
 ];
@@ -169,9 +186,7 @@ const GalleryPage: React.FC = () => {
         <div className="hero-bg absolute inset-0 bg-cover bg-center -z-10" style={{ backgroundImage: 'url("/images/people.png")' }}></div>
         <div className="hero-gradient absolute inset-0 bg-gradient-to-b from-black/40 to-black/20 -z-10"></div>
         <div className="hero-content text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Marathon Gallery
-          </h1>
+          
         </div>
       </section>
 
