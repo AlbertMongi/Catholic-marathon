@@ -78,6 +78,7 @@ const resources = {
     our_proud_sponsors: "Our Proud Sponsors",
     sponsor_alt: "Sponsor {{number}}",
     our_team_title: "Organizing Committee",
+     payment_terms_and_conditions : "Terms and Conditions",
     // ABOUT US
       full_name: "Full Name",
     full_name_placeholder: "Enter your full name",
@@ -86,6 +87,8 @@ const resources = {
     form_subject: "Subject",
     subject_placeholder: "Select a subject",
     form_message: "Message",
+     validation_accept_terms :  "Accept Terms and Conditions",
+     validation_select_payment_method :  "Select Payment Method",
     message_placeholder: "Write your message here",
     form_send_message: "Send Message",
      health_desc:
@@ -155,11 +158,31 @@ const resources = {
 "payment.airtel_money": "Airtel Money",
 "payment.halo_pesa": "Halopesa",
 "payment.processing": "Processing...",
+'payment_your_bill_number' : 'Bill Number',
   // Race distances (these were not in PHP but kept consistent)
   "race.2km": "2 Km",
   "race.5km": "5 Km",
   "race.10km": "10 Km",
-  "race.21km": "21 Km (Half Marathon)"
+  "race.21km": "21 Km (Half Marathon)",
+
+
+  // STEPS FOR PAYMENT
+      "complete_payment" : 'Complete Payment',
+    'how_to_pay_later'       : 'How to Pay Later',
+    'pay_later_subtitle'     : 'Use any mobile money network to complete your registration',
+    'your_bill_number'       : 'Your Bill Number',
+    'bill_number_note'       : 'Use this number across all networks below',
+    'step_dial'              : 'Dial :{{code}} on your :{{network}}',
+    'step_select_pay_bill'   : 'Select "Lipa Bili" (Pay Bill)',
+    'step_enter_bill_number' : 'Enter Bill Number: :{{number}}',
+    'step_enter_reference'   : 'Enter your Reference Number (your phone number)',
+    'step_enter_amount'      : 'Enter amount: :{{amount}}',
+    'step_enter_pin_mpesa'   : 'Enter your M-Pesa PIN and confirm',
+    'step_enter_pin'         : 'Enter your PIN and confirm',
+    'important'              : 'Important',
+    'pay_later_sms_note'     : 'After payment, your registration will be confirmed automatically. Please keep your SMS confirmation as proof of payment.',
+    'close'                  : 'Close',
+    'ok_pay_later'           : "OK, I'll Pay Later",
   
     },
   },
@@ -314,11 +337,36 @@ feature_register_desc:
 "payment.processing": "Inashughulikia...",
  our_team_title: "Kamati ya Maandalizi",
       health_title: "Afya",
+       validation_select_payment_method :  "Chagua Mtandao wa malipo",
       education_desc:
         "Maboresho ya shule ya sekondari Pugu",
               youth_empowerment_desc:
         "Kuchangia ukuaji wa kituo cha ufundi stadi Pugu",
         education_title: "Elimu",
+ payment_terms_and_conditions : "Sheria na masharti",
+ validation_accept_terms :  "Kubali masharti",
+
+
+        // PAYMENT STEPS
+            'select_method' : '-- Chagua njia ya malipo --',
+    'complete_payment' : 'Kamilisha Malipo',
+    'payment_request_sent_to_your_phone' : 'Ombi la malipo limetumwa kwenye simu yako.',
+    'how_to_pay_later'       : 'Jinsi ya Kulipa Baadaye',
+    'pay_later_subtitle'     : 'Tumia mtandao wowote wa pesa za simu kukamilisha usajili wako',
+    'your_bill_number'       : 'Nambari Yako ya Bili',
+    'bill_number_note'       : 'Tumia nambari hii katika mitandao yote hapa chini',
+    'step_dial'              : 'Piga : {{code}} kwenye simu yako ya :{{network}}',
+    'step_select_pay_bill'   : 'Chagua "Lipa Bili"',
+    'step_enter_bill_number' : 'Ingiza Nambari ya Bili: :{{number}}',
+    'step_enter_reference'   : 'Ingiza Nambari ya Kumbukumbu (nambari yako ya simu)',
+    'step_enter_amount'      : 'Ingiza kiasi: :{{amount}}',
+    'step_enter_pin_mpesa'   : 'Ingiza PIN yako ya M-Pesa na uthibitishe',
+    'step_enter_pin'         : 'Ingiza PIN yako na uthibitishe',
+    'important'              : 'Muhimu',
+    'pay_later_sms_note'     : 'Baada ya malipo, usajili wako utathibitishwa moja kwa moja. Tafadhali hifadhi ujumbe wa SMS kama uthibitisho wa malipo.',
+    'close'                  : 'Funga',
+    'ok_pay_later'           : 'Sawa, Nitalipa Baadaye',
+    'payment_your_bill_number' : 'Namba ya Bili',
         
 //  ABOUT US 
 contact_us_title: "Tutumie maoni yako",

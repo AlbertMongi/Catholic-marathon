@@ -1,9 +1,9 @@
-// export default MarathonRegistrationPage;
+// MarathonRegistrationPage.tsx
 
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
-import { Loader2 } from "lucide-react";
+import { Loader2, CheckCircle2 } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -14,240 +14,96 @@ import {
 
 const API_BASE = "http://127.0.0.1:8000/api"; // ← change to production URL later
 
-// ── Real Decania → Parokia mapping ───────────────────────────────────────
 const decaniaParokiaMap: Record<string, string[]> = {
   "Mt. Joseph": [
-    "St. Joseph",
-    "Chang'ombe",
-    "Upanga",
-    "Msimbazi",
-    "Mburahati",
-    "Keko",
-    "Mafia",
-    "Muhimbili",
-    "Buguruni",
-    "Kurasini",
-    "Mtoni",
-    "Mikoroshoni",
-    "Gonge - Mafia",
-    "Bareni - Mafia",
+    "St. Joseph", "Chang'ombe", "Upanga", "Msimbazi", "Mburahati", "Keko",
+    "Mafia", "Muhimbili", "Buguruni", "Kurasini", "Mtoni", "Mikoroshoni",
+    "Gonge - Mafia", "Bareni - Mafia",
   ],
   "Ubungo": [
-    "Ubungo Msewe",
-    "Manzese",
-    "Kimara",
-    "Chuo Kikuu",
-    "Tandale",
-    "Michungwani",
-    "Changanyikeni",
-    "Korogwe",
+    "Ubungo Msewe", "Manzese", "Kimara", "Chuo Kikuu", "Tandale",
+    "Michungwani", "Changanyikeni", "Korogwe",
   ],
   "Makuburi": [
-    "Makuburi",
-    "Kibangu",
-    "Luhanga",
-    "Tabata Kisiwani",
-    "Makoka",
-    "Kilungule",
-    "Mabibo",
-    "Nzasa",
-    "Kimara Mtoni",
-    "Baruti",
-    "Maria Goreti",
-    "Kimara Mavurunza",
-    "Bonyokwa",
+    "Makuburi", "Kibangu", "Luhanga", "Tabata Kisiwani", "Makoka",
+    "Kilungule", "Mabibo", "Nzasa", "Kimara Mtoni", "Baruti",
+    "Maria Goreti", "Kimara Mavurunza", "Bonyokwa",
   ],
   "Kibaha": [
-    "Kibaha",
-    "Mkuza",
-    "Mlandizi",
-    "Kibamba",
-    "Kiluvya",
-    "Kibwegere",
-    "Kwembe",
-    "Misugusugu",
-    "Kongowele",
-    "Jamaika",
-    "Chang'ombe",
-    "Mpiji",
-    "Makurunge",
-    "Visiga",
-    "Lulanzi",
-    "Mabwepande",
-    "Hondogo",
-    "Miembesaba",
-    "Garagaza",
-    "Kidimu",
+    "Kibaha", "Mkuza", "Mlandizi", "Kibamba", "Kiluvya", "Kibwegere",
+    "Kwembe", "Misugusugu", "Kongowele", "Jamaika", "Chang'ombe",
+    "Mpiji", "Makurunge", "Visiga", "Lulanzi", "Mabwepande",
+    "Hondogo", "Miembesaba", "Garagaza", "Kidimu",
   ],
   "Mbezi Luis": [
-    "Mbezi Luis",
-    "Makabe",
-    "Msakuzi",
-    "Mshikamano",
-    "Malamba Mawili",
-    "Msumi",
-    "Mpiji Magohe",
-    "Tegeta A",
-    "Pande",
+    "Mbezi Luis", "Makabe", "Msakuzi", "Mshikamano", "Malamba Mawili",
+    "Msumi", "Mpiji Magohe", "Tegeta A", "Pande",
     "Mageti - Mt. Simon Stock",
   ],
   "Mavurunza": [
-    "Mavurunza",
-    "Mbezi Mwisho",
-    "Temboni",
-    "Tagaste",
-    "Temboni- Ritha",
-    "Matosa",
-    "Msingwa",
-    "Goba",
-    "Stop-Over",
+    "Mavurunza", "Mbezi Mwisho", "Temboni", "Tagaste", "Temboni- Ritha",
+    "Matosa", "Msingwa", "Goba", "Stop-Over",
   ],
   "Kigamboni": [
-    "Kigamboni",
-    "Kongowe",
-    "Mji Mwema",
-    "Kimbiji",
-    "Toangoma",
-    "Kibada",
-    "Gezaulole",
-    "Mikwambe",
-    "Vijibweni",
-    "Mwongozo",
-    "Mkokozi",
-    "Lugwadu",
-    "Mlamleni",
-    "Kisarawe II",
+    "Kigamboni", "Kongowe", "Mji Mwema", "Kimbiji", "Toangoma",
+    "Kibada", "Gezaulole", "Mikwambe", "Vijibweni", "Mwongozo",
+    "Mkokozi", "Lugwadu", "Mlamleni", "Kisarawe II",
   ],
   "Mbagala": [
-    "Mbagala Zakhem",
-    "Kizuiani",
-    "Kijichi",
-    "Mbagala Kuu",
-    "Kizinga",
-    "Mbande",
-    "Kilamba",
-    "Chamazi",
-    "Vigoa",
-    "Majimatitu",
-    "Kingugi",
-    "Vigozi",
-    "Msongola A",
-    "Mgeninani",
+    "Mbagala Zakhem", "Kizuiani", "Kijichi", "Mbagala Kuu", "Kizinga",
+    "Mbande", "Kilamba", "Chamazi", "Vigoa", "Majimatitu",
+    "Kingugi", "Vigozi", "Msongola A", "Mgeninani",
   ],
   "Kilimahewa": [
-    "Vikindu",
-    "Mkuranga",
-    "Kilimahewa",
-    "Kibiti",
-    "Kisiju Pwani",
-    "Kisegese",
-    "Bungu",
-    "Ikwiriri",
-    "Vianzi",
-    "Marogoro",
-    "Utete",
+    "Vikindu", "Mkuranga", "Kilimahewa", "Kibiti", "Kisiju Pwani",
+    "Kisegese", "Bungu", "Ikwiriri", "Vianzi", "Marogoro", "Utete",
   ],
   "Mt. Thomas More": [
-    "Mbezi Beach - Mt. Gasper",
-    " Salasala",
-    "Mbezi Juu",
-    "Kunduchi Mtongani",
-    "Mbezi Beach (BMMH)",
-    "Mbezi Beach (Thomas More)",
-    "Kilongawima",
-    "Goba Kunguru",
-    "Kinzudi",
-    "Goba Mwisho",
-    "IPTL - Mt. Ambrose",
-    "Utatu Mtakatifu - Skanska",
-    "Mbezi Manyema - Mt. Monica",
-    "Kinzudi (Toleo la Bwana)",
+    "Mbezi Beach - Mt. Gasper", "Salasala", "Mbezi Juu",
+    "Kunduchi Mtongani", "Mbezi Beach (BMMH)", "Mbezi Beach (Thomas More)",
+    "Kilongawima", "Goba Kunguru", "Kinzudi", "Goba Mwisho",
+    "IPTL - Mt. Ambrose", "Utatu Mtakatifu - Skanska",
+    "Mbezi Manyema - Mt. Monica", "Kinzudi (Toleo la Bwana)",
     "Salasala Kilimahewa",
-  
   ],
   "Mt. Petro ": [
-    "Oysterbay",
-    "Mwenge",
-    "Sinza",
-    "Mwananyamala",
-    "Hananasifu",
-    "Kawe",
-    "Mikocheni",
-    "Makongo Juu",
-    "Magomeni",
-    "Kijitonyama",
+    "Oysterbay", "Mwenge", "Sinza", "Mwananyamala", "Hananasifu",
+    "Kawe", "Mikocheni", "Makongo Juu", "Magomeni", "Kijitonyama",
   ],
   "Ukonga": [
-    "Ukonga",
-    "Yombo Kiwalani",
-    "Yombo Dovya",
-    "Buza",
-    "Kitunda",
-    "Yombo Vituka",
-    "Kivule",
-    "Mwanagati",
-    "Magole",
-    "Gongolamboto",
-    "Nyantira",
-    "Minazini",
-    "Kipunguni",
+    "Ukonga", "Yombo Kiwalani", "Yombo Dovya", "Buza", "Kitunda",
+    "Yombo Vituka", "Kivule", "Mwanagati", "Magole", "Gongolamboto",
+    "Nyantira", "Minazini", "Kipunguni",
   ],
   "Pugu": [
-    "Pugu",
-    "Mji Mpya Relini",
-    "Chanika",
-    "Chakenge",
-    "Buyuni",
-    "Bombambili",
-    "Mvuti",
-    "Zingiziwa",
-    "Kisarawe",
-    " Masaki",
-    "Viwege",
-    "Kigenzi",
-    "Yongwe",
-    "Dominico",
-    "Mzenga",
-    "Nyebulu",
-    "Rada",
-    "Msongola B",
-    "Vikongoro",
-    "Homboza",
+    "Pugu", "Mji Mpya Relini", "Chanika", "Chakenge", "Buyuni",
+    "Bombambili", "Mvuti", "Zingiziwa", "Kisarawe", "Masaki",
+    "Viwege", "Kigenzi", "Yongwe", "Dominico", "Mzenga",
+    "Nyebulu", "Rada", "Msongola B", "Vikongoro", "Homboza",
   ],
   "Segerea": [
-    "Segerea",
-    "Tabata",
-    "Kimanga",
-    "Kipawa",
-    "Mongo la Ndege",
-    "Vingunguti",
-    "Kinyerezi",
-    "Ulongoni",
-    "Sitakishari",
-    "King'azi",
-    "Manabii",
-    "Bangulo",
-    "Kisukuru",
-    "Kifuru",
+    "Segerea", "Tabata", "Kimanga", "Kipawa", "Mongo la Ndege",
+    "Vingunguti", "Kinyerezi", "Ulongoni", "Sitakishari", "King'azi",
+    "Manabii", "Bangulo", "Kisukuru", "Kifuru",
   ],
-   "Chanika": [
-    "Chanika",
-    "Dominiko",
-    "Msongora B",
-    "Chakenge",
-    "Mvuti",
-    "Nyeburu",
-    "Homboza",
-    "Zingiziwa",
-    "Yongwe",
-    "Vikongoro",
+  "Chanika": [
+    "Chanika", "Dominiko", "Msongora B", "Chakenge", "Mvuti",
+    "Nyeburu", "Homboza", "Zingiziwa", "Yongwe", "Vikongoro",
   ],
+};
+
+type Step = "participant" | "payment" | "success";
+
+const stepLabels: Record<Step, string> = {
+  participant: "",
+  payment: "",
+  success: "",
 };
 
 const MarathonRegistrationPage: React.FC = () => {
   const { t } = useTranslation();
 
-  const [step, setStep] = useState<"form" | "payment" | "success">("form");
+  const [step, setStep] = useState<Step>("participant");
 
   const [formData, setFormData] = useState({
     full_name: "",
@@ -272,7 +128,7 @@ const MarathonRegistrationPage: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
-  // ── Registration handlers ────────────────────────────────────────────
+  // ── Registration form handlers ─────────────────────────────────────────────
   const handleRegChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
@@ -362,7 +218,7 @@ const MarathonRegistrationPage: React.FC = () => {
     }
   };
 
-  // ── Payment handlers ─────────────────────────────────────────────────
+  // ── Payment handlers ───────────────────────────────────────────────────────
   const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const target = e.target;
     const value = target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value;
@@ -381,12 +237,12 @@ const MarathonRegistrationPage: React.FC = () => {
       return;
     }
     if (action === "pay_now" && !paymentData.payment_method) {
-      setError(t("validation.select_payment_method"));
+      setError(t("validation_select_payment_method"));
       setLoading(false);
       return;
     }
     if (!paymentData.terms) {
-      setError(t("validation.accept_terms"));
+      setError(t("validation_accept_terms"));
       setLoading(false);
       return;
     }
@@ -410,11 +266,12 @@ const MarathonRegistrationPage: React.FC = () => {
 
       if (res.ok) {
         setMessage(
-          data.message ||
-            (action === "pay_now"
-              ? t("payment.request_sent")
-              : t("payment.registered_pay_later"))
+          action === "pay_now"
+            ? data.message || t("payment.request_sent")
+            : data.message || t("payment.registered_pay_later")
         );
+
+        // Both actions now go to success step
         setStep("success");
       } else {
         setError(data.message || t("payment.error_generic"));
@@ -427,91 +284,132 @@ const MarathonRegistrationPage: React.FC = () => {
     }
   };
 
+  // ── Helpers ────────────────────────────────────────────────────────────────
   const isCatholic = formData.membership === "catholic";
   const showParokia = isCatholic && !!formData.decania;
   const isOther = formData.membership === "other";
-
   const availableParokia = formData.decania && decaniaParokiaMap[formData.decania]
     ? decaniaParokiaMap[formData.decania]
     : [];
 
-  // ── RENDER ───────────────────────────────────────────────────────────
+  const currentStepIndex = ["participant", "payment", "success"].indexOf(step);
+
+  // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
     <>
       {/* Hero Section */}
-      <section className="relative min-h-[25vh] flex items-center justify-center overflow-hidden">
+      <section className="relative min-h-[30vh] flex items-center justify-center overflow-hidden">
         <div
-          className="absolute inset-0 bg-cover bg-center"
-          style={{ backgroundImage: 'url("images/running.png")' }}
+          className="absolute inset-0 bg-cover bg-center brightness-[0.85]"
+          style={{ backgroundImage: 'url("/images/running.png")' }}
         />
+        <div className="relative z-10 text-center text-white px-6">
+   
+        </div>
       </section>
 
-      {/* Main Content – mixed logos background (checkerboard / offset pattern) */}
-      <section className="py-12 md:py-16 bg-white relative overflow-hidden">
-        {/* Mixed repeating logos – both logos visible in a tiled/mixed way */}
-        <div className="absolute inset-0 opacity-[0.15] pointer-events-none">
+      {/* Main Content */}
+      <section className="py-12 md:py-16 bg-gradient-to-b from-white to-purple-50/30 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.08] pointer-events-none">
           <div
             className="w-full h-full bg-repeat"
             style={{
-              backgroundImage: `
-                url("/images/pugu.png"),
-                url("/images/pugu_black.png")
-              `,
-              backgroundSize: "140px 140px, 140px 140px",
-              backgroundPosition: "0 0, 70px 70px",     // half-tile offset → checkerboard mix
-              backgroundRepeat: "repeat, repeat",
+              backgroundImage: `url("/images/pugu.png"), url("/images/pugu_black.png")`,
+              backgroundSize: "160px 160px, 160px 160px",
+              backgroundPosition: "0 0, 80px 80px",
             }}
           />
         </div>
 
-        <div className="max-w-[880px] mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-          <div
-         className="rounded-3xl overflow-hidden bg-white border border-purple-500 
-shadow-[0_0_25px_rgba(168,85,247,0.6)]"
-          >
-            {step === "form" && (
+        <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
+          {/* Step Progress */}
+          <div className="mb-10">
+            <div className="flex justify-between items-center mb-3">
+              {(["participant", "payment", "success"] as const).map((s, i) => (
+                <div
+                  key={s}
+                  className={`flex flex-col items-center flex-1 ${
+                    i < currentStepIndex
+                      ? "text-purple-700"
+                      : i === currentStepIndex
+                      ? "text-purple-900 font-semibold"
+                      : "text-gray-400"
+                  }`}
+                >
+                  <div
+                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold mb-2 transition-all ${
+                      i < currentStepIndex
+                        ? "bg-purple-600"
+                        : i === currentStepIndex
+                        ? "bg-purple-700 ring-4 ring-purple-200"
+                        : "bg-gray-300"
+                    }`}
+                  >
+                    {i < currentStepIndex ? <CheckCircle2 className="w-6 h-6" /> : i + 1}
+                  </div>
+                  <span className="text-sm hidden sm:block">{stepLabels[s]}</span>
+                </div>
+              ))}
+            </div>
+            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-purple-600 to-indigo-600 transition-all duration-500"
+                style={{ width: `${((currentStepIndex + 1) / 3) * 100}%` }}
+              />
+            </div>
+          </div>
+
+          <div className="rounded-3xl overflow-hidden bg-white border border-purple-200 shadow-xl shadow-purple-100/40">
+            {step === "participant" && (
               <div className="p-8 md:p-12">
-                <p className="text-center text-gray-500 italic mb-8 text-sm">
-                  {t("form.required_fields")} <span className="text-red-500">*</span>
-                </p>
+                {/* <h2 className="text-3xl font-bold text-purple-900 mb-2 text-center">
+                 
+                </h2>
+                <p className="text-center text-gray-600 mb-10">
+                  Please fill in your details accurately
+                </p> */}
 
                 {error && (
-                  <div className="mb-6 p-4 bg-red-50 border border-red-200 text-red-800 rounded-xl text-center">
+                  <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-800 rounded-2xl text-center">
                     {error}
                   </div>
                 )}
 
-                <form onSubmit={handleRegSubmit} className="space-y-7">
-                  <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {t("form.full_name")} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="full_name"
-                      value={formData.full_name}
-                      onChange={handleRegChange}
-                      placeholder={t("form.full_name_placeholder")}
-                      className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
-                      required
-                    />
+                <form onSubmit={handleRegSubmit} className="space-y-6">
+                  {/* ── Full name + Phone ── */}
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.full_name")} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="text"
+                        name="full_name"
+                        value={formData.full_name}
+                        onChange={handleRegChange}
+                        placeholder={t("form.full_name_placeholder")}
+                        className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.phone_number")} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="tel"
+                        name="phone_number"
+                        value={formData.phone_number}
+                        onChange={handleRegChange}
+                        placeholder="07XXXXXXXX"
+                        className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                        required
+                      />
+                    </div>
                   </div>
 
-                  <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {t("form.phone_number")} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone_number"
-                      value={formData.phone_number}
-                      onChange={handleRegChange}
-                      placeholder="07XXXXXXXX"
-                      className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
-                      required
-                    />
-                  </div>
-
+                  {/* Email */}
                   <div>
                     <label className="block font-medium text-gray-700 mb-2">
                       {t("form.email")}
@@ -526,48 +424,52 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
                     />
                   </div>
 
-                  <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {t("form.race_category")} <span className="text-red-500">*</span>
-                    </label>
-                    <Select
-                      value={formData.race_category}
-                      onValueChange={(v) => setFormData((p) => ({ ...p, race_category: v }))}
-                    >
-                      <SelectTrigger className="h-12 rounded-xl">
-                        <SelectValue placeholder={t("form.select_distance")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="2km">{t("race.2km")}</SelectItem>
-                        <SelectItem value="5km">{t("race.5km")}</SelectItem>
-                        <SelectItem value="10km">{t("race.10km")}</SelectItem>
-                        <SelectItem value="21km">{t("race.21km")}</SelectItem>
-                      </SelectContent>
-                    </Select>
+                  {/* Race + T-shirt */}
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.race_category")} <span className="text-red-500">*</span>
+                      </label>
+                      <Select
+                        value={formData.race_category}
+                        onValueChange={(v) => setFormData((p) => ({ ...p, race_category: v }))}
+                      >
+                        <SelectTrigger className="h-12 rounded-xl">
+                          <SelectValue placeholder={t("form.select_distance")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="2km">{t("race.2km")}</SelectItem>
+                          <SelectItem value="5km">{t("race.5km")}</SelectItem>
+                          <SelectItem value="10km">{t("race.10km")}</SelectItem>
+                          <SelectItem value="21km">{t("race.21km")}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.tshirt_size")} <span className="text-red-500">*</span>
+                      </label>
+                      <Select
+                        value={formData.kit_size}
+                        onValueChange={(v) => setFormData((p) => ({ ...p, kit_size: v }))}
+                      >
+                        <SelectTrigger className="h-12 rounded-xl">
+                          <SelectValue placeholder={t("form.select_size")} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="S">S</SelectItem>
+                          <SelectItem value="M">M</SelectItem>
+                          <SelectItem value="L">L</SelectItem>
+                          <SelectItem value="XL">XL</SelectItem>
+                          <SelectItem value="XXL">XXL</SelectItem>
+                          <SelectItem value="XXXL">XXXL</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
                   </div>
 
-                  <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {t("form.tshirt_size")} <span className="text-red-500">*</span>
-                    </label>
-                    <Select
-                      value={formData.kit_size}
-                      onValueChange={(v) => setFormData((p) => ({ ...p, kit_size: v }))}
-                    >
-                      <SelectTrigger className="h-12 rounded-xl">
-                        <SelectValue placeholder={t("form.select_size")} />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectItem value="S">S</SelectItem>
-                        <SelectItem value="M">M</SelectItem>
-                        <SelectItem value="L">L</SelectItem>
-                        <SelectItem value="XL">XL</SelectItem>
-                        <SelectItem value="XXL">XXL</SelectItem>
-                        <SelectItem value="XXXL">XXXL</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-
+                  {/* Membership */}
                   <div>
                     <label className="block font-medium text-gray-700 mb-2">
                       {t("form.membership")} <span className="text-red-500">*</span>
@@ -586,53 +488,57 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
                     </Select>
                   </div>
 
+                  {/* Catholic fields */}
                   {isCatholic && (
-                    <div>
-                      <label className="block font-medium text-gray-700 mb-2">
-                        {t("form.decania")} <span className="text-red-500">*</span>
-                      </label>
-                      <Select
-                        value={formData.decania}
-                        onValueChange={(v) => setFormData((p) => ({ ...p, decania: v }))}
-                      >
-                        <SelectTrigger className="h-12 rounded-xl">
-                          <SelectValue placeholder={t("form.select_decania")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {Object.keys(decaniaParokiaMap).map((dec) => (
-                            <SelectItem key={dec} value={dec}>
-                              {dec}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
+                    <>
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("form.decania")} <span className="text-red-500">*</span>
+                        </label>
+                        <Select
+                          value={formData.decania}
+                          onValueChange={(v) => setFormData((p) => ({ ...p, decania: v }))}
+                        >
+                          <SelectTrigger className="h-12 rounded-xl">
+                            <SelectValue placeholder={t("form.select_decania")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            {Object.keys(decaniaParokiaMap).map((dec) => (
+                              <SelectItem key={dec} value={dec}>
+                                {dec}
+                              </SelectItem>
+                            ))}
+                          </SelectContent>
+                        </Select>
+                      </div>
+
+                      {showParokia && (
+                        <div>
+                          <label className="block font-medium text-gray-700 mb-2">
+                            {t("form.parokia")} <span className="text-red-500">*</span>
+                          </label>
+                          <Select
+                            value={formData.parokia}
+                            onValueChange={(v) => setFormData((p) => ({ ...p, parokia: v }))}
+                            disabled={availableParokia.length === 0}
+                          >
+                            <SelectTrigger className="h-12 rounded-xl">
+                              <SelectValue placeholder={t("form.select_parokia")} />
+                            </SelectTrigger>
+                            <SelectContent>
+                              {availableParokia.map((par) => (
+                                <SelectItem key={par} value={par}>
+                                  {par}
+                                </SelectItem>
+                              ))}
+                            </SelectContent>
+                          </Select>
+                        </div>
+                      )}
+                    </>
                   )}
 
-                  {showParokia && (
-                    <div>
-                      <label className="block font-medium text-gray-700 mb-2">
-                        {t("form.parokia")} <span className="text-red-500">*</span>
-                      </label>
-                      <Select
-                        value={formData.parokia}
-                        onValueChange={(v) => setFormData((p) => ({ ...p, parokia: v }))}
-                        disabled={availableParokia.length === 0}
-                      >
-                        <SelectTrigger className="h-12 rounded-xl">
-                          <SelectValue placeholder={t("form.select_parokia")} />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {availableParokia.map((par) => (
-                            <SelectItem key={par} value={par}>
-                              {par}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  )}
-
+                  {/* Other membership pickup */}
                   {isOther && (
                     <div>
                       <label className="block font-medium text-gray-700 mb-2">
@@ -645,29 +551,29 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
                         <SelectTrigger className="h-12 rounded-xl">
                           <SelectValue placeholder={t("form.select_pickup")} />
                         </SelectTrigger>
-<SelectContent>
-  <SelectItem value="CRDB Mlimani City">CRDB Mlimani City</SelectItem>
-  <SelectItem value="Mkombozi Bank Msimbazi Center">Mkombozi Bank Msimbazi Center</SelectItem>
-  <SelectItem value="Mkombozi Bank Tegeta">Mkombozi Bank Tegeta</SelectItem>
-  <SelectItem value="Kanisa Katoliki Mt. Petro - Oysterbay">Kanisa Katoliki Mt. Petro - Oysterbay</SelectItem>
-  <SelectItem value="Kanisa Katoliki Kristo Mfalme - Tabata">Kanisa Katoliki Kristo Mfalme - Tabata</SelectItem>
-  <SelectItem value="Kanisa Katoliki Segerea">Kanisa Katoliki Segerea</SelectItem>
-  <SelectItem value="Kanisa Katoliki Mt. Yosefu - Posta">Kanisa Katoliki Mt. Yosefu - Posta</SelectItem>
-  <SelectItem value="Kanisa Katoliki Pugu">Kanisa Katoliki Pugu</SelectItem>
-  <SelectItem value="Kibo Complex Tegeta">Kibo Complex Tegeta</SelectItem>
-  <SelectItem value="Kariakoo">Kariakoo</SelectItem>
-  <SelectItem value="KKKT Kijitonyama">KKKT Kijitonyama</SelectItem>
-  <SelectItem value="IFM">IFM</SelectItem>
-  <SelectItem value="Chuo Kikuu">Chuo Kikuu</SelectItem>
-  <SelectItem value="Kanisa Katoliki Makongo">Kanisa Katoliki Makongo</SelectItem>
-  <SelectItem value="Kanisa Katoliki Mbezi Louis">Kanisa Katoliki Mbezi Louis</SelectItem>
-  <SelectItem value="Kanisa Katoliki Chanika">Kanisa Katoliki Chanika</SelectItem>
-  <SelectItem value="Kanisa Katoliki Mt. Gaspar">Kanisa Katoliki Mt. Gaspar</SelectItem>
-  <SelectItem value="Kibaha Pwani">Kibaha Pwani</SelectItem>
-  <SelectItem value="Ubungo">Ubungo</SelectItem>
-  <SelectItem value="Msongora">Msongora</SelectItem>
-  <SelectItem value="Woiso Original Products (WOP) ">Woiso Original Products (WOP)</SelectItem>
-</SelectContent>
+                        <SelectContent>
+                          <SelectItem value="CRDB Mlimani City">CRDB Mlimani City</SelectItem>
+                          <SelectItem value="Mkombozi Bank Msimbazi Center">Mkombozi Bank Msimbazi Center</SelectItem>
+                          <SelectItem value="Mkombozi Bank Tegeta">Mkombozi Bank Tegeta</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Mt. Petro - Oysterbay">Kanisa Katoliki Mt. Petro - Oysterbay</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Kristo Mfalme - Tabata">Kanisa Katoliki Kristo Mfalme - Tabata</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Segerea">Kanisa Katoliki Segerea</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Mt. Yosefu - Posta">Kanisa Katoliki Mt. Yosefu - Posta</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Pugu">Kanisa Katoliki Pugu</SelectItem>
+                          <SelectItem value="Kibo Complex Tegeta">Kibo Complex Tegeta</SelectItem>
+                          <SelectItem value="Kariakoo">Kariakoo</SelectItem>
+                          <SelectItem value="KKKT Kijitonyama">KKKT Kijitonyama</SelectItem>
+                          <SelectItem value="IFM">IFM</SelectItem>
+                          <SelectItem value="Chuo Kikuu">Chuo Kikuu</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Makongo">Kanisa Katoliki Makongo</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Mbezi Louis">Kanisa Katoliki Mbezi Louis</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Chanika">Kanisa Katoliki Chanika</SelectItem>
+                          <SelectItem value="Kanisa Katoliki Mt. Gaspar">Kanisa Katoliki Mt. Gaspar</SelectItem>
+                          <SelectItem value="Kibaha Pwani">Kibaha Pwani</SelectItem>
+                          <SelectItem value="Ubungo">Ubungo</SelectItem>
+                          <SelectItem value="Msongora">Msongora</SelectItem>
+                          <SelectItem value="Woiso Original Products (WOP) ">Woiso Original Products (WOP)</SelectItem>
+                        </SelectContent>
                       </Select>
                     </div>
                   )}
@@ -675,7 +581,7 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
                   <Button
                     type="submit"
                     disabled={loading}
-                    className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-semibold rounded-xl shadow-lg disabled:opacity-60 mt-8"
+                    className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-bold rounded-xl shadow-lg disabled:opacity-60 mt-8"
                   >
                     {loading ? (
                       <span className="flex items-center justify-center gap-3">
@@ -692,9 +598,9 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
 
             {step === "payment" && (
               <div className="p-8 md:p-12">
-                <h2 className="text-3xl font-bold text-center mb-2 text-purple-900">
-                  {t("payment.complete_payment")}
-                </h2>
+                {/* <h2 className="text-3xl font-bold text-center text-purple-900 mb-2">
+                  Complete Payment
+                </h2> */}
                 <p className="text-center text-gray-600 mb-8">
                   {t("payment.pugu_marathon_registration")}
                 </p>
@@ -773,7 +679,7 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
                     <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
                       {t("payment.accept_terms_prefix")}{" "}
                       <a href="/terms" className="text-purple-700 underline hover:text-purple-900">
-                        {t("payment.terms_and_conditions")}
+                        {t("payment_terms_and_conditions")}
                       </a>{" "}
                       {t("payment.accept_terms_suffix")}
                     </label>
@@ -809,38 +715,127 @@ shadow-[0_0_25px_rgba(168,85,247,0.6)]"
             )}
 
             {step === "success" && (
-              <div className="p-12 text-center">
-                <div className="mb-8 p-8 bg-green-50 border border-green-200 text-green-900 rounded-2xl">
-                  <h2 className="text-3xl font-bold mb-6">{t("success.thank_you")}</h2>
-                  <p className="text-xl leading-relaxed">{message}</p>
-                  <p className="mt-6 text-gray-700">
-                    {t("success.confirmation_message")}
-                  </p>
+              <div className="p-8 md:p-12">
+                <div className="text-center mb-10">
+                  {/* <div className="inline-block bg-green-100 text-green-700 px-6 py-2 rounded-full text-lg font-semibold mb-6">
+                    Registration Complete!
+                  </div> */}
+                  {/* <h2 className="text-3xl font-bold text-purple-900 mb-4">
+                    {t("success_thank_you")}
+                  </h2> */}
+                  {/* <p className="text-xl text-gray-700 mb-8">{message}</p> */}
                 </div>
 
-                <Button
-                  onClick={() => {
-                    setStep("form");
-                    setFormData({
-                      full_name: "",
-                      phone_number: "",
-                      email_address: "",
-                      race_category: "",
-                      kit_size: "",
-                      membership: "",
-                      decania: "",
-                      parokia: "",
-                      pickup_point: "",
-                    });
-                    setPaymentData({ phone_number: "", payment_method: "", terms: false });
-                    setRegistrationId(null);
-                    setMessage(null);
-                    setError(null);
-                  }}
-                  className=""
-                >
-                  {/* {t("success.register_another")} */}
-                </Button>
+                {/* Pay Later Instructions – shown for everyone in success step */}
+                <div className="max-w-3xl mx-auto">
+                  <div className="bg-purple-50 border-2 border-dashed border-purple-600 rounded-2xl p-6 md:p-8 text-center mb-10">
+                    <p className="text-sm text-purple-800 uppercase tracking-wider font-medium mb-3">
+                      {t("payment_your_bill_number")}
+                    </p>
+                    <h2 className="text-5xl md:text-6xl font-black text-purple-900 tracking-widest">
+                      686686
+                    </h2>
+                    {/* <p className="text-sm text-gray-600 mt-3">
+                      {t("payment_bill_number_note")}
+                    </p> */}
+                  </div>
+
+                  <div className="space-y-6 mb-10">
+                    {/* <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                      <div className="inline-block bg-green-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                        M-Pesa
+                      </div>
+                      <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+        <li>{t("messages.step_dial", { code: "*150*00#", network: "Vodacom" })}</li>
+        <li>{t("messages.step_select_pay_bill")}</li>
+        <li>{t("messages.step_enter_bill_number", { number: "686686" })}</li>
+        <li>{t("messages.step_enter_reference")}</li>
+        <li>{t("messages.step_enter_amount", { amount: "TZS 30,000" })}</li>
+        <li>{t("messages.step_enter_pin_mpesa")}</li>
+      </ol>
+                    </div> */}
+
+                    <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                      <div className="inline-block bg-cyan-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                        Mixx by Yas (Tigo)
+                      </div>
+                      <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+        <li>1.{t("step_dial", { code: "*150*01#", network: "Tigo" })}</li>
+        <li>2.{t("step_select_pay_bill")}</li>
+        <li>3.{t("step_enter_bill_number", { number: "686686" })}</li>
+        <li>4.{t("step_enter_reference")}</li>
+        <li>5.{t("step_enter_amount", { amount: "TZS 30,000" })}</li>
+        <li>6.{t("step_enter_pin")}</li>
+      </ol>
+                    </div>
+
+                    <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                      <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                        Airtel Money
+                      </div>
+                         <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+        <li>1.{t("step_dial", { code: "*150*60#", network: "Airtel" })}</li>
+        <li>2.Namba 5 {t("step_select_pay_bill")}</li>
+         <li>3.Chagua # : More</li>
+         <li>4.Chagua Namba 12: Fintech</li>
+           <li>5.Chagua Namba 1: EvMak</li>
+              <li>6.Ingiza Reference Number</li>
+        {/* <li>{t("step_enter_bill_number", { number: "686686" })}</li>
+        <li>{t("step_enter_reference")}</li> */}
+        <li>7.{t("step_enter_amount", { amount: "TZS 30,000" })}</li>
+        <li>8.{t("step_enter_pin")}</li>
+         <li>9.Bonyeza 1 Kuthibitisha</li>
+      </ol>
+                    </div>
+
+                    <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                      <div className="inline-block bg-orange-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                        Halopesa
+                      </div>
+                       <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+        <li>1.{t("step_dial", { code: "*150*88#", network: "Halotel" })}</li>
+        <li>2.{t("step_select_pay_bill")}</li>
+        <li>3.{t("step_enter_bill_number", { number: "686686" })}</li>
+        <li>4.{t("step_enter_reference")}</li>
+        <li>5.{t("step_enter_amount", { amount: "TZS 30,000" })}</li>
+        <li>7.{t("step_enter_pin")}</li>
+      </ol>
+                    </div>
+                  </div>
+
+                  {/* <div className="p-5 bg-yellow-50 border-l-4 border-yellow-500 rounded-xl mb-10">
+                    <p className="text-sm text-gray-800">
+                      ⚠️ <strong>{t("payment_important")}:</strong>{" "}
+                      {t("payment_pay_later_sms_note")}
+                    </p>
+                  </div> */}
+                </div>
+
+                <div className="text-center">
+                  {/* <Button
+                    onClick={() => {
+                      setStep("participant");
+                      setFormData({
+                        full_name: "",
+                        phone_number: "",
+                        email_address: "",
+                        race_category: "",
+                        kit_size: "",
+                        membership: "",
+                        decania: "",
+                        parokia: "",
+                        pickup_point: "",
+                      });
+                      setPaymentData({ phone_number: "", payment_method: "", terms: false });
+                      setRegistrationId(null);
+                      setMessage(null);
+                      setError(null);
+                    }}
+                    className="bg-purple-700 hover:bg-purple-800 text-white px-12 py-7 text-lg font-bold rounded-xl shadow-lg"
+                  >
+                    {t("success.register_another")}
+                  </Button> */}
+                </div>
               </div>
             )}
           </div>
