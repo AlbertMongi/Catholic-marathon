@@ -113,9 +113,14 @@ const MarathonRegistrationPage: React.FC = () => {
   });
 
   const [registrationId, setRegistrationId] = useState<number | null>(null);
+
   const [paymentData, setPaymentData] = useState({
+    payment_type: "" as "" | "mobile" | "card",
+    mobile_method: "",
     phone_number: "",
-    payment_method: "",
+    email: "",
+    address: "",
+    postal_code: "",
     terms: false,
   });
 
@@ -199,7 +204,11 @@ const MarathonRegistrationPage: React.FC = () => {
 
       if (res.ok && data.registration_id) {
         setRegistrationId(data.registration_id);
-        setPaymentData((p) => ({ ...p, phone_number: formData.phone_number }));
+        setPaymentData((p) => ({
+          ...p,
+          phone_number: formData.phone_number,
+          email: formData.email_address || "",
+        }));
         setStep("payment");
         setMessage(t("registration.success_message"));
       } else {
@@ -214,15 +223,88 @@ const MarathonRegistrationPage: React.FC = () => {
   };
 
   // ── Payment handlers ───────────────────────────────────────────────────────
-  const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-    const target = e.target;
-    const value = target.type === "checkbox" ? (target as HTMLInputElement).checked : target.value;
-    setPaymentData((prev) => ({ ...prev, [target.name]: value }));
+  const handlePaymentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type, checked } = e.target;
+    setPaymentData((prev) => ({
+      ...prev,
+      [name]: type === "checkbox" ? checked : value,
+    }));
+  };
+
+  const handlePaymentTypeChange = (value: "mobile" | "card") => {
+    setPaymentData((prev) => ({
+      ...prev,
+      payment_type: value,
+      mobile_method: value === "mobile" ? prev.mobile_method : "",
+    }));
+  };
+
+  const handleMobileMethodChange = (value: string) => {
+    setPaymentData((prev) => ({ ...prev, mobile_method: value }));
+  };
+
+  const handlePayNowCard = async () => {
+    if (!registrationId) return;
+    setError(null);
+    setLoading(true);
+
+    if (!paymentData.email) {
+      setError(t("validation.email_required_for_card"));
+      setLoading(false);
+      return;
+    }
+    if (!paymentData.phone_number.match(/^0[67][1-9]\d{7}$/)) {
+      setError(t("validation.phone_invalid"));
+      setLoading(false);
+      return;
+    }
+    if (!paymentData.terms) {
+      setError(t("validation.accept_terms"));
+      setLoading(false);
+      return;
+    }
+
+    try {
+      const res = await fetch(`${API_BASE}/marathon/card/${registrationId}/initiate`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+        },
+        body: JSON.stringify({
+          email: paymentData.email,
+          phone_number: paymentData.phone_number,
+          address: paymentData.address || undefined,
+          postal_code: paymentData.postal_code || undefined,
+        }),
+      });
+
+      const data = await res.json();
+
+      if (res.ok && data.success && data.payment_url) {
+        // Redirect to EvMak / card payment page
+        window.location.href = data.payment_url;
+      } else {
+        setError(data.error || t("payment.card_initiation_failed"));
+      }
+    } catch (err) {
+      setError(t("error.network_during_payment"));
+      console.error(err);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePaymentAction = async (action: "pay_now" | "pay_later") => {
     if (!registrationId) return;
+    if (paymentData.payment_type === "card") {
+      if (action === "pay_now") {
+        await handlePayNowCard();
+      }
+      return;
+    }
 
+    // Mobile money path
     setError(null);
     setLoading(true);
 
@@ -231,8 +313,8 @@ const MarathonRegistrationPage: React.FC = () => {
       setLoading(false);
       return;
     }
-    if (action === "pay_now" && !paymentData.payment_method) {
-      setError(t("validation.select_payment_method"));
+    if (action === "pay_now" && !paymentData.mobile_method) {
+      setError(t("validation.select_mobile_method"));
       setLoading(false);
       return;
     }
@@ -251,7 +333,7 @@ const MarathonRegistrationPage: React.FC = () => {
         },
         body: JSON.stringify({
           phone_number: paymentData.phone_number,
-          payment_method: paymentData.payment_method,
+          payment_method: paymentData.mobile_method,
           action,
           terms: paymentData.terms,
         }),
@@ -263,8 +345,8 @@ const MarathonRegistrationPage: React.FC = () => {
         setPaymentAction(action);
         setMessage(
           action === "pay_now"
-            ? data.message || t("payment.request_sent") || "Payment request sent! Please check your phone."
-            : data.message || t("payment.registered_pay_later") || "Registration successful. Pay later using the details below."
+            ? data.message || "Payment request sent! Please check your phone."
+            : data.message || "Registration successful. Pay later using the details below."
         );
         setStep("success");
       } else {
@@ -285,6 +367,9 @@ const MarathonRegistrationPage: React.FC = () => {
   const availableParokia = formData.decania && decaniaParokiaMap[formData.decania]
     ? decaniaParokiaMap[formData.decania]
     : [];
+
+  const showMobileFields = paymentData.payment_type === "mobile";
+  const showCardFields = paymentData.payment_type === "card";
 
   // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
@@ -576,85 +661,180 @@ const MarathonRegistrationPage: React.FC = () => {
                 </div>
 
                 <div className="space-y-6">
+                  {/* Payment Type Selection */}
                   <div>
                     <label className="block font-medium text-gray-700 mb-2">
-                      {t("payment.phone_for_payment")} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone_number"
-                      value={paymentData.phone_number}
-                      onChange={handlePaymentChange}
-                      placeholder="07XXXXXXXX"
-                      className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
-                      required
-                    />
-                  </div>
-
-                  <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {t("payment.payment_method")} <span className="text-red-500">*</span>
+                      {t("payment.choose_payment_type")} <span className="text-red-500">*</span>
                     </label>
                     <Select
-                      value={paymentData.payment_method}
-                      onValueChange={(v) => setPaymentData((p) => ({ ...p, payment_method: v }))}
+                      value={paymentData.payment_type}
+                      onValueChange={(v) => handlePaymentTypeChange(v as "mobile" | "card")}
                     >
                       <SelectTrigger className="h-12 rounded-xl">
-                        <SelectValue placeholder={t("payment.select_method")} />
+                        <SelectValue placeholder={t("payment.select_type")} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="Mpesa">M-Pesa</SelectItem>
-                        <SelectItem value="TigoPesa">{t("payment.tigo_pesa")}</SelectItem>
-                        <SelectItem value="AirtelMoney">{t("payment.airtel_money")}</SelectItem>
-                        <SelectItem value="HaloPesa">{t("payment.halo_pesa")}</SelectItem>
+                        <SelectItem value="mobile">{t("payment.mobile_money")}</SelectItem>
+                        <SelectItem value="card">{t("payment.credit_debit_card")}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
 
-                  <div className="flex items-start space-x-3">
-                    <input
-                      type="checkbox"
-                      name="terms"
-                      id="terms"
-                      checked={paymentData.terms}
-                      onChange={handlePaymentChange}
-                      className="mt-1 h-5 w-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
-                      required
-                    />
-                    <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
-                      {t("payment.accept_terms_prefix")}{" "}
-                      <a href="/terms" className="text-purple-700 underline hover:text-purple-900">
-                        {t("payment.terms_and_conditions")}
-                      </a>{" "}
-                      {t("payment.accept_terms_suffix")}
-                    </label>
-                  </div>
+                  {/* ── MOBILE MONEY FIELDS ── */}
+                  {showMobileFields && (
+                    <>
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("payment.phone_for_payment")} <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone_number"
+                          value={paymentData.phone_number}
+                          onChange={handlePaymentChange}
+                          placeholder="07XXXXXXXX"
+                          className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                          required
+                        />
+                      </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
-                    <Button
-                      onClick={() => handlePaymentAction("pay_now")}
-                      disabled={loading}
-                      className="bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-bold rounded-xl shadow-lg disabled:opacity-60"
-                    >
-                      {loading ? (
-                        <span className="flex items-center justify-center gap-3">
-                          <Loader2 className="h-5 w-5 animate-spin" />
-                          {t("payment.processing")}
-                        </span>
-                      ) : (
-                        t("payment.pay_now")
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("payment.mobile_operator")} <span className="text-red-500">*</span>
+                        </label>
+                        <Select
+                          value={paymentData.mobile_method}
+                          onValueChange={handleMobileMethodChange}
+                        >
+                          <SelectTrigger className="h-12 rounded-xl">
+                            <SelectValue placeholder={t("payment.select_operator")} />
+                          </SelectTrigger>
+                          <SelectContent>
+                            <SelectItem value="Mpesa">M-Pesa</SelectItem>
+                            <SelectItem value="TigoPesa">{t("payment.tigo_pesa")}</SelectItem>
+                            <SelectItem value="AirtelMoney">{t("payment.airtel_money")}</SelectItem>
+                            <SelectItem value="HaloPesa">{t("payment.halo_pesa")}</SelectItem>
+                          </SelectContent>
+                        </Select>
+                      </div>
+                    </>
+                  )}
+
+                  {/* ── CARD FIELDS ── */}
+                  {showCardFields && (
+                    <>
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("form.email")} <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="email"
+                          name="email"
+                          value={paymentData.email}
+                          onChange={handlePaymentChange}
+                          placeholder="example@email.com"
+                          className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("payment.phone_for_payment")} <span className="text-red-500">*</span>
+                        </label>
+                        <input
+                          type="tel"
+                          name="phone_number"
+                          value={paymentData.phone_number}
+                          onChange={handlePaymentChange}
+                          placeholder="07XXXXXXXX"
+                          className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                          required
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("form.address")}
+                        </label>
+                        <input
+                          type="text"
+                          name="address"
+                          value={paymentData.address}
+                          onChange={handlePaymentChange}
+                          placeholder="Your street address"
+                          className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block font-medium text-gray-700 mb-2">
+                          {t("form.postal_code")}
+                        </label>
+                        <input
+                          type="text"
+                          name="postal_code"
+                          value={paymentData.postal_code}
+                          onChange={handlePaymentChange}
+                          placeholder="00000"
+                          className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                        />
+                      </div>
+                    </>
+                  )}
+
+                  {/* Terms Checkbox - shown for both */}
+                  {(showMobileFields || showCardFields) && (
+                    <div className="flex items-start space-x-3">
+                      <input
+                        type="checkbox"
+                        name="terms"
+                        id="terms"
+                        checked={paymentData.terms}
+                        onChange={handlePaymentChange}
+                        className="mt-1 h-5 w-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
+                        required
+                      />
+                      <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
+                        {t("payment.accept_terms_prefix")}{" "}
+                        <a href="/terms" className="text-purple-700 underline hover:text-purple-900">
+                          {t("payment.terms_and_conditions")}
+                        </a>{" "}
+                        {t("payment.accept_terms_suffix")}
+                      </label>
+                    </div>
+                  )}
+
+                  {/* Action buttons - shown after payment type selected */}
+                  {(showMobileFields || showCardFields) && (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
+                      <Button
+                        onClick={() => handlePaymentAction("pay_now")}
+                        disabled={loading}
+                        className="bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-bold rounded-xl shadow-lg disabled:opacity-60"
+                      >
+                        {loading ? (
+                          <span className="flex items-center justify-center gap-3">
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                            {t("payment.processing")}
+                          </span>
+                        ) : (
+                          t("payment.pay_now")
+                        )}
+                      </Button>
+
+                      {showMobileFields && (
+                        <Button
+                          variant="outline"
+                          onClick={() => handlePaymentAction("pay_later")}
+                          disabled={loading}
+                          className="py-7 text-lg font-bold border-2 border-gray-400 hover:bg-gray-50 rounded-xl"
+                        >
+                          {t("payment.pay_later")}
+                        </Button>
                       )}
-                    </Button>
-
-                    <Button
-                      variant="outline"
-                      onClick={() => handlePaymentAction("pay_later")}
-                      disabled={loading}
-                      className="py-7 text-lg font-bold border-2 border-gray-400 hover:bg-gray-50 rounded-xl"
-                    >
-                      {t("payment.pay_later")}
-                    </Button>
-                  </div>
+                    </div>
+                  )}
                 </div>
               </div>
             )}
@@ -666,10 +846,23 @@ const MarathonRegistrationPage: React.FC = () => {
                   <h2 className="text-3xl font-bold text-purple-900 mb-4">
                     {t("success.thank_you") || "Thank You!"}
                   </h2>
-                  <p className="text-xl text-gray-700 mb-8">Tafadhali Lipa kwenye Simu</p>
+
+                  {paymentData.payment_type === "card" ? (
+                    <p className="text-xl text-gray-700 mb-8">
+                      Redirecting to secure card payment page...
+                    </p>
+                  ) : paymentAction === "pay_later" ? (
+                    <p className="text-xl text-gray-700 mb-8">
+                      Tafadhali Lipa kwenye Simu
+                    </p>
+                  ) : (
+                    <p className="text-xl text-gray-700 mb-8">
+                      Payment request sent! Please check your phone.
+                    </p>
+                  )}
                 </div>
 
-                {paymentAction === "pay_later" ? (
+                {paymentData.payment_type !== "card" && paymentAction === "pay_later" && (
                   <>
                     <div className="bg-purple-50 border-2 border-dashed border-purple-600 rounded-2xl p-6 md:p-8 text-center mb-10">
                       <p className="text-sm text-purple-800 uppercase tracking-wider font-medium mb-3">
@@ -727,18 +920,6 @@ const MarathonRegistrationPage: React.FC = () => {
                       </div>
                     </div>
                   </>
-                ) : (
-                  <div className="max-w-xl mx-auto">
-                    {/* <h3 className="text-2xl font-semibold text-green-800 mb-4">
-                      {t("payment.payment_requested") || "Payment Requested"}
-                    </h3>
-                    <p className="text-gray-700 leading-relaxed text-lg">
-                      {t("payment.check_phone_prompt") || "We have sent a payment prompt to your phone. Please complete the payment now."}
-                    </p>
-                    <p className="text-gray-600 mt-6 text-center">
-                      {t("payment.once_confirmed_you_will_receive_sms") || "You will receive a confirmation SMS once the payment is successful."}
-                    </p> */}
-                  </div>
                 )}
 
                 <div className="text-center mt-10">
