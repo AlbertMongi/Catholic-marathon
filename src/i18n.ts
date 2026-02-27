@@ -78,6 +78,9 @@ const resources = {
     our_proud_sponsors: "Our Proud Sponsors",
     sponsor_alt: "Sponsor {{number}}",
     our_team_title: "Organizing Committee",
+     "payment.mobile_operator" : "Mobile Operator",
+     "form.address": "Address",
+    
      payment_terms_and_conditions : "Terms and Conditions",
     // ABOUT US
       full_name: "Full Name",
@@ -99,11 +102,12 @@ const resources = {
         health_title: "Health",
              environment_desc:
         "Promoting and supporting environmental preservation",
-                youth_empowerment_desc:
+        youth_empowerment_desc:
         "Support the growth of the Vocational Centre",
         education_title: "Education",
         environment_title: "Environment",
         youth_empowerment_title: "Youth Empowerment",
+        "payment.credit_debit_card": "Credit card",
     // Registration page specific
   "form.full_name": "Full Name",
   "form.full_name_placeholder": "Enter your full name",
@@ -129,14 +133,17 @@ const resources = {
   "validation.catholic_decania_parokia_required": "Catholic members must provide Decania and Parokia",
   "validation.other_pickup_required": "Others must select kit pickup point",
 "payment.accept_terms_prefix": "I accept the",
+  "form.postal_code": "Postal Code",
   "registration.success_message": "Registration completed! Proceed to payment.",
 "payment.pugu_marathon_registration": "Pugu Marathon Registration",
   "payment.complete_payment": "Complete Payment",
   "payment.participant_details": "Participant Details",
+  " payment.terms_and_conditions ": "Terms and Conditions",
   "payment.registration_fee": "Registration Fee",
   "payment.phone_for_payment": "Phone Number",
   "payment.payment_method": "Payment Method",
   "payment.select_method": "-- Select payment method --",
+  "payment.mobile_money": "Mobile Money",
   "payment.i_agree_terms_conditions": "I agree to the terms and conditions",
   "payment.pay_now": "Pay Now",
   "payment.participant": "Participant",
@@ -274,10 +281,11 @@ feature_register_desc:
     health_desc:
         "Maboresho ya kituo cha afya Pugu",
         community_focus_title: "Malengo yetu kwa jamii",
-        
+          "payment.credit_debit_card": "Kupitia Benki",
     // Registration page specific
   "form.full_name": "Jina Kamili",
   "form.full_name_placeholder": "Andika Jina lako kamili",
+  "payment.mobile_operator" : "Mtandao wa Simu",
   "form.phone_number": "Namba ya Simu",
   "form.email": "Barua Pepe",
   "form.race_category": "Kundi la Mbio",
@@ -299,7 +307,7 @@ feature_register_desc:
   "validation.required_fields": "Tafadhali jaza sehemu zote zinazohitajika",
   "validation.catholic_decania_parokia_required": "Catholic wanachama wanahitaji Dekania na Parokia",
   "validation.other_pickup_required": "Wengine wanahitaji eneo la kuchukulia jezi",
-
+  "form.address": "Anuani",
   "registration.success_message": "Usajili umekamilika! Sasa endelea na malipo.",
 "form.email_placeholder": "yourmail@example.com",
   "payment.complete_payment": "Kamilisha Malipo",
@@ -307,6 +315,7 @@ feature_register_desc:
   "payment.registration_fee": "Ada ya Usajili",
   "payment.phone_for_payment": "Namba ya Simu",
   "payment.payment_method": "Njia ya Malipo",
+  "form.postal_code": "Anuani ya makazi",
   "payment.select_method": "-- Chagua njia ya malipo --",
   "payment.i_agree_terms_conditions": "Ninakubali vigezo na masharti",
   "payment.pay_now": "Lipa Sasa",
@@ -324,6 +333,7 @@ feature_register_desc:
 "form.required_fields": "Sehemu zinazohitajika",
   "membership.catholic": "Katoliki",
   "membership.other": "Nyingine",
+    " payment.terms_and_conditions ": "Vigezo na msharti",
 "payment.accept_terms_prefix": "Nakubali",
 "payment.participant": "Mshiriki",
   // Race distances
@@ -361,6 +371,7 @@ feature_register_desc:
     'step_enter_reference'   : 'Ingiza Nambari ya Kumbukumbu (nambari yako ya simu)',
     'step_enter_amount'      : 'Ingiza kiasi: :{{amount}}',
     'step_enter_pin_mpesa'   : 'Ingiza PIN yako ya M-Pesa na uthibitishe',
+     "payment.mobile_money": "Kupitia Simu",
     'step_enter_pin'         : 'Ingiza PIN yako na uthibitishe',
     'important'              : 'Muhimu',
     'pay_later_sms_note'     : 'Baada ya malipo, usajili wako utathibitishwa moja kwa moja. Tafadhali hifadhi ujumbe wa SMS kama uthibitisho wa malipo.',

@@ -664,14 +664,14 @@ const MarathonRegistrationPage: React.FC = () => {
                   {/* Payment Type Selection */}
                   <div>
                     <label className="block font-medium text-gray-700 mb-2">
-                      {t("payment.choose_payment_type")} <span className="text-red-500">*</span>
+                      {t("payment.payment_method")} <span className="text-red-500">*</span>
                     </label>
                     <Select
                       value={paymentData.payment_type}
                       onValueChange={(v) => handlePaymentTypeChange(v as "mobile" | "card")}
                     >
                       <SelectTrigger className="h-12 rounded-xl">
-                        <SelectValue placeholder={t("payment.select_type")} />
+                        <SelectValue placeholder={t("payment.payment_method")} />
                       </SelectTrigger>
                       <SelectContent>
                         <SelectItem value="mobile">{t("payment.mobile_money")}</SelectItem>
@@ -707,10 +707,10 @@ const MarathonRegistrationPage: React.FC = () => {
                           onValueChange={handleMobileMethodChange}
                         >
                           <SelectTrigger className="h-12 rounded-xl">
-                            <SelectValue placeholder={t("payment.select_operator")} />
+                            <SelectValue placeholder={t("payment.mobile_operator")} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="Mpesa">M-Pesa</SelectItem>
+                            {/* <SelectItem value="Mpesa">M-Pesa</SelectItem> */}
                             <SelectItem value="TigoPesa">{t("payment.tigo_pesa")}</SelectItem>
                             <SelectItem value="AirtelMoney">{t("payment.airtel_money")}</SelectItem>
                             <SelectItem value="HaloPesa">{t("payment.halo_pesa")}</SelectItem>
