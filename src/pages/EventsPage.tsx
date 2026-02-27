@@ -18,6 +18,8 @@ const galleryImages = [
   { src: "/images/JMN_9222.JPG",  year: 2025 },
   { src: "/images/JMN_9158.JPG",  year: 2025 },
   { src: "/images/JMN_9126.JPG",  year: 2025 },
+    { src: "/images/4H7A0373.JPG", year: 2025},
+  { src: "/images/4H7A0391.JPG", year: 2025 },
   // 2023 photos (from your screenshot)
     // Your original 2024 photos
   { src: "/images/WhatsApp Image 2026-02-25 at 20.44.36 (1).jpeg", year: 2024 },
@@ -36,8 +38,7 @@ const galleryImages = [
 { src: "/images/WhatsApp Image 2026-02-25 at 20.44.40.jpeg", year: 2024 },
 { src: "/images/WhatsApp Image 2026-02-25 at 20.44.41 (1).jpeg", year: 2024 },
 { src: "/images/WhatsApp Image 2026-02-25 at 20.44.41.jpeg", year: 2024 },
-  { src: "/images/4H7A0373.JPG", year: 2024 },
-  { src: "/images/4H7A0391.JPG", year: 2024 },
+
 //  { src: "/images/DSC_0100.jpg",   year: 2023 },
   { src: "/images/DSC_0771-1.jpg", year: 2023 },
   { src: "/images/IMG_2193.jpg",   year: 2023 },
@@ -183,7 +184,7 @@ const GalleryPage: React.FC = () => {
     <>
       {/* Hero Section */}
       <section className="hero-section relative flex items-center justify-center" style={{ minHeight: '40vh' }}>
-        <div className="hero-bg absolute inset-0 bg-cover bg-center -z-10" style={{ backgroundImage: 'url("/images/people.png")' }}></div>
+        <div className="hero-bg absolute inset-0 bg-cover bg-center -z-10" style={{ backgroundImage: 'url("/images/WhatsApp Image 2026-02-25 at 20.44.40 (2).jpeg")' }}></div>
         <div className="hero-gradient absolute inset-0 bg-gradient-to-b from-black/40 to-black/20 -z-10"></div>
         <div className="hero-content text-center">
           
