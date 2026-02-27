@@ -94,16 +94,11 @@ const decaniaParokiaMap: Record<string, string[]> = {
 
 type Step = "participant" | "payment" | "success";
 
-const stepLabels: Record<Step, string> = {
-  participant: "",
-  payment: "",
-  success: "",
-};
-
 const MarathonRegistrationPage: React.FC = () => {
   const { t } = useTranslation();
 
   const [step, setStep] = useState<Step>("participant");
+  const [paymentAction, setPaymentAction] = useState<"pay_now" | "pay_later" | null>(null);
 
   const [formData, setFormData] = useState({
     full_name: "",
@@ -237,12 +232,12 @@ const MarathonRegistrationPage: React.FC = () => {
       return;
     }
     if (action === "pay_now" && !paymentData.payment_method) {
-      setError(t("validation_select_payment_method"));
+      setError(t("validation.select_payment_method"));
       setLoading(false);
       return;
     }
     if (!paymentData.terms) {
-      setError(t("validation_accept_terms"));
+      setError(t("validation.accept_terms"));
       setLoading(false);
       return;
     }
@@ -265,13 +260,12 @@ const MarathonRegistrationPage: React.FC = () => {
       const data = await res.json();
 
       if (res.ok) {
+        setPaymentAction(action);
         setMessage(
           action === "pay_now"
-            ? data.message || t("payment.request_sent")
-            : data.message || t("payment.registered_pay_later")
+            ? data.message || t("payment.request_sent") || "Payment request sent! Please check your phone."
+            : data.message || t("payment.registered_pay_later") || "Registration successful. Pay later using the details below."
         );
-
-        // Both actions now go to success step
         setStep("success");
       } else {
         setError(data.message || t("payment.error_generic"));
@@ -292,8 +286,6 @@ const MarathonRegistrationPage: React.FC = () => {
     ? decaniaParokiaMap[formData.decania]
     : [];
 
-  const currentStepIndex = ["participant", "payment", "success"].indexOf(step);
-
   // ── RENDER ─────────────────────────────────────────────────────────────────
   return (
     <>
@@ -304,7 +296,7 @@ const MarathonRegistrationPage: React.FC = () => {
           style={{ backgroundImage: 'url("/images/running.png")' }}
         />
         <div className="relative z-10 text-center text-white px-6">
-   
+          {/* You can add title/hero text here if needed */}
         </div>
       </section>
 
@@ -322,53 +314,9 @@ const MarathonRegistrationPage: React.FC = () => {
         </div>
 
         <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
-          {/* Step Progress */}
-          <div className="mb-10">
-            <div className="flex justify-between items-center mb-3">
-              {(["participant", "payment", "success"] as const).map((s, i) => (
-                <div
-                  key={s}
-                  className={`flex flex-col items-center flex-1 ${
-                    i < currentStepIndex
-                      ? "text-purple-700"
-                      : i === currentStepIndex
-                      ? "text-purple-900 font-semibold"
-                      : "text-gray-400"
-                  }`}
-                >
-                  <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold mb-2 transition-all ${
-                      i < currentStepIndex
-                        ? "bg-purple-600"
-                        : i === currentStepIndex
-                        ? "bg-purple-700 ring-4 ring-purple-200"
-                        : "bg-gray-300"
-                    }`}
-                  >
-                    {i < currentStepIndex ? <CheckCircle2 className="w-6 h-6" /> : i + 1}
-                  </div>
-                  <span className="text-sm hidden sm:block">{stepLabels[s]}</span>
-                </div>
-              ))}
-            </div>
-            <div className="h-2 bg-gray-200 rounded-full overflow-hidden">
-              <div
-                className="h-full bg-gradient-to-r from-purple-600 to-indigo-600 transition-all duration-500"
-                style={{ width: `${((currentStepIndex + 1) / 3) * 100}%` }}
-              />
-            </div>
-          </div>
-
           <div className="rounded-3xl overflow-hidden bg-white border border-purple-200 shadow-xl shadow-purple-100/40">
             {step === "participant" && (
               <div className="p-8 md:p-12">
-                {/* <h2 className="text-3xl font-bold text-purple-900 mb-2 text-center">
-                 
-                </h2>
-                <p className="text-center text-gray-600 mb-10">
-                  Please fill in your details accurately
-                </p> */}
-
                 {error && (
                   <div className="mb-8 p-4 bg-red-50 border border-red-200 text-red-800 rounded-2xl text-center">
                     {error}
@@ -376,7 +324,7 @@ const MarathonRegistrationPage: React.FC = () => {
                 )}
 
                 <form onSubmit={handleRegSubmit} className="space-y-6">
-                  {/* ── Full name + Phone ── */}
+                  {/* Full name + Phone */}
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="block font-medium text-gray-700 mb-2">
@@ -598,9 +546,6 @@ const MarathonRegistrationPage: React.FC = () => {
 
             {step === "payment" && (
               <div className="p-8 md:p-12">
-                {/* <h2 className="text-3xl font-bold text-center text-purple-900 mb-2">
-                  Complete Payment
-                </h2> */}
                 <p className="text-center text-gray-600 mb-8">
                   {t("payment.pugu_marathon_registration")}
                 </p>
@@ -679,7 +624,7 @@ const MarathonRegistrationPage: React.FC = () => {
                     <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
                       {t("payment.accept_terms_prefix")}{" "}
                       <a href="/terms" className="text-purple-700 underline hover:text-purple-900">
-                        {t("payment_terms_and_conditions")}
+                        {t("payment.terms_and_conditions")}
                       </a>{" "}
                       {t("payment.accept_terms_suffix")}
                     </label>
@@ -717,124 +662,87 @@ const MarathonRegistrationPage: React.FC = () => {
             {step === "success" && (
               <div className="p-8 md:p-12">
                 <div className="text-center mb-10">
-                  {/* <div className="inline-block bg-green-100 text-green-700 px-6 py-2 rounded-full text-lg font-semibold mb-6">
-                    Registration Complete!
-                  </div> */}
-                  {/* <h2 className="text-3xl font-bold text-purple-900 mb-4">
-                    {t("success_thank_you")}
-                  </h2> */}
-                  {/* <p className="text-xl text-gray-700 mb-8">{message}</p> */}
+                  <CheckCircle2 className="mx-auto h-16 w-16 text-green-600 mb-6" />
+                  <h2 className="text-3xl font-bold text-purple-900 mb-4">
+                    {t("success.thank_you") || "Thank You!"}
+                  </h2>
+                  <p className="text-xl text-gray-700 mb-8">Tafadhali Lipa kwenye Simu</p>
                 </div>
 
-                {/* Pay Later Instructions – shown for everyone in success step */}
-                <div className="max-w-3xl mx-auto">
-                  <div className="bg-purple-50 border-2 border-dashed border-purple-600 rounded-2xl p-6 md:p-8 text-center mb-10">
-                    <p className="text-sm text-purple-800 uppercase tracking-wider font-medium mb-3">
-                      {t("payment_your_bill_number")}
+                {paymentAction === "pay_later" ? (
+                  <>
+                    <div className="bg-purple-50 border-2 border-dashed border-purple-600 rounded-2xl p-6 md:p-8 text-center mb-10">
+                      <p className="text-sm text-purple-800 uppercase tracking-wider font-medium mb-3">
+                        {t("payment.your_bill_number") || "Your Bill Number"}
+                      </p>
+                      <h2 className="text-5xl md:text-6xl font-black text-purple-900 tracking-widest">
+                        686686
+                      </h2>
+                    </div>
+
+                    <div className="space-y-6 mb-10 max-w-3xl mx-auto">
+                      <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                        <div className="inline-block bg-cyan-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                          Mixx by Yas (Tigo)
+                        </div>
+                        <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+                          <li>1. {t("step_dial", { code: "*150*01#", network: "Tigo" })}</li>
+                          <li>2. {t("step_select_pay_bill")}</li>
+                          <li>3. {t("step_enter_bill_number", { number: "686686" })}</li>
+                          <li>4. {t("step_enter_reference")}</li>
+                          <li>5. {t("step_enter_amount", { amount: "TZS 30,000" })}</li>
+                          <li>6. {t("step_enter_pin")}</li>
+                        </ol>
+                      </div>
+
+                      <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                        <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                          Airtel Money
+                        </div>
+                        <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+                          <li>1. {t("step_dial", { code: "*150*60#", network: "Airtel" })}</li>
+                          <li>2. Namba 5 {t("step_select_pay_bill")}</li>
+                          <li>3. Chagua # : More</li>
+                          <li>4. Chagua Namba 12: Fintech</li>
+                          <li>5. Chagua Namba 1: EvMak</li>
+                          <li>6. Ingiza Reference Number</li>
+                          <li>7. {t("step_enter_amount", { amount: "TZS 30,000" })}</li>
+                          <li>8. {t("step_enter_pin")}</li>
+                          <li>9. Bonyeza 1 Kuthibitisha</li>
+                        </ol>
+                      </div>
+
+                      <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
+                        <div className="inline-block bg-orange-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
+                          Halopesa
+                        </div>
+                        <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
+                          <li>1. {t("step_dial", { code: "*150*88#", network: "Halotel" })}</li>
+                          <li>2. {t("step_select_pay_bill")}</li>
+                          <li>3. {t("step_enter_bill_number", { number: "686686" })}</li>
+                          <li>4. {t("step_enter_reference")}</li>
+                          <li>5. {t("step_enter_amount", { amount: "TZS 30,000" })}</li>
+                          <li>6. {t("step_enter_pin")}</li>
+                        </ol>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  <div className="max-w-xl mx-auto">
+                    {/* <h3 className="text-2xl font-semibold text-green-800 mb-4">
+                      {t("payment.payment_requested") || "Payment Requested"}
+                    </h3>
+                    <p className="text-gray-700 leading-relaxed text-lg">
+                      {t("payment.check_phone_prompt") || "We have sent a payment prompt to your phone. Please complete the payment now."}
                     </p>
-                    <h2 className="text-5xl md:text-6xl font-black text-purple-900 tracking-widest">
-                      686686
-                    </h2>
-                    {/* <p className="text-sm text-gray-600 mt-3">
-                      {t("payment_bill_number_note")}
+                    <p className="text-gray-600 mt-6 text-center">
+                      {t("payment.once_confirmed_you_will_receive_sms") || "You will receive a confirmation SMS once the payment is successful."}
                     </p> */}
                   </div>
+                )}
 
-                  <div className="space-y-6 mb-10">
-                    {/* <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-                      <div className="inline-block bg-green-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
-                        M-Pesa
-                      </div>
-                      <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
-        <li>{t("messages.step_dial", { code: "*150*00#", network: "Vodacom" })}</li>
-        <li>{t("messages.step_select_pay_bill")}</li>
-        <li>{t("messages.step_enter_bill_number", { number: "686686" })}</li>
-        <li>{t("messages.step_enter_reference")}</li>
-        <li>{t("messages.step_enter_amount", { amount: "TZS 30,000" })}</li>
-        <li>{t("messages.step_enter_pin_mpesa")}</li>
-      </ol>
-                    </div> */}
-
-                    <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-                      <div className="inline-block bg-cyan-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
-                        Mixx by Yas (Tigo)
-                      </div>
-                      <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
-        <li>1.{t("step_dial", { code: "*150*01#", network: "Tigo" })}</li>
-        <li>2.{t("step_select_pay_bill")}</li>
-        <li>3.{t("step_enter_bill_number", { number: "686686" })}</li>
-        <li>4.{t("step_enter_reference")}</li>
-        <li>5.{t("step_enter_amount", { amount: "TZS 30,000" })}</li>
-        <li>6.{t("step_enter_pin")}</li>
-      </ol>
-                    </div>
-
-                    <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-                      <div className="inline-block bg-red-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
-                        Airtel Money
-                      </div>
-                         <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
-        <li>1.{t("step_dial", { code: "*150*60#", network: "Airtel" })}</li>
-        <li>2.Namba 5 {t("step_select_pay_bill")}</li>
-         <li>3.Chagua # : More</li>
-         <li>4.Chagua Namba 12: Fintech</li>
-           <li>5.Chagua Namba 1: EvMak</li>
-              <li>6.Ingiza Reference Number</li>
-        {/* <li>{t("step_enter_bill_number", { number: "686686" })}</li>
-        <li>{t("step_enter_reference")}</li> */}
-        <li>7.{t("step_enter_amount", { amount: "TZS 30,000" })}</li>
-        <li>8.{t("step_enter_pin")}</li>
-         <li>9.Bonyeza 1 Kuthibitisha</li>
-      </ol>
-                    </div>
-
-                    <div className="border border-gray-200 rounded-xl p-5 bg-white shadow-sm">
-                      <div className="inline-block bg-orange-600 text-white px-3 py-1 rounded-md text-xs font-bold mb-3">
-                        Halopesa
-                      </div>
-                       <ol className="mb-0 pl-3 text-sm text-gray-700 leading-8">
-        <li>1.{t("step_dial", { code: "*150*88#", network: "Halotel" })}</li>
-        <li>2.{t("step_select_pay_bill")}</li>
-        <li>3.{t("step_enter_bill_number", { number: "686686" })}</li>
-        <li>4.{t("step_enter_reference")}</li>
-        <li>5.{t("step_enter_amount", { amount: "TZS 30,000" })}</li>
-        <li>7.{t("step_enter_pin")}</li>
-      </ol>
-                    </div>
-                  </div>
-
-                  {/* <div className="p-5 bg-yellow-50 border-l-4 border-yellow-500 rounded-xl mb-10">
-                    <p className="text-sm text-gray-800">
-                      ⚠️ <strong>{t("payment_important")}:</strong>{" "}
-                      {t("payment_pay_later_sms_note")}
-                    </p>
-                  </div> */}
-                </div>
-
-                <div className="text-center">
-                  {/* <Button
-                    onClick={() => {
-                      setStep("participant");
-                      setFormData({
-                        full_name: "",
-                        phone_number: "",
-                        email_address: "",
-                        race_category: "",
-                        kit_size: "",
-                        membership: "",
-                        decania: "",
-                        parokia: "",
-                        pickup_point: "",
-                      });
-                      setPaymentData({ phone_number: "", payment_method: "", terms: false });
-                      setRegistrationId(null);
-                      setMessage(null);
-                      setError(null);
-                    }}
-                    className="bg-purple-700 hover:bg-purple-800 text-white px-12 py-7 text-lg font-bold rounded-xl shadow-lg"
-                  >
-                    {t("success.register_another")}
-                  </Button> */}
+                <div className="text-center mt-10">
+                  {/* You can add "Register Another" button here if desired */}
                 </div>
               </div>
             )}
