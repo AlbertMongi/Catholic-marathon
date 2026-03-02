@@ -281,7 +281,7 @@ feature_register_desc:
     health_desc:
         "Maboresho ya kituo cha afya Pugu",
         community_focus_title: "Malengo yetu kwa jamii",
-          "payment.credit_debit_card": "Kupitia Benki",
+          "payment.credit_debit_card": "Kupitia Kadi",
     // Registration page specific
   "form.full_name": "Jina Kamili",
   "form.full_name_placeholder": "Andika Jina lako kamili",
