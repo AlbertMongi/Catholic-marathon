@@ -378,7 +378,7 @@ const AboutPage: React.FC = () => {
             <form onSubmit={handleSubmit} className="space-y-6">
               <div>
                 <label className="block font-medium text-gray-700 mb-2">
-                  {t("form.full_name")} <span className="text-red-500">*</span>
+                  {t("form.full_name")} <span className="text-red-500"></span>
                 </label>
                 <input
                   type="text"
