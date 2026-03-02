@@ -173,6 +173,7 @@ const resources = {
   "race.10km": "10 Km",
   "race.21km": "21 Km (Half Marathon)",
   "payment.terms_and_conditions1": " payment terms and conditions",
+  "form.sending":"send message",
 
 
   // STEPS FOR PAYMENT
@@ -359,6 +360,7 @@ feature_register_desc:
         education_title: "Elimu",
  payment_terms_and_conditions : "Sheria na masharti",
  validation_accept_terms :  "Kubali masharti",
+   "form.sending":"tuma meseji",
 
 
         // PAYMENT STEPS
