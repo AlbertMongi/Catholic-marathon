@@ -393,7 +393,7 @@ const AboutPage: React.FC = () => {
 
               <div>
                 <label className="block font-medium text-gray-700 mb-2">
-                  {t("form.email")} <span className="text-red-500">*</span>
+                  {t("form.email")} <span className="text-red-500"></span>
                 </label>
                 <input
                   type="email"
@@ -422,7 +422,7 @@ const AboutPage: React.FC = () => {
 
               <div>
                 <label className="block font-medium text-gray-700 mb-2">
-                  {t("form_message")} <span className="text-red-500">*</span>
+                  {t("form_message")} <span className="text-red-500"></span>
                 </label>
                 <textarea
                   name="message"
