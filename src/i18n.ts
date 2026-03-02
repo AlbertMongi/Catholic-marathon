@@ -79,6 +79,7 @@ const resources = {
     sponsor_alt: "Sponsor {{number}}",
     our_team_title: "Organizing Committee",
      "payment.mobile_operator" : "Mobile Operator",
+      "validation.accept_terms": "accept terms and conditions",
      "form.address": "Address",
     
      payment_terms_and_conditions : "Terms and Conditions",
@@ -328,6 +329,7 @@ feature_register_desc:
 "form.registering": "Inasajili...",
 "payment.accept_terms_suffix": "na nathibitisha niko tayari kushiriki mbio.",
   "success.thank_you": "Asante Sana!",
+  "validation.accept_terms": "Tafadhali kubali masharti",
   "success.confirmation_message": "Utapokea ujumbe wa uthibitisho hivi karibuni.",
   "success.register_another": "Sajili Mshiriki Mwingine",
   "success.back_home": "Rudi Nyumbani",
