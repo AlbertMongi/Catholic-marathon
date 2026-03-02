@@ -767,7 +767,7 @@ const MarathonRegistrationPage: React.FC = () => {
                         />
                       </div>
 
-                      <div>
+                      {/* <div>
                         <label className="block font-medium text-gray-700 mb-2">
                           {t("form.postal_code")}
                         </label>
@@ -779,7 +779,7 @@ const MarathonRegistrationPage: React.FC = () => {
                           placeholder="00000"
                           className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
                         />
-                      </div>
+                      </div> */}
                     </>
                   )}
 
@@ -798,7 +798,7 @@ const MarathonRegistrationPage: React.FC = () => {
                       <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
                         {t("payment.accept_terms_prefix")}{" "}
                         <a href="/terms" className="text-purple-700 underline hover:text-purple-900">
-                          {t("payment.terms_and_conditions")}
+                          {t("payment.terms_and_conditions1")}
                         </a>{" "}
                         {t("payment.accept_terms_suffix")}
                       </label>

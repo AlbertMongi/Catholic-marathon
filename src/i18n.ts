@@ -171,6 +171,7 @@ const resources = {
   "race.5km": "5 Km",
   "race.10km": "10 Km",
   "race.21km": "21 Km (Half Marathon)",
+  "payment.terms_and_conditions1": " payment terms and conditions",
 
 
   // STEPS FOR PAYMENT
@@ -334,6 +335,7 @@ feature_register_desc:
   "membership.catholic": "Katoliki",
   "membership.other": "Nyingine",
     " payment.terms_and_conditions ": "Vigezo na msharti",
+    "payment.terms_and_conditions1": "Vigezo na masharti vya malipo",
 "payment.accept_terms_prefix": "Nakubali",
 "payment.participant": "Mshiriki",
   // Race distances
