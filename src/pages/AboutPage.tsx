@@ -221,7 +221,7 @@ const AboutPage: React.FC = () => {
       }
     } catch (err) {
       console.error(err);
-      setError("Network error, please try again later.");
+      setError("Hakuna mtandao, jaribu tena baadae.");
     } finally {
       setLoading(false);
     }
