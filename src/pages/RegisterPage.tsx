@@ -762,7 +762,7 @@ const MarathonRegistrationPage: React.FC = () => {
                           name="address"
                           value={paymentData.address}
                           onChange={handlePaymentChange}
-                          placeholder="Your street address"
+                          placeholder=""
                           className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
                         />
                       </div>
