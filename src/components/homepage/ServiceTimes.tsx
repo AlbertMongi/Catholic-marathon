@@ -44,9 +44,9 @@ const ServiceTimes: React.FC = () => {
                 <p className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-[#FAC31C]">
                   {daysLeft}
                 </p>
-                <p className="uppercase tracking-wide text-gray-600 mt-2 text-sm md:text-base font-medium">
+                {/* <p className="uppercase tracking-wide text-gray-600 mt-2 text-sm md:text-base font-medium">
                   {t("days")}
-                </p>
+                </p> */}
               </div>
             </div>
           </GlassCard>

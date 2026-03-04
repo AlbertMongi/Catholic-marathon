@@ -59,12 +59,12 @@ const decaniaParokiaMap: Record<string, string[]> = {
     "Kisegese", "Bungu", "Ikwiriri", "Vianzi", "Marogoro", "Utete",
   ],
   "Mt. Thomas More": [
-    "Mbezi Beach - Mt. Gasper", "Salasala", "Mbezi Juu",
-    "Kunduchi Mtongani", "Mbezi Beach (BMMH)", "Mbezi Beach (Thomas More)",
-    "Kilongawima", "Goba Kunguru", "Kinzudi", "Goba Mwisho",
-    "IPTL - Mt. Ambrose", "Utatu Mtakatifu - Skanska",
-    "Mbezi Manyema - Mt. Monica", "Kinzudi (Toleo la Bwana)",
-    "Salasala Kilimahewa",
+    " Mt. Gasper - Mbezi Beach ", "Mt.Augustino - Salasala", "Mt.Dominico - Mbezi Juu",
+    "Mt.Nicholous - Kunduchi Mtongani", "BMMH - Mbezi Beach", "Thomas More (Mbezi Beach)",
+    "Mt.Kizito - Kilongawima", "BMMK - Goba", "Mt.Cecilia - Kinzudi", "Mt. Ritha - Goba Mwisho",
+    "  Mt. Ambrose - IPTL", "Utatu Mtakatifu - Skanska",
+    "Mt. Monica - Mbezi Manyema ", "Toleo la Bwana - Kinzudi",
+    "Mt.Thelesia -Salasala Kilimahewa",
   ],
   "Mt. Petro ": [
     "Oysterbay", "Mwenge", "Sinza", "Mwananyamala", "Hananasifu",
@@ -345,8 +345,8 @@ const MarathonRegistrationPage: React.FC = () => {
         setPaymentAction(action);
         setMessage(
           action === "pay_now"
-            ? data.message || "Payment request sent! Please check your phone."
-            : data.message || "Registration successful. Pay later using the details below."
+            ? data.message || "Ombi la malipo limetumwa kwenye simu yako. Tafadhali maliza malipo ili kukamilisha usajili."
+            : data.message || "Umejisajili kikamalifu"
         );
         setStep("success");
       } else {
@@ -585,7 +585,7 @@ const MarathonRegistrationPage: React.FC = () => {
                           <SelectValue placeholder={t("form.select_pickup")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="CRDB Mlimani City">CRDB Mlimani City</SelectItem>
+                          <SelectItem value="CRDB Mlimani City"> Mlimani City</SelectItem>
                           <SelectItem value="Mkombozi Bank Msimbazi Center">Mkombozi Bank Msimbazi Center</SelectItem>
                           <SelectItem value="Mkombozi Bank Tegeta">Mkombozi Bank Tegeta</SelectItem>
                           <SelectItem value="Kanisa Katoliki Mt. Petro - Oysterbay">Kanisa Katoliki Mt. Petro - Oysterbay</SelectItem>
@@ -857,7 +857,7 @@ const MarathonRegistrationPage: React.FC = () => {
                     </p>
                   ) : (
                     <p className="text-xl text-gray-700 mb-8">
-                      Payment request sent! Please check your phone.
+                      Ombi la malipo limetumwa kwenye simu yako. Tafadhali maliza malipo ili kukamilisha usajili.
                     </p>
                   )}
                 </div>

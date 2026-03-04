@@ -203,7 +203,7 @@ const AboutPage: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/contact", {
+      const res = await fetch("http://127.0.0.1:8000/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactData),
@@ -255,7 +255,7 @@ const AboutPage: React.FC = () => {
       {/* Hero Section */}
       <section
         className="relative flex items-center justify-center"
-        style={{ minHeight: "500px", padding: "40px 20px" }}
+        style={{ minHeight: "700px", padding: "40px 20px" }}
       >
         <div
           className="absolute inset-0 bg-cover bg-center -z-10"
@@ -306,12 +306,13 @@ const AboutPage: React.FC = () => {
             {[
               { src: "/images/team.jpeg", name: "Kamati Kuu" },
               { src: "/images/tendaji.jpeg", name: "Kamati Tendaji" },
+              { src: "/images/mlezi.jpeg", name: "Fr. Romwald Mukandara", role: "Mlezi" },
               { src: "/images/mwenyekiti.jpeg", name: "Adam Nderumaki", role: "Mwenyekiti" },
               { src: "/images/makamu.jpeg", name: "Yolanda Kahunduka", role: "Makamu Mwenyekiti" },
               { src: "/images/katibu1.jpeg", name: "Walter Nguma", role: "Katibu" },
               { src: "/images/katibu.jpeg", name: "Emmanuel Mlay", role: "Katibu Msaidizi" },
               { src: "/images/mwekahazina.jpeg", name: "Deogratius Kessy", role: "Mhazini" },
-              { src: "/images/mlezi.jpeg", name: "Fr. Romwald Mukandara", role: "Mlezi" },
+              
             ].map((member, index) => (
               <div key={index} className="group text-center">
                 <div

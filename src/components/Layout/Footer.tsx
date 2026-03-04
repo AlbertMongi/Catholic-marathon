@@ -103,11 +103,21 @@ const Footer: React.FC = () => {
               <li className="flex items-center">
                 <Phone size={18} className="mr-3 flex-shrink-0 text-[#FAC31C]" />
                 <a
-                  href="tel:+255716400001"
+                  href="tel:+255717140699"
                   className="hover:text-[#FAC31C] transition-colors duration-300"
                   aria-label={t("call_us")}
                 >
                   +255 717 140 699 
+                </a>
+              </li>
+                <li className="flex items-center">
+                <Phone size={18} className="mr-3 flex-shrink-0 text-[#FAC31C]" />
+                <a
+                  href="tel:+255715433739"
+                  className="hover:text-[#FAC31C] transition-colors duration-300"
+                  aria-label={t("call_us")}
+                >
+                  +255 715 433 739 
                 </a>
               </li>
               <li className="flex items-center">
