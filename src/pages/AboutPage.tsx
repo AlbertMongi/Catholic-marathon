@@ -177,8 +177,8 @@ const AboutPage: React.FC = () => {
 
   const [contactData, setContactData] = useState({
     name: "",
-    email: "",
-    subject: "",
+    // email: "",
+    // subject: "",
     message: "",
   });
 
@@ -196,8 +196,8 @@ const AboutPage: React.FC = () => {
     setError(null);
     setMessage(null);
 
-    if (!contactData.name || !contactData.email || !contactData.message) {
-      setError("Please fill all required fields.");
+    if ( !contactData.message) {
+      setError("Please this field is required.");
       return;
     }
 
@@ -215,7 +215,7 @@ const AboutPage: React.FC = () => {
 
       if (res.ok) {
         setMessage(data.message || "Your message has been sent successfully!");
-        setContactData({ name: "", email: "", subject: "", message: "" });
+        setContactData({ name: "",  message: "" });
       } else {
         setError(data.message || "Something went wrong.");
       }
@@ -284,7 +284,7 @@ const AboutPage: React.FC = () => {
 
             <div className="flex justify-center">
               <img
-                src="/images/map.png"
+                src="/images/ROUTE.png"
                 alt="Route"
                 className="w-full h-72 md:h-80 lg:h-96 object-contain"
               />
@@ -304,16 +304,15 @@ const AboutPage: React.FC = () => {
 
           <div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {[
-              { src: "/images/team.jpeg", name: "Kamati Kuu" },
-              { src: "/images/tendaji.jpeg", name: "Kamati Tendaji" },
-              { src: "/images/mlezi.jpeg", name: "Fr. Romwald Mukandara", role: "Mlezi" },
-              { src: "/images/mwenyekiti.jpeg", name: "Adam Nderumaki", role: "Mwenyekiti" },
-              { src: "/images/makamu.jpeg", name: "Yolanda Kahunduka", role: "Makamu Mwenyekiti" },
-              { src: "/images/katibu1.jpeg", name: "Walter Nguma", role: "Katibu" },
-              { src: "/images/katibu.jpeg", name: "Emmanuel Mlay", role: "Katibu Msaidizi" },
-              { src: "/images/mwekahazina.jpeg", name: "Deogratius Kessy", role: "Mhazini" },
-              
-            ].map((member, index) => (
+  { src: "/images/team.jpeg", name: t("kamati_kuu") },
+  { src: "/images/tendaji.jpeg", name: t("kamati_tendaji") },
+  { src: "/images/mlezi.jpeg", name: "Fr. Romwald Mukandara", role: t("mlezi") },
+  { src: "/images/mwenyekiti.jpeg", name: "Adam Nderumaki", role: t("mwenyekiti") },
+  { src: "/images/makamu.jpeg", name: "Yolanda Kahunduka", role: t("makamu_mwenyekiti") },
+  { src: "/images/katibu1.jpeg", name: "Walter Nguma", role: t("katibu") },
+  { src: "/images/katibu.jpeg", name: "Emmanuel Mlay", role: t("katibu_msaidizi") },
+  { src: "/images/mwekahazina.jpeg", name: "Deogratius Kessy", role: t("mhazini") },
+].map((member, index) => (
               <div key={index} className="group text-center">
                 <div
                   className="overflow-hidden rounded-2xl shadow-lg cursor-pointer"
@@ -392,22 +391,9 @@ const AboutPage: React.FC = () => {
                 />
               </div>
 
-              <div>
-                <label className="block font-medium text-gray-700 mb-2">
-                  {t("form.email")} <span className="text-red-500"></span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={contactData.email}
-                  onChange={handleChange}
-                  placeholder={t("form.email_placeholder")}
-                  className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
-                  required
-                />
-              </div>
+             
 
-              <div>
+              {/* <div>
                 <label className="block font-medium text-gray-700 mb-2">
                   {t("form_subject")}
                 </label>
@@ -419,7 +405,7 @@ const AboutPage: React.FC = () => {
                   placeholder={t("subject_placeholder")}
                   className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
                 />
-              </div>
+              </div> */}
 
               <div>
                 <label className="block font-medium text-gray-700 mb-2">

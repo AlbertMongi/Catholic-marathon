@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
             />
             <div className="flex space-x-6 justify-center md:justify-start">
               {[
-                { href: "", icon: <Facebook size={24} /> },
+                { href: "https://www.facebook.com/share/r/1ATr4wPkLP/?mibextid=9drbnH&s=yWDuG2&fs=e", icon: <Facebook size={24} /> },
                 { href: "https://www.instagram.com/pugu__marathon?igsh=YW1vajF0eWs3dWdh", icon: <Instagram size={24} /> },
                 { href: "https://www.youtube.com/@tumainitelevision", icon: <Youtube size={24} /> },
               ].map((social, idx) => (
@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
                 >
                   {social.icon}
                 </a>
-              ))}
+              ))}``
             </div>
           </div>
 
@@ -55,6 +55,7 @@ const Footer: React.FC = () => {
               {[
                 // { to: "/about", label: t("about_pugu_marathon") },
                 { to: "/register", label: t("register_to_run") },
+                  { to: "/serve", label: t("register_to_run1") },
                 // { to: "/contact", label: t("contact_us") },
               ].map((link, idx) => (
                 <li key={idx}>

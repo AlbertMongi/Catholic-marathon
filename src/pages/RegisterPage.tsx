@@ -15,80 +15,243 @@ import {
 const API_BASE = "http://127.0.0.1:8000/api"; // ← change to production URL later
 
 const decaniaParokiaMap: Record<string, string[]> = {
-  "Mt. Joseph": [
-    "St. Joseph", "Chang'ombe", "Upanga", "Msimbazi", "Mburahati", "Keko",
-    "Mafia", "Muhimbili", "Buguruni", "Kurasini", "Mtoni", "Mikoroshoni",
-    "Gonge - Mafia", "Bareni - Mafia",
-  ],
-  "Ubungo": [
-    "Ubungo Msewe", "Manzese", "Kimara", "Chuo Kikuu", "Tandale",
-    "Michungwani", "Changanyikeni", "Korogwe",
-  ],
-  "Makuburi": [
-    "Makuburi", "Kibangu", "Luhanga", "Tabata Kisiwani", "Makoka",
-    "Kilungule", "Mabibo", "Nzasa", "Kimara Mtoni", "Baruti",
-    "Maria Goreti", "Kimara Mavurunza", "Bonyokwa",
-  ],
-  "Kibaha": [
-    "Kibaha", "Mkuza", "Mlandizi", "Kibamba", "Kiluvya", "Kibwegere",
-    "Kwembe", "Misugusugu", "Kongowele", "Jamaika", "Chang'ombe",
-    "Mpiji", "Makurunge", "Visiga", "Lulanzi", "Mabwepande",
-    "Hondogo", "Miembesaba", "Garagaza", "Kidimu",
-  ],
-  "Mbezi Luis": [
-    "Mbezi Luis", "Makabe", "Msakuzi", "Mshikamano", "Malamba Mawili",
-    "Msumi", "Mpiji Magohe", "Tegeta A", "Pande",
-    "Mageti - Mt. Simon Stock",
-  ],
-  "Mavurunza": [
-    "Mavurunza", "Mbezi Mwisho", "Temboni", "Tagaste", "Temboni- Ritha",
-    "Matosa", "Msingwa", "Goba", "Stop-Over",
-  ],
-  "Kigamboni": [
-    "Kigamboni", "Kongowe", "Mji Mwema", "Kimbiji", "Toangoma",
-    "Kibada", "Gezaulole", "Mikwambe", "Vijibweni", "Mwongozo",
-    "Mkokozi", "Lugwadu", "Mlamleni", "Kisarawe II",
-  ],
-  "Mbagala": [
-    "Mbagala Zakhem", "Kizuiani", "Kijichi", "Mbagala Kuu", "Kizinga",
-    "Mbande", "Kilamba", "Chamazi", "Vigoa", "Majimatitu",
-    "Kingugi", "Vigozi", "Msongola A", "Mgeninani",
-  ],
-  "Kilimahewa": [
-    "Vikindu", "Mkuranga", "Kilimahewa", "Kibiti", "Kisiju Pwani",
-    "Kisegese", "Bungu", "Ikwiriri", "Vianzi", "Marogoro", "Utete",
-  ],
-  "Mt. Thomas More": [
-    " Mt. Gasper - Mbezi Beach ", "Mt.Augustino - Salasala", "Mt.Dominico - Mbezi Juu",
-    "Mt.Nicholous - Kunduchi Mtongani", "BMMH - Mbezi Beach", "Thomas More (Mbezi Beach)",
-    "Mt.Kizito - Kilongawima", "BMMK - Goba", "Mt.Cecilia - Kinzudi", "Mt. Ritha - Goba Mwisho",
-    "  Mt. Ambrose - IPTL", "Utatu Mtakatifu - Skanska",
-    "Mt. Monica - Mbezi Manyema ", "Toleo la Bwana - Kinzudi",
-    "Mt.Thelesia -Salasala Kilimahewa",
-  ],
-  "Mt. Petro ": [
-    "Oysterbay", "Mwenge", "Sinza", "Mwananyamala", "Hananasifu",
-    "Kawe", "Mikocheni", "Makongo Juu", "Magomeni", "Kijitonyama",
-  ],
-  "Ukonga": [
-    "Ukonga", "Yombo Kiwalani", "Yombo Dovya", "Buza", "Kitunda",
-    "Yombo Vituka", "Kivule", "Mwanagati", "Magole", "Gongolamboto",
-    "Nyantira", "Minazini", "Kipunguni",
-  ],
-  "Pugu": [
-    "Pugu", "Mji Mpya Relini", "Chanika", "Chakenge", "Buyuni",
-    "Bombambili", "Mvuti", "Zingiziwa", "Kisarawe", "Masaki",
-    "Viwege", "Kigenzi", "Yongwe", "Dominico", "Mzenga",
-    "Nyebulu", "Rada", "Msongola B", "Vikongoro", "Homboza",
-  ],
-  "Segerea": [
-    "Segerea", "Tabata", "Kimanga", "Kipawa", "Mongo la Ndege",
-    "Vingunguti", "Kinyerezi", "Ulongoni", "Sitakishari", "King'azi",
-    "Manabii", "Bangulo", "Kisukuru", "Kifuru",
-  ],
   "Chanika": [
-    "Chanika", "Dominiko", "Msongora B", "Chakenge", "Mvuti",
-    "Nyeburu", "Homboza", "Zingiziwa", "Yongwe", "Vikongoro",
+    "Chakenge",
+    "Chanika",
+    "Dominiko",
+    "Homboza",
+    "Msongora B",
+    "Mvuti",
+    "Nyeburu",
+    "Vikongoro",
+    "Yongwe",
+    "Zingiziwa",
+  ],
+
+  "Kibaha": [
+    "Chang'ombe",
+    "Garagaza",
+    "Hondogo",
+    "Jamaika",
+    "Kibaha",
+    "Kibamba",
+    "Kibwegere",
+    "Kidimu",
+    "Kiluvya",
+    "Kongowele",
+    "Kwembe",
+    "Lulanzi",
+    "Mabwepande",
+    "Makurunge",
+    "Miembesaba",
+    "Misugusugu",
+    "Mkuza",
+    "Mlandizi",
+    "Mpiji",
+    "Visiga",
+  ],
+
+  "Kigamboni": [
+    "Gezaulole",
+    "Kibada",
+    "Kigamboni",
+    "Kimbiji",
+    "Kisarawe II",
+    "Kongowe",
+    "Lugwadu",
+    "Mikwambe",
+    "Mji Mwema",
+    "Mkokozi",
+    "Mlamleni",
+    "Mwongozo",
+    "Toangoma",
+    "Vijibweni",
+  ],
+
+  "Kilimahewa": [
+    "Bungu",
+    "Ikwiriri",
+    "Kibiti",
+    "Kisiju Pwani",
+    "Kisegese",
+    "Kilimahewa",
+    "Marogoro",
+    "Mkuranga",
+    "Utete",
+    "Vianzi",
+    "Vikindu",
+  ],
+
+  "Makuburi": [
+    "Baruti",
+    "Bonyokwa",
+    "Kibangu",
+    "Kilungule",
+    "Kimara Mavurunza",
+    "Kimara Mtoni",
+    "Luhanga",
+    "Mabibo",
+    "Makoka",
+    "Makuburi",
+    "Maria Goreti",
+    "Nzasa",
+    "Tabata Kisiwani",
+  ],
+
+  "Mavurunza": [
+    "Goba",
+    "Matosa",
+    "Mavurunza",
+    "Mbezi Mwisho",
+    "Msingwa",
+    "Stop-Over",
+    "Tagaste",
+    "Temboni",
+    "Temboni- Ritha",
+  ],
+
+  "Mbagala": [
+    "Chamazi",
+    "Kijichi",
+    "Kilamba",
+    "Kingugi",
+    "Kizinga",
+    "Kizuiani",
+    "Majimatitu",
+    "Mbande",
+    "Mbagala Kuu",
+    "Mbagala Zakhem",
+    "Mgeninani",
+    "Msongola A",
+    "Vigoa",
+    "Vigozi",
+  ],
+
+  "Mbezi Luis": [
+    "Mageti - Mt. Simon Stock",
+    "Makabe",
+    "Malamba Mawili",
+    "Mbezi Luis",
+    "Mpiji Magohe",
+    "Msakuzi",
+    "Mshikamano",
+    "Msumi",
+    "Pande",
+    "Tegeta A",
+  ],
+
+  "Mt. Joseph": [
+    "Bareni - Mafia",
+    "Buguruni",
+    "Chang'ombe",
+    "Gonge - Mafia",
+    "Keko",
+    "Kurasini",
+    "Mafia",
+    "Mburahati",
+    "Mikoroshoni",
+    "Mtoni",
+    "Msimbazi",
+    "Muhimbili",
+    "St. Joseph",
+    "Upanga",
+  ],
+
+  "Mt. Petro": [
+    "Hananasifu",
+    "Kawe",
+    "Kijitonyama",
+    "Magomeni",
+    "Makongo Juu",
+    "Mikocheni",
+    "Mwananyamala",
+    "Mwenge",
+    "Oysterbay",
+    "Sinza",
+  ],
+
+  "Mt. Thomas More": [
+    "BMMH - Mbezi Beach",
+    "BMMK - Goba",
+    "Mt. Ambrose - IPTL",
+    "Mt. Cecilia - Kinzudi",
+    "Mt. Dominico - Mbezi Juu",
+    "Mt. Gasper - Mbezi Beach",
+    "Mt. Kizito - Kilongawima",
+    "Mt. Monica - Mbezi Manyema",
+    "Mt. Nicholous - Kunduchi Mtongani",
+    "Mt. Ritha - Goba Mwisho",
+    "Mt. Thelesia - Salasala Kilimahewa",
+    "Mt. Augustino - Salasala",
+    "Thomas More (Mbezi Beach)",
+    "Toleo la Bwana - Kinzudi",
+    "Utatu Mtakatifu - Skanska",
+  ],
+
+  "Pugu": [
+    "Bombambili",
+    "Buyuni",
+    "Chakenge",
+    "Dominico",
+    "Homboza",
+    "Kigenzi",
+    "Kisarawe",
+    "Masaki",
+    "Mji Mpya Relini",
+    "Msongola B",
+    "Mvuti",
+    "Mzenga",
+    "Nyebulu",
+    "Pugu",
+    "Rada",
+    "Viwege",
+    "Vikongoro",
+    "Yongwe",
+    "Zingiziwa",
+  ],
+
+  "Segerea": [
+    "Bangulo",
+    "Kifuru",
+    "Kimanga",
+    "King'azi",
+    "Kinyerezi",
+    "Kipawa",
+    "Kisukuru",
+    "Manabii",
+    "Mongo la Ndege",
+    "Segerea",
+    "Sitakishari",
+    "Tabata",
+    "Ulongoni",
+    "Vingunguti",
+  ],
+
+  "Ubungo": [
+    "Changanyikeni",
+    "Chuo Kikuu",
+    "Kimara",
+    "Korogwe",
+    "Manzese",
+    "Michungwani",
+    "Tandale",
+    "Ubungo Msewe",
+  ],
+
+  "Ukonga": [
+    "Buza",
+    "Gongolamboto",
+    "Kipunguni",
+    "Kitunda",
+    "Kivule",
+    "Magole",
+    "Minazini",
+    "Mwanagati",
+    "Nyantira",
+    "Ukonga",
+    "Yombo Dovya",
+    "Yombo Kiwalani",
+    "Yombo Vituka",
   ],
 };
 
@@ -101,7 +264,11 @@ const MarathonRegistrationPage: React.FC = () => {
   const [paymentAction, setPaymentAction] = useState<"pay_now" | "pay_later" | null>(null);
 
   const [formData, setFormData] = useState({
-    full_name: "",
+    first_name: "",
+    middle_name: "",
+    last_name: "",
+    age: "",
+    sex: "",
     phone_number: "",
     email_address: "",
     race_category: "",
@@ -128,6 +295,12 @@ const MarathonRegistrationPage: React.FC = () => {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
+  // ── Derived full name ──────────────────────────────────────────────────────
+  const getFullName = () =>
+    [formData.first_name, formData.middle_name, formData.last_name]
+      .filter(Boolean)
+      .join(" ");
+
   // ── Registration form handlers ─────────────────────────────────────────────
   const handleRegChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
@@ -138,13 +311,14 @@ const MarathonRegistrationPage: React.FC = () => {
     if (name === "membership") {
       setFormData((prev) => ({
         ...prev,
+        membership: value,
         decania: "",
         parokia: "",
         pickup_point: "",
       }));
     }
     if (name === "decania") {
-      setFormData((prev) => ({ ...prev, parokia: "" }));
+      setFormData((prev) => ({ ...prev, decania: value, parokia: "" }));
     }
   };
 
@@ -154,8 +328,18 @@ const MarathonRegistrationPage: React.FC = () => {
     setError(null);
     setLoading(true);
 
-    if (!formData.full_name.trim()) {
+    if (!formData.first_name.trim() || !formData.last_name.trim()) {
       setError(t("validation.full_name_required"));
+      setLoading(false);
+      return;
+    }
+    if (!formData.age || isNaN(Number(formData.age)) || Number(formData.age) < 5 || Number(formData.age) > 100) {
+      setError(t("validation.age_invalid") || "Tafadhali ingiza umri sahihi (miaka 5–100).");
+      setLoading(false);
+      return;
+    }
+    if (!formData.sex) {
+      setError(t("validation.sex_required") || "Tafadhali chagua jinsia.");
       setLoading(false);
       return;
     }
@@ -188,7 +372,12 @@ const MarathonRegistrationPage: React.FC = () => {
           "Accept": "application/json",
         },
         body: JSON.stringify({
-          full_name: formData.full_name,
+          first_name: formData.first_name,
+          middle_name: formData.middle_name || null,
+          last_name: formData.last_name,
+          full_name: getFullName(),
+          age: Number(formData.age),
+          sex: formData.sex,
           phone_number: formData.phone_number,
           email_address: formData.email_address || null,
           religion: formData.membership,
@@ -282,7 +471,6 @@ const MarathonRegistrationPage: React.FC = () => {
       const data = await res.json();
 
       if (res.ok && data.success && data.payment_url) {
-        // Redirect to EvMak / card payment page
         window.location.href = data.payment_url;
       } else {
         setError(data.error || t("payment.card_initiation_failed"));
@@ -304,7 +492,6 @@ const MarathonRegistrationPage: React.FC = () => {
       return;
     }
 
-    // Mobile money path
     setError(null);
     setLoading(true);
 
@@ -409,23 +596,95 @@ const MarathonRegistrationPage: React.FC = () => {
                 )}
 
                 <form onSubmit={handleRegSubmit} className="space-y-6">
-                  {/* Full name + Phone */}
+
+                  {/* First Name + Middle Name */}
                   <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="block font-medium text-gray-700 mb-2">
-                        {t("form.full_name")} <span className="text-red-500">*</span>
+                        {t("form.first_name") || "Jina la Kwanza"} <span className="text-red-500">*</span>
                       </label>
                       <input
                         type="text"
-                        name="full_name"
-                        value={formData.full_name}
+                        name="first_name"
+                        value={formData.first_name}
                         onChange={handleRegChange}
-                        placeholder={t("form.full_name_placeholder")}
+                        placeholder={t("form.first_name_placeholder") || "Jina la kwanza"}
                         className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
                         required
                       />
                     </div>
 
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.middle_name") || "Jina la Kati"}
+                      </label>
+                      <input
+                        type="text"
+                        name="middle_name"
+                        value={formData.middle_name}
+                        onChange={handleRegChange}
+                        placeholder={t("form.middle_name_placeholder") || "Jina la kati (si lazima)"}
+                        className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Last Name */}
+                  <div>
+                    <label className="block font-medium text-gray-700 mb-2">
+                      {t("form.last_name") || "Jina la Mwisho"} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="last_name"
+                      value={formData.last_name}
+                      onChange={handleRegChange}
+                      placeholder={t("form.last_name_placeholder") || "Jina la mwisho"}
+                      className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                      required
+                    />
+                  </div>
+
+                  {/* Age + Sex */}
+                  <div className="grid gap-6 md:grid-cols-2">
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.age") || "Umri"} <span className="text-red-500">*</span>
+                      </label>
+                      <input
+                        type="number"
+                        name="age"
+                        value={formData.age}
+                        onChange={handleRegChange}
+                        placeholder={t("form.age_placeholder") || "Mfano: 25"}
+                        min={5}
+                        max={100}
+                        className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.sex") || "Jinsia"} <span className="text-red-500">*</span>
+                      </label>
+                      <Select
+                        value={formData.sex}
+                        onValueChange={(v) => setFormData((p) => ({ ...p, sex: v }))}
+                      >
+                        <SelectTrigger className="h-12 rounded-xl">
+                          <SelectValue placeholder={t("form.select_sex") || "Chagua jinsia"} />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectItem value="male">{t("sex.male") || "Mme"}</SelectItem>
+                          <SelectItem value="female">{t("sex.female") || "Mke"}</SelectItem>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                  </div>
+
+                  {/* Phone + Email */}
+                  <div className="grid gap-6 md:grid-cols-2">
                     <div>
                       <label className="block font-medium text-gray-700 mb-2">
                         {t("form.phone_number")} <span className="text-red-500">*</span>
@@ -440,21 +699,20 @@ const MarathonRegistrationPage: React.FC = () => {
                         required
                       />
                     </div>
-                  </div>
 
-                  {/* Email */}
-                  <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {t("form.email")}
-                    </label>
-                    <input
-                      type="email"
-                      name="email_address"
-                      value={formData.email_address}
-                      onChange={handleRegChange}
-                      placeholder={t("form.email_placeholder")}
-                      className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
-                    />
+                    <div>
+                      <label className="block font-medium text-gray-700 mb-2">
+                        {t("form.email")}
+                      </label>
+                      <input
+                        type="email"
+                        name="email_address"
+                        value={formData.email_address}
+                        onChange={handleRegChange}
+                        placeholder={t("form.email_placeholder")}
+                        className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
+                      />
+                    </div>
                   </div>
 
                   {/* Race + T-shirt */}
@@ -509,7 +767,15 @@ const MarathonRegistrationPage: React.FC = () => {
                     </label>
                     <Select
                       value={formData.membership}
-                      onValueChange={(v) => setFormData((p) => ({ ...p, membership: v }))}
+                      onValueChange={(v) =>
+                        setFormData((p) => ({
+                          ...p,
+                          membership: v,
+                          decania: "",
+                          parokia: "",
+                          pickup_point: "",
+                        }))
+                      }
                     >
                       <SelectTrigger className="h-12 rounded-xl">
                         <SelectValue placeholder={t("form.select_membership")} />
@@ -530,7 +796,9 @@ const MarathonRegistrationPage: React.FC = () => {
                         </label>
                         <Select
                           value={formData.decania}
-                          onValueChange={(v) => setFormData((p) => ({ ...p, decania: v }))}
+                          onValueChange={(v) =>
+                            setFormData((p) => ({ ...p, decania: v, parokia: "" }))
+                          }
                         >
                           <SelectTrigger className="h-12 rounded-xl">
                             <SelectValue placeholder={t("form.select_decania")} />
@@ -585,7 +853,7 @@ const MarathonRegistrationPage: React.FC = () => {
                           <SelectValue placeholder={t("form.select_pickup")} />
                         </SelectTrigger>
                         <SelectContent>
-                          <SelectItem value="CRDB Mlimani City"> Mlimani City</SelectItem>
+                          <SelectItem value="CRDB Mlimani City">Mlimani City</SelectItem>
                           <SelectItem value="Mkombozi Bank Msimbazi Center">Mkombozi Bank Msimbazi Center</SelectItem>
                           <SelectItem value="Mkombozi Bank Tegeta">Mkombozi Bank Tegeta</SelectItem>
                           <SelectItem value="Kanisa Katoliki Mt. Petro - Oysterbay">Kanisa Katoliki Mt. Petro - Oysterbay</SelectItem>
@@ -605,7 +873,7 @@ const MarathonRegistrationPage: React.FC = () => {
                           <SelectItem value="Kibaha Pwani">Kibaha Pwani</SelectItem>
                           <SelectItem value="Ubungo">Ubungo</SelectItem>
                           <SelectItem value="Msongora">Msongora</SelectItem>
-                          <SelectItem value="Woiso Original Products (WOP) ">Woiso Original Products (WOP)</SelectItem>
+                          <SelectItem value="Woiso Original Products (WOP)">Woiso Original Products (WOP)</SelectItem>
                         </SelectContent>
                       </Select>
                     </div>
@@ -649,7 +917,12 @@ const MarathonRegistrationPage: React.FC = () => {
                 <div className="mb-8">
                   <h5 className="font-semibold mb-3 text-lg">{t("payment.participant")}</h5>
                   <p className="text-gray-700">
-                    <strong>{t("form.full_name")}:</strong> {formData.full_name} <br />
+                    <strong>{t("form.full_name") || "Jina Kamili"}:</strong> {getFullName()} <br />
+                    <strong>{t("form.age") || "Umri"}:</strong> {formData.age} <br />
+                    <strong>{t("form.sex") || "Jinsia"}:</strong>{" "}
+                    {formData.sex === "male"
+                      ? t("sex.male") || "Mme"
+                      : t("sex.female") || "Mke"} <br />
                     <strong>{t("form.phone_number")}:</strong> {formData.phone_number} <br />
                     <strong>{t("form.race_category")}:</strong> {formData.race_category.toUpperCase()}
                   </p>
@@ -710,10 +983,10 @@ const MarathonRegistrationPage: React.FC = () => {
                             <SelectValue placeholder={t("payment.mobile_operator")} />
                           </SelectTrigger>
                           <SelectContent>
-                            {/* <SelectItem value="Mpesa">M-Pesa</SelectItem> */}
                             <SelectItem value="TigoPesa">{t("payment.tigo_pesa")}</SelectItem>
                             <SelectItem value="AirtelMoney">{t("payment.airtel_money")}</SelectItem>
                             <SelectItem value="HaloPesa">{t("payment.halo_pesa")}</SelectItem>
+                            <SelectItem value="Mpesa">Vodacom</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -766,24 +1039,10 @@ const MarathonRegistrationPage: React.FC = () => {
                           className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
                         />
                       </div>
-
-                      {/* <div>
-                        <label className="block font-medium text-gray-700 mb-2">
-                          {t("form.postal_code")}
-                        </label>
-                        <input
-                          type="text"
-                          name="postal_code"
-                          value={paymentData.postal_code}
-                          onChange={handlePaymentChange}
-                          placeholder="00000"
-                          className="w-full px-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none"
-                        />
-                      </div> */}
                     </>
                   )}
 
-                  {/* Terms Checkbox - shown for both */}
+                  {/* Terms Checkbox */}
                   {(showMobileFields || showCardFields) && (
                     <div className="flex items-start space-x-3">
                       <input
@@ -797,7 +1056,7 @@ const MarathonRegistrationPage: React.FC = () => {
                       />
                       <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
                         {t("payment.accept_terms_prefix")}{" "}
-                        <a href="/terms" className="text-purple-700 underline hover:text-purple-900">
+                        <a href="" className="text-purple-700 underline hover:text-purple-900">
                           {t("payment.terms_and_conditions1")}
                         </a>{" "}
                         {t("payment.accept_terms_suffix")}
@@ -805,7 +1064,7 @@ const MarathonRegistrationPage: React.FC = () => {
                     </div>
                   )}
 
-                  {/* Action buttons - shown after payment type selected */}
+                  {/* Action buttons */}
                   {(showMobileFields || showCardFields) && (
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-10">
                       <Button

@@ -76,12 +76,23 @@ const resources = {
     integrity_title: "Integrity & Fair Play",
     integrity_content: "We uphold fairness, honesty, and ethical standards in organizing the event, registrations, and results.",
     pugu_marathon_route: "Pugu Marathon route",
-    our_proud_sponsors: "Our Proud Sponsors",
+    our_proud_sponsors: "Our  Sponsors",
     sponsor_alt: "Sponsor {{number}}",
     our_team_title: "Organizing Committee",
      "payment.mobile_operator" : "Mobile Operator",
       "validation.accept_terms": "accept terms and conditions",
      "form.address": "Address",
+      
+
+  "kamati_kuu": "Main Committee",
+  "kamati_tendaji": "Executive Committee",
+
+  "mlezi": "Care taker",
+  "mwenyekiti": "Chairperson",
+  "makamu_mwenyekiti": "Vice Chairperson",
+  "katibu": "Secretary",
+  "katibu_msaidizi": "Assistant Secretary",
+  "mhazini": "Treasurer",
     
      payment_terms_and_conditions : "Terms and Conditions",
     // ABOUT US
@@ -150,6 +161,8 @@ const resources = {
   "payment.pay_now": "Pay Now",
   "payment.participant": "Participant",
   "payment.pay_later": "Pay Later",
+  "register_to_run1": "How to pay later",
+  "payment.error_generic": 'Payment failed',
   "payment.request_sent": "Payment request sent to your phone. Please confirm the payment to complete your registration.",
   "payment.stk_push_success": "STK Push initiated successfully.",
   "payment.please_confirm": "Please confirm the payment to complete your registration.",
@@ -175,6 +188,7 @@ const resources = {
   "race.21km": "21 Km (Half Marathon)",
   "payment.terms_and_conditions1": " payment terms and conditions",
   "form.sending":"send message",
+  "validation.select_mobile_method": "Select mobile operator",
 
 
   // STEPS FOR PAYMENT
@@ -194,6 +208,18 @@ const resources = {
     'pay_later_sms_note'     : 'After payment, your registration will be confirmed automatically. Please keep your SMS confirmation as proof of payment.',
     'close'                  : 'Close',
     'ok_pay_later'           : "OK, I'll Pay Later",
+     "form.first_name": "First Name",
+  "form.first_name_placeholder": "Enter first name",
+  "form.middle_name": "Middle Name",
+  "form.middle_name_placeholder": "Enter middle name (optional)",
+  "form.last_name": "Last Name",
+  "form.last_name_placeholder": "Enter last name",
+  "form.age": "Age",
+  "form.age_placeholder": "e.g. 25",
+  "form.sex": "Sex",
+  "form.select_sex": "Select sex",
+  "sex.male": "Male",
+  "sex.female": "Female",
   
     },
   },
@@ -266,7 +292,7 @@ feature_register_desc:
     our_purpose_title: "Madhumuni Yetu",
     our_purpose_content: "Kuchochea mtindo wa maisha wenye afya na kufanya jamii ijumlishe kupitia tukio la marathon lililopangwa vizuri na lenye furaha.",
     our_mission_title: "Dhamira Yetu",
-    our_mission_content: "Kuleta pamoja watu kutoka makundi na matabaka yote ya jamii bila ubaguzi wa aina yoyote, kwa lengo la kujenga mshikamano, upendo na ushirikiano. Tunakusudia kuhamasisha na kuunga mkono maendeleo ya jamii ya Pugu kwa ujumla pamoja na maboresho ya kituo cha Hija Pugu. Dhamira yetu ni kukuza afya bora, kuboresha elimu, kuendeleza stadi za kazi na ujasiriamali kwa vijana na kulinda mazingira yetu kwa ajili ya kizazi cha sasa na kijacho. Tunaamini kuwa kwa kushirikiana, tunaweza kuleta mabadiliko chanya na endelevu katika jamii yetu.",
+    our_mission_content: "Kuleta pamoja watu kutoka makundi na matabaka yote ya jamii bila ubaguzi wa aina yoyote, kwa lengo la kujenga mshikamano, upendo na ushirikiano. Tunakusudia kuhamasisha na kuunga mkono shughuli za maendeleo na huduma za kijamii kwa ujumla pamoja na maboresho ya kituo cha Hija Pugu. Dhamira yetu ni kukuza afya bora, kuboresha elimu, kuendeleza stadi za kazi na ujasiriamali kwa vijana na kulinda mazingira yetu kwa ajili ya kizazi cha sasa na kijacho. Tunaamini kuwa kwa kushirikiana, tunaweza kuleta mabadiliko chanya na endelevu katika jamii yetu.",
     our_vision_title: "",
     our_vision_content: "",
     our_core_values_title: "Thamani Zetu Kuu",
@@ -362,6 +388,7 @@ feature_register_desc:
  payment_terms_and_conditions : "Sheria na masharti",
  validation_accept_terms :  "Kubali masharti",
    "form.sending":"tuma meseji",
+     "register_to_run1": "Jinsi ya kulipa",
 
 
         // PAYMENT STEPS
@@ -385,7 +412,31 @@ feature_register_desc:
     'close'                  : 'Funga',
     'ok_pay_later'           : 'Sawa, Nitalipa Baadaye',
     'payment_your_bill_number' : 'Namba ya Bili',
-        
+      "validation.select_mobile_method": "Chagua mtandao wa simu",
+      "payment.error_generic": 'Imekataa',
+      
+  "kamati_kuu": "Kamati Kuu",
+  "kamati_tendaji": "Kamati Tendaji",
+
+  "mlezi": "Mlezi",
+  "mwenyekiti": "Mwenyekiti",
+  "makamu_mwenyekiti": "Makamu Mwenyekiti",
+  "katibu": "Katibu",
+  "katibu_msaidizi": "Katibu Msaidizi",
+  "mhazini": "Mhazini",
+    "form.first_name": "Jina la Kwanza",
+  "form.first_name_placeholder": "Ingiza jina la kwanza",
+  "form.middle_name": "Jina la Kati",
+  "form.middle_name_placeholder": "Ingiza jina la kati (si lazima)",
+  "form.last_name": "Jina la Mwisho",
+  "form.last_name_placeholder": "Ingiza jina la mwisho",
+  "form.age": "Umri",
+  "form.age_placeholder": "Mfano: 25",
+  "form.sex": "Jinsia",
+  "form.select_sex": "Chagua jinsia",
+  "sex.male": "Mwanaume",
+  "sex.female": "Mwanamke",
+
 //  ABOUT US 
 contact_us_title: "Tutumie maoni yako",
   full_name: "Jina Kamili",
