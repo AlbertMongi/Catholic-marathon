@@ -181,6 +181,7 @@ const resources = {
 "payment.halo_pesa": "Halopesa",
 "payment.processing": "Processing...",
 'payment_your_bill_number' : 'Bill Number',
+'validation.sex_required': 'Choose sex',
   // Race distances (these were not in PHP but kept consistent)
   "race.2km": "2 Km",
   "race.5km": "5 Km",
@@ -411,6 +412,7 @@ feature_register_desc:
     'pay_later_sms_note'     : 'Baada ya malipo, usajili wako utathibitishwa moja kwa moja. Tafadhali hifadhi ujumbe wa SMS kama uthibitisho wa malipo.',
     'close'                  : 'Funga',
     'ok_pay_later'           : 'Sawa, Nitalipa Baadaye',
+    'validation.sex_required': 'Chagua jinsia',
     'payment_your_bill_number' : 'Namba ya Bili',
       "validation.select_mobile_method": "Chagua mtandao wa simu",
       "payment.error_generic": 'Imekataa',

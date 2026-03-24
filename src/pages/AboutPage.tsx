@@ -203,7 +203,7 @@ const AboutPage: React.FC = () => {
 
     setLoading(true);
     try {
-      const res = await fetch("http://127.0.0.1:8000/api/feedback", {
+      const res = await fetch("https://portal.pugumarathon.or.tz/api/feedback", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(contactData),
