@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const API_BASE = "https://portal.pugumarathon.or.tz/api"; // ← change to production URL later
+const API_BASE = "https:https://portal.pugumarathon.or.tz/api"; // ← change to production URL later
 
 const decaniaParokiaMap: Record<string, string[]> = {
   "Chanika": [
@@ -290,7 +290,7 @@ const MarathonRegistrationPage: React.FC = () => {
           email: formData.email_address || "",
         }));
         setStep("payment");
-        setMessage("Usajili umefanikiwa! Endelea na malipo ili uthibitishe nafasi yako.");
+        // setMessage("Usajili umefanikiwa! Endelea na malipo ili uthibitishe nafasi yako.");
       } else {
         setError(data.message || data.error || t("registration.error_generic") || "Tatizo la usajili. Jaribu tena.");
       }
@@ -456,9 +456,9 @@ const MarathonRegistrationPage: React.FC = () => {
         <div className="max-w-4xl mx-auto px-5 sm:px-6 lg:px-8 relative z-10">
           {step === "participant" && (
             <div className="mb-8">
-              <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
+              {/* <p className="text-center text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">
                 Chagua aina ya usajili
-              </p>
+              </p> */}
               <div className="grid grid-cols-2 gap-4">
                 <button
                   type="button"
@@ -484,10 +484,10 @@ const MarathonRegistrationPage: React.FC = () => {
                     </svg>
                   </div>
                   <p className={`text-base font-bold mb-1 ${registrationType === "mshiriki" ? "text-white" : "text-gray-800"}`}>
-                    Mshiriki
+                    {t("mshiriki")}
                   </p>
                   <p className={`text-xs leading-snug ${registrationType === "mshiriki" ? "text-purple-100" : "text-gray-400"}`}>
-                    Najiunga kushiriki kwenye mbio za marathon
+                    {t("mshiriki1")}
                   </p>
                 </button>
 
@@ -515,10 +515,10 @@ const MarathonRegistrationPage: React.FC = () => {
                     </svg>
                   </div>
                   <p className={`text-base font-bold mb-1 ${registrationType === "mchangiaji" ? "text-white" : "text-gray-800"}`}>
-                    Mchangiaji
+                   {t("contributor")}
                   </p>
                   <p className={`text-xs leading-snug ${registrationType === "mchangiaji" ? "text-purple-100" : "text-gray-400"}`}>
-                    Nataka kuchangia bila kushiriki kwenye mbio
+                    {t("contributor1")}
                   </p>
                 </button>
               </div>
@@ -708,8 +708,8 @@ const MarathonRegistrationPage: React.FC = () => {
                             <SelectValue placeholder={t("form.select_membership") || "Chagua uanachama"} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="catholic">Mwanakatoliki</SelectItem>
-                            <SelectItem value="other">Si Mwanakatoliki</SelectItem>
+                            <SelectItem value="catholic">{t("catholic") || "Mwanakatoliki"}</SelectItem>
+<SelectItem value="other">{t("nonCatholic") || "Si Mwanakatoliki"}</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -805,10 +805,12 @@ const MarathonRegistrationPage: React.FC = () => {
 
                   {/* Amount */}
                   <div>
-                    <label className="block font-medium text-gray-700 mb-2">
-                      {registrationType === "mshiriki" ? "Kiasi cha Usajili" : "Kiasi cha Mchango"}{" "}
-                      <span className="text-red-500">*</span>
-                    </label>
+                <label className="block font-medium text-gray-700 mb-2">
+  {registrationType === "mshiriki"
+    ? t("registrationFee") || "Kiasi cha Usajili"
+    : t("contributionAmount") || "Kiasi cha Mchango"}{" "}
+  <span className="text-red-500">*</span>
+</label>
                     <div className="relative">
                       <span className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500 font-semibold pointer-events-none select-none">
                         TZS
@@ -817,35 +819,35 @@ const MarathonRegistrationPage: React.FC = () => {
                         type="number"
                         min={registrationType === "mshiriki" ? 30000 : 500}
                         value={donationAmount || ""}
-                        placeholder="Ingiza kiasi"
+                        placeholder={t("enterAmount") || "Ingiza kiasi"}
                         onChange={(e) => setDonationAmount(Number(e.target.value))}
                         className="w-full pl-14 pr-5 py-3.5 border border-gray-300 rounded-xl focus:ring-2 focus:ring-purple-600 focus:border-purple-500 outline-none text-lg font-semibold"
                         required
                       />
                     </div>
-                    <p className="text-xs text-gray-400 mt-1.5 ml-1">
-                      {registrationType === "mshiriki"
-                        ? "Kiasi cha chini: TZS 30,000"
-                        : "Kiasi cha chini: TZS 1,000"}
-                    </p>
+                   <p className="text-xs text-gray-400 mt-1.5 ml-1">
+  {registrationType === "mshiriki"
+    ? t("minRegistrationAmount") || "Kiasi cha chini: TZS 30,000"
+    : t("minContributionAmount") || "Kiasi cha chini: TZS 1,000"}
+</p>
                   </div>
 
-                  <Button
-                    type="submit"
-                    disabled={loading}
-                    className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-bold rounded-xl shadow-lg disabled:opacity-60 mt-8"
-                  >
-                    {loading ? (
-                      <span className="flex items-center justify-center gap-3">
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        Inasajili...
-                      </span>
-                    ) : registrationType === "mshiriki" ? (
-                      "Jisajili Sasa"
-                    ) : (
-                      "Endelea na Malipo"
-                    )}
-                  </Button>
+        <Button
+  type="submit"
+  disabled={loading}
+  className="w-full bg-gradient-to-r from-purple-700 to-indigo-600 hover:from-purple-800 hover:to-indigo-700 text-white py-7 text-lg font-bold rounded-xl shadow-lg disabled:opacity-60 mt-8"
+>
+  {loading ? (
+    <span className="flex items-center justify-center gap-3">
+      <Loader2 className="h-5 w-5 animate-spin" />
+      {t("registering") || "Inasajili..."}
+    </span>
+  ) : registrationType === "mshiriki" ? (
+    t("registerNow") || "Jisajili Sasa"
+  ) : (
+    t("proceedPayment") || "Endelea na Malipo"
+  )}
+</Button>
                 </form>
               </div>
             )}
@@ -853,9 +855,7 @@ const MarathonRegistrationPage: React.FC = () => {
             {/* PAYMENT STEP */}
             {step === "payment" && (
               <div className="p-8 md:p-12">
-                <p className="text-center text-gray-600 mb-8">
-                  Malipo ya Usajili / Mchango - Pugu Marathon
-                </p>
+
 
                 {message && (
                   <div className="mb-6 p-4 bg-green-50 border border-green-200 text-green-800 rounded-xl text-center">
@@ -870,25 +870,26 @@ const MarathonRegistrationPage: React.FC = () => {
 
                 <div className="mb-8">
                   <h5 className="font-semibold mb-3 text-lg">
-                    {registrationType === "mchangiaji" ? "Mchangiaji" : "Mshiriki"}
+                    {/* {registrationType === "mchangiaji" ? "Mchangiaji" : "Mshiriki"} */}
                   </h5>
-                  <p className="text-gray-700">
-                    <strong>Jina Kamili:</strong> {getFullName()} <br />
-                    <strong>Umri:</strong> {formData.age} <br />
-                    <strong>Jinsia:</strong>{" "}
-                    {formData.sex === "male" ? "Mme" : "Mke"} <br />
-                    <strong>Simu:</strong> {formData.phone_number} <br />
-                    {registrationType === "mshiriki" && (
-                      <>
-                        <strong>Aina ya Mbio:</strong> {formData.race_category.toUpperCase()}
-                      </>
-                    )}
-                  </p>
+                 <p className="text-gray-700">
+  <strong>{t("full_name")}:</strong> {getFullName()} <br />
+  <strong>{t("age")}:</strong> {formData.age} <br />
+  <strong>{t("gender")}:</strong>{" "}
+  {formData.sex === "male" ? t("male") : t("female")} <br />
+  <strong>{t("phone")}:</strong> {formData.phone_number} <br />
+
+  {registrationType === "mshiriki" && (
+    <>
+      <strong>{t("race_type")}:</strong> {formData.race_category.toUpperCase()}
+    </>
+  )}
+</p>
                 </div>
 
                 <div className="bg-purple-50 border-2 border-dashed border-purple-600 rounded-2xl p-8 text-center mb-10">
                   <h6 className="text-xl text-purple-800 mb-2">
-                    {registrationType === "mchangiaji" ? "Kiasi cha Mchango" : "Kiasi cha Usajili"}
+                    {/* {registrationType === "mchangiaji" ? "Kiasi cha Mchango" : "Kiasi cha Usajili"} */}
                   </h6>
                   <h2 className="text-5xl font-bold text-purple-900">
                     {formatAmount(confirmedAmount)}
@@ -898,31 +899,31 @@ const MarathonRegistrationPage: React.FC = () => {
                 <div className="space-y-6">
                   <div>
                     <label className="block font-medium text-gray-700 mb-2">
-                      Chagua Aina ya Malipo <span className="text-red-500">*</span>
+                     {t("paymentType") || "Chagua Aina ya Malipo"} <span className="text-red-500">*</span>
                     </label>
                     <Select
                       value={paymentData.payment_type}
                       onValueChange={(v) => handlePaymentTypeChange(v as "mobile" | "card")}
                     >
                       <SelectTrigger className="h-12 rounded-xl">
-                        <SelectValue placeholder="Chagua aina ya malipo" />
+                        <SelectValue placeholder={t("selectPayment") || "Chagua aina ya malipo"} />
                       </SelectTrigger>
                       <SelectContent>
-                        <SelectItem value="mobile">Mtandao wa simu</SelectItem>
-                        <SelectItem value="card">Kadi (Visa / MasterCard)</SelectItem>
+                           <SelectItem value="mobile">{t("mobilePayment") || "Mtandao wa simu"}</SelectItem>
+        <SelectItem value="card">{t("cardPayment") || "Kadi (Visa / MasterCard)"}</SelectItem>
                       </SelectContent>
                     </Select>
                   </div>
  <div>
                         <label className="block font-medium text-gray-700 mb-2">
-                          Mtandao <span className="text-red-500">*</span>
+                          {t("network") || "Mtandao"} <span className="text-red-500">*</span>
                         </label>
                         <Select
                           value={paymentData.mobile_method}
                           onValueChange={handleMobileMethodChange}
                         >
                           <SelectTrigger className="h-12 rounded-xl">
-                            <SelectValue placeholder="Chagua mtandao" />
+                            <SelectValue placeholder={t("selectNetwork") || "Chagua mtandao"}  />
                           </SelectTrigger>
                           <SelectContent>
                             <SelectItem value="TigoPesa">Mixx by Yas</SelectItem>
@@ -936,7 +937,7 @@ const MarathonRegistrationPage: React.FC = () => {
                     <>
                       <div>
                         <label className="block font-medium text-gray-700 mb-2">
-                          Namba ya Simu ya Malipo <span className="text-red-500">*</span>
+                         {t("mobilePaymentNumber") || "Namba ya Simu ya Malipo"}{" "} <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="tel"
@@ -956,7 +957,7 @@ const MarathonRegistrationPage: React.FC = () => {
                     <>
                       <div>
                         <label className="block font-medium text-gray-700 mb-2">
-                          Barua Pepe <span className="text-red-500">*</span>
+                          {t("email") || "Barua Pepe"} <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="email"
@@ -971,7 +972,7 @@ const MarathonRegistrationPage: React.FC = () => {
 
                       <div>
                         <label className="block font-medium text-gray-700 mb-2">
-                          Namba ya Simu <span className="text-red-500">*</span>
+                          {t("phoneNumber") || "Namba ya Simu"} <span className="text-red-500">*</span>
                         </label>
                         <input
                           type="tel"
@@ -986,7 +987,7 @@ const MarathonRegistrationPage: React.FC = () => {
 
                       <div>
                         <label className="block font-medium text-gray-700 mb-2">
-                          Anwani
+                           {t("address") || "Anwani"}
                         </label>
                         <input
                           type="text"
@@ -1010,12 +1011,12 @@ const MarathonRegistrationPage: React.FC = () => {
                         className="mt-1 h-5 w-5 rounded border-gray-300 text-purple-600 focus:ring-purple-500"
                         required
                       />
-                      <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
-                        Nimeyasoma na kukubali{" "}
-                        <a href="#" className="text-purple-700 underline hover:text-purple-900">
-                          Sheria na Masharti
-                        </a>
-                      </label>
+   <label htmlFor="terms" className="text-sm text-gray-600 leading-relaxed">
+      {t("agreeTerms") || "Nimeyasoma na kukubali"}{" "}
+      <a href="#" className="text-purple-700 underline hover:text-purple-900">
+        {t("termsAndConditions") || "Sheria na Masharti"}
+      </a>
+    </label>
                     </div>
                   )}
 
@@ -1029,10 +1030,10 @@ const MarathonRegistrationPage: React.FC = () => {
                         {loading ? (
                           <span className="flex items-center justify-center gap-3">
                             <Loader2 className="h-5 w-5 animate-spin" />
-                            Inashughulikia...
+                             {t("processing") || "Inashughulikia..."}
                           </span>
                         ) : (
-                          "Lipa Sasa"
+                           t("payNow") || "Lipa Sasa"
                         )}
                       </Button>
 
@@ -1043,7 +1044,7 @@ const MarathonRegistrationPage: React.FC = () => {
                           disabled={loading}
                           className="py-7 text-lg font-bold border-2 border-gray-400 hover:bg-gray-50 rounded-xl"
                         >
-                          Lipa Baadaye
+                           {t("payLater") || "Lipa Baadaye"}
                         </Button>
                       )}
                     </div>
@@ -1066,21 +1067,22 @@ const MarathonRegistrationPage: React.FC = () => {
                     </p>
                   ) : paymentAction === "pay_later" ? (
                     <p className="text-xl text-gray-700 mb-8">
-                      Tafadhali Lipa kwenye Simu
+                       {t("payViaMobile") || "Tafadhali Lipa kwenye Simu"}
                     </p>
                   ) : (
                     <p className="text-xl text-gray-700 mb-8">
-                      Ombi la malipo limetumwa kwenye simu yako. Tafadhali maliza malipo ili kukamilisha usajili, au tumia kumbukumbu namba iliyotumwa kwenye simu yako kwa kutumia namba ya kampuni 686686 kwa mitandao ya Halotel, Mixx by yas na Airtel. Tumia 944344 kwa Vodacom
-                    </p>
+                      {t("paymentSentInstructions") || 
+      "Ombi la malipo limetumwa kwenye simu yako. Tafadhali maliza malipo ili kukamilisha usajili, au tumia kumbukumbu namba iliyotumwa kwenye simu yako kwa kutumia namba ya kampuni 686686 kwa mitandao ya Halotel, Mixx by yas na Airtel. Tumia 944344 kwa Vodacom"}
+  </p>
                   )}
                 </div>
 
                 {paymentData.payment_type !== "card" && paymentAction === "pay_later" && (
                   <>
                     <div className="bg-purple-50 border-2 border-dashed border-purple-600 rounded-2xl p-6 md:p-8 text-center mb-10">
-                      <p className="text-sm text-purple-800 uppercase tracking-wider font-medium mb-3">
+                      {/* <p className="text-sm text-purple-800 uppercase tracking-wider font-medium mb-3">
                         {t("payment.your_bill_number") || "Your Bill Number"}
-                      </p>
+                      </p> */}
                       <h2 className="text-5xl md:text-6xl font-black text-purple-900 tracking-widest">
                         686686
                       </h2>
