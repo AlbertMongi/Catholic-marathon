@@ -10,7 +10,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 
-const API_BASE = "https:https://portal.pugumarathon.or.tz/api"; // ← change to production URL later
+const API_BASE = "https://portal.pugumarathon.or.tz/api"; // ← change to production URL later
 
 const decaniaParokiaMap: Record<string, string[]> = {
   "Chanika": [
