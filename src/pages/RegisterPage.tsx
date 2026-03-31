@@ -460,67 +460,79 @@ const MarathonRegistrationPage: React.FC = () => {
                 Chagua aina ya usajili
               </p> */}
               <div className="grid grid-cols-2 gap-4">
-                <button
-                  type="button"
-                  onClick={() => handleTypeSwitch("mshiriki")}
-                  className={`relative rounded-2xl p-5 text-left border-2 transition-all duration-200 focus:outline-none ${
-                    registrationType === "mshiriki"
-                      ? "border-purple-600 bg-gradient-to-br from-purple-700 to-indigo-600 shadow-lg shadow-purple-200"
-                      : "border-gray-200 bg-white hover:border-purple-300 hover:shadow-md"
-                  }`}
-                >
-                  {registrationType === "mshiriki" && (
-                    <span className="absolute top-3 right-3 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow">
-                      <svg className="w-3 h-3 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                  )}
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-3 ${
-                    registrationType === "mshiriki" ? "bg-white/20" : "bg-purple-50"
-                  }`}>
-                    <svg className={`w-6 h-6 ${registrationType === "mshiriki" ? "text-white" : "text-purple-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  </div>
-                  <p className={`text-base font-bold mb-1 ${registrationType === "mshiriki" ? "text-white" : "text-gray-800"}`}>
-                    {t("mshiriki")}
-                  </p>
-                  <p className={`text-xs leading-snug ${registrationType === "mshiriki" ? "text-purple-100" : "text-gray-400"}`}>
-                    {t("mshiriki1")}
-                  </p>
-                </button>
+               <button
+  type="button"
+  onClick={() => handleTypeSwitch("mshiriki")}
+  className={`relative rounded-2xl py-2.5 px-5 text-left border-2 transition-all duration-200 focus:outline-none ${
+    registrationType === "mshiriki"
+      ? "border-purple-600 bg-gradient-to-br from-purple-700 to-indigo-600 shadow-lg shadow-purple-200"
+      : "border-gray-200 bg-white hover:border-purple-300 hover:shadow-md"
+  }`}
+>
+  {registrationType === "mshiriki" && (
+    <span className="absolute top-2 right-2 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow">
+      <svg className="w-3 h-3 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+  )}
 
-                <button
-                  type="button"
-                  onClick={() => handleTypeSwitch("mchangiaji")}
-                  className={`relative rounded-2xl p-5 text-left border-2 transition-all duration-200 focus:outline-none ${
-                    registrationType === "mchangiaji"
-                      ? "border-purple-600 bg-gradient-to-br from-purple-700 to-indigo-600 shadow-lg shadow-purple-200"
-                      : "border-gray-200 bg-white hover:border-purple-300 hover:shadow-md"
-                  }`}
-                >
-                  {registrationType === "mchangiaji" && (
-                    <span className="absolute top-3 right-3 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow">
-                      <svg className="w-3 h-3 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
-                        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                      </svg>
-                    </span>
-                  )}
-                  <div className={`w-11 h-11 rounded-xl flex items-center justify-center mb-3 ${
-                    registrationType === "mchangiaji" ? "bg-white/20" : "bg-purple-50"
-                  }`}>
-                    <svg className={`w-6 h-6 ${registrationType === "mchangiaji" ? "text-white" : "text-purple-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                    </svg>
-                  </div>
-                  <p className={`text-base font-bold mb-1 ${registrationType === "mchangiaji" ? "text-white" : "text-gray-800"}`}>
-                   {t("contributor")}
-                  </p>
-                  <p className={`text-xs leading-snug ${registrationType === "mchangiaji" ? "text-purple-100" : "text-gray-400"}`}>
-                    {t("contributor1")}
-                  </p>
-                </button>
+  {/* Emoji at top-left */}
+  <div className={`absolute top-2 left-2 w-11 h-11 rounded-xl flex items-center justify-center ${
+    registrationType === "mshiriki" ? "bg-white/20" : "bg-purple-50"
+  }`}>
+    <span className={`text-2xl ${registrationType === "mshiriki" ? "text-white" : "text-purple-600"}`}>
+      🏃‍♂️
+    </span>
+  </div>
+
+  {/* Text content aligned with emoji */}
+  <div className="ml-16 mt-0.5">
+    <p className={`text-base font-bold mb-0 ${registrationType === "mshiriki" ? "text-white" : "text-gray-800"}`}>
+      {t("mshiriki")}
+    </p>
+    <p className={`text-xs leading-snug ${registrationType === "mshiriki" ? "text-purple-100" : "text-gray-400"}`}>
+      {t("mshiriki1")}
+    </p>
+  </div>
+</button>
+
+               <button
+  type="button"
+  onClick={() => handleTypeSwitch("mchangiaji")}
+  className={`relative rounded-2xl py-2.5 px-5 text-left border-2 transition-all duration-200 focus:outline-none ${
+    registrationType === "mchangiaji"
+      ? "border-purple-600 bg-gradient-to-br from-purple-700 to-indigo-600 shadow-lg shadow-purple-200"
+      : "border-gray-200 bg-white hover:border-purple-300 hover:shadow-md"
+  }`}
+>
+  {registrationType === "mchangiaji" && (
+    <span className="absolute top-2 right-2 w-5 h-5 bg-white rounded-full flex items-center justify-center shadow">
+      <svg className="w-3 h-3 text-purple-700" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}>
+        <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+      </svg>
+    </span>
+  )}
+
+  {/* Heart icon at top-left */}
+  <div className={`absolute top-2 left-2 w-11 h-11 rounded-xl flex items-center justify-center ${
+    registrationType === "mchangiaji" ? "bg-white/20" : "bg-purple-50"
+  }`}>
+    <svg className={`w-6 h-6 ${registrationType === "mchangiaji" ? "text-white" : "text-purple-600"}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+      <path strokeLinecap="round" strokeLinejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+    </svg>
+  </div>
+
+  {/* Text content aligned with icon */}
+  <div className="ml-16 mt-0.5">
+    <p className={`text-base font-bold mb-0 ${registrationType === "mchangiaji" ? "text-white" : "text-gray-800"}`}>
+      {t("contributor")}
+    </p>
+    <p className={`text-xs leading-snug ${registrationType === "mchangiaji" ? "text-purple-100" : "text-gray-400"}`}>
+      {t("contributor1")}
+    </p>
+  </div>
+</button>
               </div>
             </div>
           )}
@@ -1072,7 +1084,7 @@ const MarathonRegistrationPage: React.FC = () => {
                   ) : (
                     <p className="text-xl text-gray-700 mb-8">
                       {t("paymentSentInstructions") || 
-      "Ombi la malipo limetumwa kwenye simu yako. Tafadhali maliza malipo ili kukamilisha usajili, au tumia kumbukumbu namba iliyotumwa kwenye simu yako kwa kutumia namba ya kampuni 686686 kwa mitandao ya Halotel, Mixx by yas na Airtel. Tumia 944344 kwa Vodacom"}
+      "Ombi la malipo limetumwa kwenye simu yako. Tafadhali maliza malipo ili kukamilisha usajili, au tumia kumbukumbu namba iliyotumwa kwenye simu yako kwa kutumia namba ya kampuni 686686 kwa mitandao ya Halotel, Mixx by yas. Tumia namba ya kampuni 944344 kwa Vodacom. Kwa Airtel Money chagua Lipa Bili kisha #, chagua  Fintech payment kisha EvMak kisha weka kumbukumbu namba."}
   </p>
                   )}
                 </div>
