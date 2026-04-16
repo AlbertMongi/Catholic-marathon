@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2 } from "lucide-react";
@@ -132,7 +132,13 @@ const MarathonRegistrationPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-
+  // Auto scroll to top when step changes + remove white space at bottom
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth"
+    });
+  }, [step]);
   // ── Helpers ────────────────────────────────────────────────────────────────
   const getFullName = () =>
     [formData.first_name, formData.middle_name, formData.last_name]

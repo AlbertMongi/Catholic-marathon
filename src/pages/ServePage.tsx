@@ -70,7 +70,7 @@ const C2BPaymentPage: React.FC = () => {
                   <li>{t("airtelStep3", "Chagua More (zaidi) ikiwa inahitajika")}</li>
                   <li>{t("airtelStep4", "Chagua Fintech au Merchant Payments")}</li>
                   <li>{t("airtelStep5", "Chagua EvMak au chaguo linalofanana")}</li>
-                  <li>{t("airtelStep6", "Ingiza namba ya Bili/Reference: 686686")}</li>
+                  <li>{t("airtelStep6", "Ingiza namba ya kumbukumbu")}</li>
                   <li>{t("airtelStep7", "Ingiza kiasi: 30000")}</li>
                   <li>{t("airtelStep8", "Ingiza PIN yako kuthibitisha")}</li>
                 </ol>
