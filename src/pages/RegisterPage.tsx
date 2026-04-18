@@ -18,10 +18,9 @@ const decaniaParokiaMap: Record<string, string[]> = {
     "Mvuti", "Nyeburu", "Vikongoro", "Yongwe", "Zingiziwa",
   ],
   "Kibaha": [
-    "Chang'ombe", "Garagaza", "Hondogo", "Jamaika", "Kibaha", "Kibamba",
-    "Kibwegere", "Kidimu", "Kiluvya", "Kongowele", "Kwembe", "Lulanzi",
-    "Mabwepande", "Makurunge", "Miembesaba", "Misugusugu", "Mkuza",
-    "Mlandizi", "Mpiji", "Visiga",
+    "Kibamba", "Teule Mt. Anna, Hondogo", "Kiluvya", "Kibwegere", "Kwembe",
+    "Mabwepande", "Makurunge", "Kibaha", "Lulanzi", "Teule Mpiji",
+    "Teule Kidimu", "Teule Mkombozi", "Teule Muheza", "Teule Luguruni",
   ],
   "Kigamboni": [
     "Gezaulole", "Kibada", "Kigamboni", "Kimbiji", "Kisarawe II",
@@ -49,6 +48,10 @@ const decaniaParokiaMap: Record<string, string[]> = {
   "Mbezi Luis": [
     "Mageti - Mt. Simon Stock", "Makabe", "Malamba Mawili", "Mbezi Luis",
     "Mpiji Magohe", "Msakuzi", "Mshikamano", "Msumi", "Pande", "Tegeta A",
+  ],
+   "Mlandizi": [
+    "Kongowele", "Visiga", "Chang'ombe", "Mlandizi",
+    "Teule Mikongeni", "Miembe saba", "Mkuza", "Jamaika", "Teule Vikuge", "Teule Galagaza", "Misugusugu",
   ],
   "Mt. Joseph": [
     "Bareni - Mafia", "Buguruni", "Chang'ombe", "Gonge - Mafia", "Keko",
