@@ -465,7 +465,7 @@ feature_register_desc:
 "payment.airtel_money": "Airtel Money",
 "payment.halo_pesa": "Halopesa",
   "contributor": "Mchangiaji",
-  "contributor1": "Nataka kuchangia",
+  "contributor1": "Nachangia bila kushiriki mbio za marathon",
    "registering": "Inasajili...",
     "registerNow": "Jisajili Sasa",
     "proceedPayment": "Endelea na Malipo",

@@ -1058,7 +1058,7 @@ const MarathonRegistrationPage: React.FC = () => {
                         )}
                       </Button>
 
-                      {showMobileFields && (
+                      {/* {showMobileFields && (
                         <Button
                           variant="outline"
                           onClick={() => handlePaymentAction("pay_later")}
@@ -1067,7 +1067,7 @@ const MarathonRegistrationPage: React.FC = () => {
                         >
                            {t("payLater") || "Lipa Baadaye"}
                         </Button>
-                      )}
+                      )} */}
                     </div>
                   )}
                 </div>
