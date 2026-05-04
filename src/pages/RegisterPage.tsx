@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Button } from "@/components/ui/button";
 import { Loader2, CheckCircle2 } from "lucide-react";
@@ -135,6 +135,11 @@ const MarathonRegistrationPage: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
+
+  // Synchronous lock to prevent duplicate backend requests from rapid double-clicks
+  // (state-based `loading` flag updates async — too slow to block the 2nd click).
+  const isSubmittingRef = useRef(false);
+  const isPayingRef = useRef(false);
   // Auto scroll to top when step changes + remove white space at bottom
   useEffect(() => {
     window.scrollTo({
@@ -192,6 +197,9 @@ const MarathonRegistrationPage: React.FC = () => {
   // ── Unified registration submit ────────────────────────────────────────────
   const handleRegistrationSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    // Synchronous duplicate-submit guard (see handlePaymentAction for rationale).
+    if (isSubmittingRef.current) return;
+    isSubmittingRef.current = true;
     setMessage(null);
     setError(null);
     setLoading(true);
@@ -200,24 +208,28 @@ const MarathonRegistrationPage: React.FC = () => {
     if (!formData.first_name.trim() || !formData.last_name.trim()) {
       setError("Tafadhali ingiza jina la kwanza na la mwisho.");
       setLoading(false);
+      isSubmittingRef.current = false;
       return;
     }
 
     if (!formData.age || isNaN(Number(formData.age)) || Number(formData.age) < 5 || Number(formData.age) > 100) {
       setError("Umri lazima uwe kati ya miaka 5–100.");
       setLoading(false);
+      isSubmittingRef.current = false;
       return;
     }
 
     if (!formData.sex) {
       setError("Tafadhali chagua jinsia.");
       setLoading(false);
+      isSubmittingRef.current = false;
       return;
     }
 
     if (!formData.phone_number.match(/^0[67][1-9]\d{7}$/)) {
       setError("Namba ya simu si sahihi (07XXXXXXXX au 06XXXXXXXX).");
       setLoading(false);
+      isSubmittingRef.current = false;
       return;
     }
 
@@ -229,6 +241,7 @@ const MarathonRegistrationPage: React.FC = () => {
           : `Kiasi cha mchango lazima kiwe angalau TZS 1,000.`
       );
       setLoading(false);
+      isSubmittingRef.current = false;
       return;
     }
 
@@ -236,16 +249,19 @@ const MarathonRegistrationPage: React.FC = () => {
       if (!formData.race_category || !formData.kit_size || !formData.religion) {
         setError("Tafadhali jaza sehemu zote zinazohitajika.");
         setLoading(false);
+        isSubmittingRef.current = false;
         return;
       }
       if (formData.religion === "catholic" && (!formData.decania || !formData.parokia)) {
         setError("Tafadhali chagua Decania na Parokia.");
         setLoading(false);
+        isSubmittingRef.current = false;
         return;
       }
       if (formData.religion === "other" && !formData.pickup_point) {
         setError("Tafadhali chagua eneo la kuchukulia jezi.");
         setLoading(false);
+        isSubmittingRef.current = false;
         return;
       }
     }
@@ -308,6 +324,7 @@ const MarathonRegistrationPage: React.FC = () => {
       console.error(err);
     } finally {
       setLoading(false);
+      isSubmittingRef.current = false;
     }
   };
 
@@ -334,100 +351,101 @@ const MarathonRegistrationPage: React.FC = () => {
 
   const handlePaymentAction = async (action: "pay_now" | "pay_later") => {
     if (!registrationId) return;
+    // Synchronous duplicate-click guard. Set BEFORE any await so a 2nd click
+    // arriving in the same tick (before React re-renders `disabled={loading}`)
+    // bails out immediately and never reaches the backend.
+    if (isPayingRef.current) return;
+    isPayingRef.current = true;
     setError(null);
     setLoading(true);
 
-    if (!paymentData.terms) {
-      setError("Lazima ukubali sheria na masharti.");
-      setLoading(false);
-      return;
-    }
-
-    // Card payment
-    if (paymentData.payment_type === "card") {
-      if (action !== "pay_now") return;
-
-      if (!paymentData.email) {
-        setError("Barua pepe inahitajika kwa malipo ya kadi.");
-        setLoading(false);
+    try {
+      if (!paymentData.terms) {
+        setError("Lazima ukubali sheria na masharti.");
         return;
       }
+
+      // Card payment
+      if (paymentData.payment_type === "card") {
+        if (action !== "pay_now") return;
+
+        if (!paymentData.email) {
+          setError("Barua pepe inahitajika kwa malipo ya kadi.");
+          return;
+        }
+        if (!paymentData.phone_number.match(/^0[67][1-9]\d{7}$/)) {
+          setError("Namba ya simu si sahihi.");
+          return;
+        }
+
+        try {
+          const res = await fetch(`${API_BASE}/marathon/card/${registrationId}/initiate`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json", Accept: "application/json" },
+            body: JSON.stringify({
+              email: paymentData.email,
+              phone_number: paymentData.phone_number,
+              address: paymentData.address || undefined,
+              postal_code: paymentData.postal_code || undefined,
+            }),
+          });
+
+          const data = await res.json();
+          if (res.ok && data.success && data.payment_url) {
+            window.location.href = data.payment_url;
+          } else {
+            setError(data.error || data.message || "Tatizo la kuanzisha malipo ya kadi.");
+          }
+        } catch (err) {
+          setError("Tatizo la mtandao wakati wa malipo ya kadi.");
+          console.error(err);
+        }
+        return;
+      }
+
+      // Mobile payment
       if (!paymentData.phone_number.match(/^0[67][1-9]\d{7}$/)) {
-        setError("Namba ya simu si sahihi.");
-        setLoading(false);
+        setError("Namba ya simu inahitajika na lazima iwe sahihi.");
+        return;
+      }
+
+      if (action === "pay_now" && !paymentData.mobile_method) {
+        setError("Tafadhali chagua mtandao wa malipo.");
         return;
       }
 
       try {
-        const res = await fetch(`${API_BASE}/marathon/card/${registrationId}/initiate`, {
+        const res = await fetch(`${API_BASE}/marathon-registration/${registrationId}/process-payment`, {
           method: "POST",
           headers: { "Content-Type": "application/json", Accept: "application/json" },
           body: JSON.stringify({
-            email: paymentData.email,
             phone_number: paymentData.phone_number,
-            address: paymentData.address || undefined,
-            postal_code: paymentData.postal_code || undefined,
+            payment_method: paymentData.mobile_method,
+            action,
+            terms: true,
           }),
         });
 
         const data = await res.json();
-        if (res.ok && data.success && data.payment_url) {
-          window.location.href = data.payment_url;
+
+        if (res.ok) {
+          setPaymentAction(action);
+          setMessage(
+            action === "pay_now"
+              ? data.message || "Ombi la malipo limetumwa kwenye simu yako. Thibitisha malipo."
+              : data.message || "Usajili umehifadhiwa. Lipa baadaye ndani ya saa 24."
+          );
+          setStep("success");
         } else {
-          setError(data.error || data.message || "Tatizo la kuanzisha malipo ya kadi.");
+          setError(data.message || data.error || "Tatizo la kuanzisha malipo.");
         }
       } catch (err) {
-        setError("Tatizo la mtandao wakati wa malipo ya kadi.");
+        setError("Tatizo la mtandao wakati wa malipo.");
         console.error(err);
-      } finally {
-        setLoading(false);
       }
-      return;
-    }
-
-    // Mobile payment
-    if (!paymentData.phone_number.match(/^0[67][1-9]\d{7}$/)) {
-      setError("Namba ya simu inahitajika na lazima iwe sahihi.");
-      setLoading(false);
-      return;
-    }
-
-    if (action === "pay_now" && !paymentData.mobile_method) {
-      setError("Tafadhali chagua mtandao wa malipo.");
-      setLoading(false);
-      return;
-    }
-
-    try {
-      const res = await fetch(`${API_BASE}/marathon-registration/${registrationId}/process-payment`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify({
-          phone_number: paymentData.phone_number,
-          payment_method: paymentData.mobile_method,
-          action,
-          terms: true,
-        }),
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setPaymentAction(action);
-        setMessage(
-          action === "pay_now"
-            ? data.message || "Ombi la malipo limetumwa kwenye simu yako. Thibitisha malipo."
-            : data.message || "Usajili umehifadhiwa. Lipa baadaye ndani ya saa 24."
-        );
-        setStep("success");
-      } else {
-        setError(data.message || data.error || "Tatizo la kuanzisha malipo.");
-      }
-    } catch (err) {
-      setError("Tatizo la mtandao wakati wa malipo.");
-      console.error(err);
     } finally {
       setLoading(false);
+      isPayingRef.current = false;
     }
   };
 
