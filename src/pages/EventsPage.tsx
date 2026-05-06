@@ -1,6 +1,14 @@
 import React, { useState, useMemo, useEffect } from 'react';
-import { Download, Share2, X } from 'lucide-react'; // ← modern icons
+import { Download, Share2, X } from 'lucide-react';
+ // ← modern icons
+const images2023 = Array.from({ length: 6793 - 5858 + 1 }, (_, i) => ({
+  src: `/images/ADS_${5858 + i}.jpg`,
+  year: 2023
+}));
+
+
 const galleryImages = [
+   ...images2023,
     // Your original 2025 photos
   { src: "/images/JMN_9052.JPG",  year: 2026 },
   { src: "/images/JMN_9069.JPG",  year: 2026 },
@@ -68,6 +76,7 @@ const galleryImages = [
   { src: "/images/IMG_2256.jpg",   year: 2023 },
   { src: "/images/IMG_2257.jpg",   year: 2023 },
   { src: "/images/IMG_2259.jpg",   year: 2023 },
+  
 
   // { src: "/images/IMG_2265.jpg",   year: 2023 },
   // { src: "/images/IMG_2266.jpg",   year: 2023 },
