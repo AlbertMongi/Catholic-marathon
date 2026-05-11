@@ -258,7 +258,7 @@ const MarathonRegistrationPage: React.FC = () => {
         isSubmittingRef.current = false;
         return;
       }
-      if (formData.religion === "other" && !formData.pickup_point) {
+      if ((formData.religion === "other" || formData.religion === "catholic_outside") && !formData.pickup_point) {
         setError("Tafadhali chagua eneo la kuchukulia jezi.");
         setLoading(false);
         isSubmittingRef.current = false;
@@ -281,7 +281,7 @@ const MarathonRegistrationPage: React.FC = () => {
 
    if (registrationType === "mshiriki") {
       payload.participant_type = "mkimbiaji";
-      payload.religion = formData.religion;
+      payload.religion = formData.religion === "catholic_outside" ? "other" : formData.religion;
       payload.race_category = formData.race_category;
       payload.kit_size = formData.kit_size;
       payload.decania = formData.decania || null;
@@ -452,7 +452,7 @@ const MarathonRegistrationPage: React.FC = () => {
   // ── UI helpers ─────────────────────────────────────────────────────────────
   const isCatholic = formData.religion === "catholic";
   const showParokia = isCatholic && !!formData.decania;
-  const isOther = formData.religion === "other";
+  const showPickup = formData.religion === "catholic_outside" || formData.religion === "other";
   const availableParokia = formData.decania ? decaniaParokiaMap[formData.decania] ?? [] : [];
   const showMobileFields = paymentData.payment_type === "mobile";
   const showCardFields = paymentData.payment_type === "card";
@@ -747,8 +747,9 @@ const MarathonRegistrationPage: React.FC = () => {
                             <SelectValue placeholder={t("form.select_membership") || "Chagua uanachama"} />
                           </SelectTrigger>
                           <SelectContent>
-                            <SelectItem value="catholic">{t("catholic") || "Mwanakatoliki"}</SelectItem>
-<SelectItem value="other">{t("nonCatholic") || "Si Mwanakatoliki"}</SelectItem>
+                            <SelectItem value="catholic">Mkatoliki Jimbo la Dar es Salaam</SelectItem>
+                            <SelectItem value="catholic_outside">Mkatoliki Nje ya Jimbo la Dar es Salaam</SelectItem>
+                            <SelectItem value="other">Si Mkatoliki</SelectItem>
                           </SelectContent>
                         </Select>
                       </div>
@@ -801,7 +802,7 @@ const MarathonRegistrationPage: React.FC = () => {
                         </>
                       )}
 
-                      {isOther && (
+                      {showPickup && (
                         <div>
                           <label className="block font-medium text-gray-700 mb-2">
                             {t("form.pickup_point") || "Eneo la Kuchukulia Jezi"} <span className="text-red-500">*</span>
